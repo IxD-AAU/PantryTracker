@@ -1,0 +1,13 @@
+.phone-square {
+    aspect-ratio: 389/852;
+    width: auto;
+    height: min(90vh, 852px);
+    background-color: rgb(96.47% 94.12% 79.61%); /* ændre senere */
+    border-radius: 40px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
