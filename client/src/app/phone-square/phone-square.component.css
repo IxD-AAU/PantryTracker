@@ -33,9 +33,9 @@
 }
 .phone-bottom-nav.debug-nav {
     position:absolute;
-    bottom: 12px;
+    bottom: 0px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% - 20px));
     z-index: 10001;
     width: calc(100% - 40px);
     margin: 0;
