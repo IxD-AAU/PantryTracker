@@ -1,8 +1,8 @@
 .phone-frame {
-    aspect-ratio: 389/852;
+    aspect-ratio: 388/852;
     width: auto;
     height: min(90vh, 852px);
-    background-color: rgb(96.47% 94.12% 79.61%); /* ændre senere */
+    background-color: rgb(96.47% 94.12% 79.61%);
     border-radius: 40px;
 
     position: relative;
@@ -35,9 +35,10 @@
     position:absolute;
     bottom: 0px;
     left: 50%;
-    transform: translateX(calc(-50% - 20px));
+    transform: translateX(calc(-50%));
     z-index: 10001;
-    width: calc(100% - 40px);
+    width: 100%;
+    max-width: 388px;
     margin: 0;
     padding: 0;
     max-width: 389px;
@@ -46,7 +47,7 @@
 }
 
 .phone-bottom-nav .nav-bar {
-    width: 100%;
+    width: 388px;
     height: 70px;
     border-bottom-left-radius: 40px;
     border-bottom-left-radius: 40px;
