@@ -164,6 +164,158 @@ app.get('/api/data/get/household/inviteCode', (req, res)=>{
     })
 })
 
+app.get('/api/data/get/household/householdmember1', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT HouseHoldMember1 FROM householdtable WHERE UHID = ?', [data.UHID], (err, results)=>{
+        if (err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: HOUSEHOLD(HouseholdMember1) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/householdmember2', (req,res)=>{
+    const data = req.query;
+    connection.query('SELECT HouseHoldMember2 FROM householdtable WHERE UHID = ?', [data.UHID], (err, results)=>{
+        if (err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: HOUSEHOLD(HouseholdMember2) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/householdmember3', (req,res)=>{
+    const data = req.query;
+    connection.query('SELECT HouseHoldMember3 FROM householdtable WHERE UHID = ?', [data.UHID], (err, results)=>{
+        if (err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: HOUSEHOLD(HouseholdMember3) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/householdmember4', (req,res)=>{
+    const data = req.query;
+    connection.query('SELECT HouseHoldMember4 FROM householdtable WHERE UHID = ?', [data.UHID], (err, results)=>{
+        if (err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: HOUSEHOLD(HouseholdMember4) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/householdmember5', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT HouseHoldMember5 FROM householdtable WHERE UHID =?', [data.UHID], (err,results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: HOUSEHOLD(HouseholdMember5) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/householdmember6', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT HouseHoldMember6 FROM householdtable WHERE UHID = ?', [data.UHID], (err,results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: HOUSEHOLD(HouseholdMember6) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+
+    //Getter code for Cabinets
+app.get('/api/data/get/cabinet/itemdisplayname', (req, res)=>{
+    const data = req.query;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`;
+
+    if (!(data.cabinetCode).isInteger()){
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer.'})
+        return;
+    }
+
+    connection.query(`SELECT itemDisplayName FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: CABINET(itemDisplayName) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/cabinet/itemamount', (req, res)=>{
+    const data = req.query;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`;
+
+    if (!(data.cabinetCode).isInteger()){
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer.'});
+        return;
+    }
+
+    connection.query(`SELECT itemAmount FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err,results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: CABINET(itemAmount) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/cabinet/itemexpirationdate', (req,res)=>{
+    const data = req.query;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`;
+
+    if (!(data.cabinetCode).isInteger()){
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer.'});
+    }
+
+    connection.query(`SELECT itemExpirationDate FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: CABINET(itemExpirationDate) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+    //Getter code for Household Cabinet Index
+app.get('/api/data/get/housecabinetindex/cabinetCode', (req, res)=>{
+    const data = req.query;
+    const index = `household${data.UHID}`;
+
+    connection.query(`SELECT cabinetCode FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabientCode) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+
 //INSERTION CODE:
 
 app.post('/api/data/add/user', (req, res) => {
@@ -208,11 +360,12 @@ app.post('/api/data/add/cabinet', (req, res)=>{
     const cabinetTableName = `cabinet${cabinetCode}`
 
     if (!(data.cabinetCode).isInteger()){
-        console.error(err);
-        res.status(400).json({error: 'Provided cabinet code is not an integer.'})
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer.'})
+        return;
     }
 
-    connection.query(`INSERT INTO ${cabinetTableName} (itemUFID, itemDisplayName, itemAmount, expirationDate) VALUES (?,?,?,?)`,[data.itemUFID, data.displayName, data.amount, data.expirationDate], (err, results)=>{
+    connection.query(`INSERT INTO ${cabinetTableName} (itemDisplayName, itemAmount, expirationDate) VALUES (?,?,?)`,[data.displayName, data.amount, data.expirationDate], (err, results)=>{
         if (err){
             console.error(err);
             res.status(500).json({error: 'Database insert failed'});
