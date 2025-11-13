@@ -6,6 +6,7 @@ import { HouseholdButComponent } from './household-but/household-but.component';
 import { RecipeButComponent } from './recipe-but/recipe-but.component';
 
 
+
 @Component({
   selector: 'app-nav-bar',
   imports: [GroceryListButComponent, CabinetsButComponent, HomeButComponent, HouseholdButComponent, RecipeButComponent],
