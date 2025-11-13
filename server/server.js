@@ -483,7 +483,7 @@ app.post('/api/data/add/cabinet', (req, res)=>{
 
 
 //UPDATE CODE:
-app.post('/api/data/update/user/firstname', (req,res)=>{
+app.put('/api/data/update/user/firstname', (req,res)=>{
     const data = req.body;
 
     connection.query('UPDATE usertable SET FirstName = ? WHERE UUID = ?', [data.FirstName, data.UUID], (err, results)=>{
@@ -492,12 +492,12 @@ app.post('/api/data/update/user/firstname', (req,res)=>{
             res.status(500).json({ error: 'Databas update failed'});
             return;
         }
-        res.json ({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
     
 })
 
-app.post('/api/data/update/user/lastname', (req, res)=>{
+app.put('/api/data/update/user/lastname', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE usertable SET LastName = ? WHERE UUID = ?', [data.LastName, data.UUID], (err, results)=>{
@@ -506,11 +506,11 @@ app.post('/api/data/update/user/lastname', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/user/username', (req, res)=>{
+app.put('/api/data/update/user/username', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE usertable SET Username = ? WHERE UUID = ?', [data.Username, data.UUID], (err, results)=>{
@@ -519,11 +519,11 @@ app.post('/api/data/update/user/username', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/user/accesscode', (req, res)=>{
+app.put('/api/data/update/user/accesscode', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE usertable SET AccessCode = ? WHERE UUID = ?', [data.AccessCode, data.UUID], (err, results)=>{
@@ -532,11 +532,11 @@ app.post('/api/data/update/user/accesscode', (req, res)=>{
             res.status(500).json({ error: 'Databse update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/user/useremail', (req, res)=>{
+app.put('/api/data/update/user/useremail', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE usertable SET UserEmail = ? WHERE UUID = ?', [data.UserEmail, data.UUID], (err, results)=>{
@@ -545,11 +545,11 @@ app.post('/api/data/update/user/useremail', (req, res)=>{
             res.status(500).json({error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/food/displayname', (req, res)=>{
+app.put('/api/data/update/food/displayname', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE foodtable SET displayName = ? WHERE UFID = ?', [data.displayName, data.UFID], (err, results)=>{
@@ -558,11 +558,11 @@ app.post('/api/data/update/food/displayname', (req, res)=>{
             res.status(500).json({error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/food/barcode', (req, res)=>{
+app.put('/api/data/update/food/barcode', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE foodtable SET barCode = ? WHERE UFID = ?', [data.barCode, data.UFID], (err, results)=>{
@@ -571,11 +571,11 @@ app.post('/api/data/update/food/barcode', (req, res)=>{
             res.status(500).json({error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/household/displayname', (req, res)=>{
+app.put('/api/data/update/household/displayname', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE householdtable SET displayName = ? WHERE UHID = ?', [data.displayName, data.UHID], (err, results)=>{
@@ -584,11 +584,11 @@ app.post('/api/data/update/household/displayname', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/household/inviteCode', (req, res)=>{
+app.put('/api/data/update/household/inviteCode', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE householdtable SET inviteCode = ? WHERE UHID = ?', [data.inviteCode, data.UHID], (err, results)=>{
@@ -597,11 +597,11 @@ app.post('/api/data/update/household/inviteCode', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/household/householdmember/1', (req, res)=>{
+app.put('/api/data/update/household/householdmember/1', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE householdtable SET HouseHoldMember1 = ? WHERE UHID = ?', [data.HouseHoldMember1, data.UHID], (err, results)=>{
@@ -610,11 +610,11 @@ app.post('/api/data/update/household/householdmember/1', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/household/householdmember/2', (req, res)=>{
+app.put('/api/data/update/household/householdmember/2', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE householdtable SET HouseHoldMember2 = ? WHERE UHID = ?', [data.HouseHoldMember2, data.UHID], (err, results)=>{
@@ -623,11 +623,11 @@ app.post('/api/data/update/household/householdmember/2', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/household/householdmember/3', (req, res)=>{
+app.put('/api/data/update/household/householdmember/3', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE householdtable SET HouseHoldMember3 = ? WHERE UHID = ?', [data.HouseHoldMember3, data.UHID], (err, results)=>{
@@ -636,11 +636,11 @@ app.post('/api/data/update/household/householdmember/3', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/household/householdmember/4', (req, res)=>{
+app.put('/api/data/update/household/householdmember/4', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE householdtable SET HouseHoldMember4 = ? WHERE UHID = ?', [data.HouseHoldMember4, data.UHID], (err, results)=>{
@@ -649,11 +649,11 @@ app.post('/api/data/update/household/householdmember/4', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/household/householdmember/5', (req, res)=>{
+app.put('/api/data/update/household/householdmember/5', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE householdtable SET HouseHoldMember5 = ? WHERE UHID = ?', [data.HouseHoldMember5, data.UHID], (err, results)=>{
@@ -662,11 +662,11 @@ app.post('/api/data/update/household/householdmember/5', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/household/householdmember/6', (req, res)=>{
+app.put('/api/data/update/household/householdmember/6', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE householdtable SET HouseHoldMember6 = ? WHERE UHID = ?', [data.HouseHoldMember6, data.UHID], (err, results)=>{
@@ -675,11 +675,11 @@ app.post('/api/data/update/household/householdmember/6', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/recipe/displayName', (req, res)=>{
+app.put('/api/data/update/recipe/displayName', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE recipetable SET displayName = ? WHERE URID = ?', [data.displayName, data.URID], (err, results)=>{
@@ -688,11 +688,11 @@ app.post('/api/data/update/recipe/displayName', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/recipe/recipelink', (req, res)=>{
+app.put('/api/data/update/recipe/recipelink', (req, res)=>{
     const data = req.body;
 
     connection.query('UPDATE recipetable SET recipeLink = ? WHERE URID = ?', [data.recipeLink , data.URID], (err, results)=>{
@@ -701,11 +701,11 @@ app.post('/api/data/update/recipe/recipelink', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/cabinet/itemdisplayname', (req, res)=>{
+app.put('/api/data/update/cabinet/itemdisplayname', (req, res)=>{
     const data = req.body;
     const cabinetCode = data.cabinetCode;
     const cabinetTableName = `cabinet${cabinetCode}`
@@ -722,11 +722,11 @@ app.post('/api/data/update/cabinet/itemdisplayname', (req, res)=>{
             res.status(500).json({ error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id: results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/cabinet/itemamount', (req, res)=>{
+app.put('/api/data/update/cabinet/itemamount', (req, res)=>{
     const data = req.body;
     const cabinetCode = data.cabinetCode;
     const cabinetTableName = `cabinet${cabinetCode}`
@@ -743,11 +743,11 @@ app.post('/api/data/update/cabinet/itemamount', (req, res)=>{
             res.status(500).json({error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id:results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
-app.post('/api/data/update/cabinet/itemexpirationdate', (req,res)=>{
+app.put('/api/data/update/cabinet/itemexpirationdate', (req,res)=>{
     const data = req.body;
     const cabinetCode = data.cabinetCode;
     const cabinetTableName = `cabinet${cabinetCode}`
@@ -764,7 +764,7 @@ app.post('/api/data/update/cabinet/itemexpirationdate', (req,res)=>{
             res.status(500).json({error: 'Database update failed'});
             return;
         }
-        res.json({ success: true, id:results.insertId});
+        res.json ({ success: true, affectedRows: results.affectedRows});
     })
 })
 
