@@ -42,6 +42,102 @@ app.get('/api/data', (req, res) => {
 });
 
 //GETTING CODE:
+    // GET ID BASED ON UNIQUE FIELD ENTRY:
+app.get('/api/data/get/user/id', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT UUID FROM usertable WHERE UserEmail = ?', [data.UserEmail], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Dataset: USER(UUID) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/food/id', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT UFID FROM foodtable WHERE barCode = ?', [data.barCode], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Dataset: FOOD(UFID) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/id/1', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT UHID FROM householdtable WHERE HouseholdMember1 = ?', [data.HouseHoldMember1], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Dataset: HOUSEHOLD(UHID) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/id/2', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT UHID FROM householdtable WHERE HouseholdMember2 = ?', [data.HouseHoldMember2], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Dataset: HOUSEHOLD(UHID) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/id/3', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT UHID FROM householdtable WHERE HouseholdMember3 = ?', [data.HouseHoldMember3], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Dataset: HOUSEHOLD(UHID) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/id/4', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT UHID FROM householdtable WHERE HouseholdMember4 = ?', [data.HouseHoldMember4], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Dataset: HOUSEHOLD(UHID) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/id/5', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT UHID FROM householdtable WHERE HouseholdMember5 = ?', [data.HouseHoldMember5], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Dataset: HOUSEHOLD(UHID) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/household/id/6', (req, res)=>{
+    const data = req.query;
+    connection.query('SELECT UHID FROM householdtable WHERE HouseholdMember6 = ?', [data.HouseHoldMember6], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Dataset: HOUSEHOLD(UHID) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
 
     // Getting User Info based on ID
 app.get('/api/data/get/user/firstname', (req, res) =>{
@@ -77,7 +173,6 @@ app.get('/api/data/get/user/username', (req,res)=>{
         res.json(results);
     })
 })
-
 app.get('/api/data/get/user/accesscode', (req, res)=>{
     const data = req.query;
     connection.query('SELECT AccessCode FROM usertable WHERE UUID = ?', [data.UUID], (err, results)=>{
@@ -89,7 +184,6 @@ app.get('/api/data/get/user/accesscode', (req, res)=>{
         res.json(results);
     })
 })
-
 app.get('/api/data/get/user/email', (req, res)=>{
     const data = req.query;
     connection.query('SELECT UserEmail FROM usertable WHERE UUID = ?', [data.UUID], (err, results)=>{
@@ -121,18 +215,6 @@ app.get('/api/data/get/food/displayName', (req, res)=>{
         if(err){
             console.error(err);
             res.status(500).json({error: 'Dataset: FOOD(displayName) | data retrieval failed'});
-            return;
-        }
-        res.json(results);
-    })
-})
-
-app.get('/api/data/get/food/expriationDate', (req, res)=>{
-    const data = req.query;
-    connection.query('SELECT expirationDate FROM foodtable WHERE UFID = ?',[data.UFID], (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Dataset: FOOD(expirationDate) | data retrieval failed'});
             return;
         }
         res.json(results);
@@ -236,7 +318,6 @@ app.get('/api/data/get/household/householdmember6', (req, res)=>{
     })
 })
 
-
     //Getter code for Cabinets
 app.get('/api/data/get/cabinet/itemdisplayname', (req, res)=>{
     const data = req.query;
@@ -315,9 +396,34 @@ app.get('/api/data/get/housecabinetindex/cabinetCode', (req, res)=>{
     })
 })
 
+    //Getter code for recipe
+app.get('/api/data/get/recipe/displayname', (req, res)=>{
+    const data = req.query;
+
+    connection.query('SELECT displayName FROM recipetable WHERE URID = ?', [data.URID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: RECIPE(displayName) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.get('/api/data/get/recipe/link', (req, res)=>{
+    const data = req.query;
+
+    connection.query('SELECT recipeLink FROM recipetable WHERE URID = ?', [data.URID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Dataset: RECIPE(recipeLink) | data retrieval failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
 
 //INSERTION CODE:
-
 app.post('/api/data/add/user', (req, res) => {
     const data = req.body;
     connection.query('INSERT INTO usertable (FirstName, LastName, Username, AccessCode, UserEmail) VALUES (?,?,?,?,?)', [data.FirstName, data.LastName, data.Username, data.AccessCode, data.UserEmail], (err, results)=>{
@@ -332,7 +438,7 @@ app.post('/api/data/add/user', (req, res) => {
 
 app.post('/api/data/add/food', (req, res) => {
     const data = req.body;
-    connection.query('INSERT INTO foodtable (barCode, displayName, expirationDate) VALUES (?,?,?)', [data.barCode, data.displayName,data.expirationDate], (err, results) => {
+    connection.query('INSERT INTO foodtable (barCode, displayName) VALUES (?,?)', [data.barCode, data.displayName], (err, results) => {
         if(err){
             console.error(err);
             res.status(500).json({ error: 'Database insert failed'});
@@ -377,8 +483,290 @@ app.post('/api/data/add/cabinet', (req, res)=>{
 
 
 //UPDATE CODE:
+app.post('/api/data/update/user/firstname', (req,res)=>{
+    const data = req.body;
 
+    connection.query('UPDATE usertable SET FirstName = ? WHERE UUID = ?', [data.FirstName, data.UUID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Databas update failed'});
+            return;
+        }
+        res.json ({ success: true, id: results.insertId});
+    })
+    
+})
 
+app.post('/api/data/update/user/lastname', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE usertable SET LastName = ? WHERE UUID = ?', [data.LastName, data.UUID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/user/username', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE usertable SET Username = ? WHERE UUID = ?', [data.Username, data.UUID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/user/accesscode', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE usertable SET AccessCode = ? WHERE UUID = ?', [data.AccessCode, data.UUID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Databse update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/user/useremail', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE usertable SET UserEmail = ? WHERE UUID = ?', [data.UserEmail, data.UUID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/food/displayname', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE foodtable SET displayName = ? WHERE UFID = ?', [data.displayName, data.UFID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/food/barcode', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE foodtable SET barCode = ? WHERE UFID = ?', [data.barCode, data.UFID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/household/displayname', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE householdtable SET displayName = ? WHERE UHID = ?', [data.displayName, data.UHID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/household/inviteCode', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE householdtable SET inviteCode = ? WHERE UHID = ?', [data.inviteCode, data.UHID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/household/householdmember/1', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE householdtable SET HouseHoldMember1 = ? WHERE UHID = ?', [data.HouseHoldMember1, data.UHID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/household/householdmember/2', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE householdtable SET HouseHoldMember2 = ? WHERE UHID = ?', [data.HouseHoldMember2, data.UHID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/household/householdmember/3', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE householdtable SET HouseHoldMember3 = ? WHERE UHID = ?', [data.HouseHoldMember3, data.UHID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/household/householdmember/4', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE householdtable SET HouseHoldMember4 = ? WHERE UHID = ?', [data.HouseHoldMember4, data.UHID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/household/householdmember/5', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE householdtable SET HouseHoldMember5 = ? WHERE UHID = ?', [data.HouseHoldMember5, data.UHID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/household/householdmember/6', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE householdtable SET HouseHoldMember6 = ? WHERE UHID = ?', [data.HouseHoldMember6, data.UHID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/recipe/displayName', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE recipetable SET displayName = ? WHERE URID = ?', [data.displayName, data.URID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/recipe/recipelink', (req, res)=>{
+    const data = req.body;
+
+    connection.query('UPDATE recipetable SET recipeLink = ? WHERE URID = ?', [data.recipeLink , data.URID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/cabinet/itemdisplayname', (req, res)=>{
+    const data = req.body;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`
+
+    if (!(data.cabinetCode).isInteger()){
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer.'})
+        return;
+    }
+
+    connection.query(`UPDATE ${cabinetTableName} SET itemDisplayName = ? WHERE UCID = ?`, [data.displayName, data.UCID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/update/cabinet/itemamount', (req, res)=>{
+    const data = req.body;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`
+
+    if (!(data.cabinetCode).isInteger()){
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer.'})
+        return;
+    }
+
+    connection.query(`UPDATE ${cabinetTableName} SET itemAmount = ? WHERE UCID = ?`, [data.amount, data.UCID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id:results.insertId});
+    })
+})
+
+app.post('/api/data/update/cabinet/itemexpirationdate', (req,res)=>{
+    const data = req.body;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`
+
+    if (!(data.cabinetCode).isInteger()){
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer.'})
+        return;
+    }
+
+    connection.query(`UPDATE ${cabinetTableName} SET itemExpirationDate = ? WHERE UCID = ?`, [data.expirationDate, data.UCID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, id:results.insertId});
+    })
+})
 
 //DELETION CODE:
 
