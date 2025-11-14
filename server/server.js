@@ -151,6 +151,7 @@ app.get('/api/data/get/user/firstname', (req, res) =>{
         res.json(results);
     })
 })
+
 app.get('/api/data/get/user/lastname', (req, res)=>{
     const data = req.query;
     connection.query('SELECT LastName FROM usertable WHERE UUID = ?', [data.UUID], (err, results)=>{
@@ -162,6 +163,7 @@ app.get('/api/data/get/user/lastname', (req, res)=>{
         res.json(results);
     })
 })
+
 app.get('/api/data/get/user/username', (req,res)=>{
     const data = req.query;
     connection.query('SELECT Username FROM usertable WHERE UUID = ?', [data.UUID], (err, results)=>{
@@ -173,6 +175,7 @@ app.get('/api/data/get/user/username', (req,res)=>{
         res.json(results);
     })
 })
+
 app.get('/api/data/get/user/accesscode', (req, res)=>{
     const data = req.query;
     connection.query('SELECT AccessCode FROM usertable WHERE UUID = ?', [data.UUID], (err, results)=>{
@@ -184,6 +187,7 @@ app.get('/api/data/get/user/accesscode', (req, res)=>{
         res.json(results);
     })
 })
+
 app.get('/api/data/get/user/email', (req, res)=>{
     const data = req.query;
     connection.query('SELECT UserEmail FROM usertable WHERE UUID = ?', [data.UUID], (err, results)=>{
@@ -389,7 +393,7 @@ app.get('/api/data/get/housecabinetindex/cabinetCode', (req, res)=>{
     connection.query(`SELECT cabinetCode FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
         if(err){
             console.error(err);
-            res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabientCode) | data retrieval failed'});
+            res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabinetCode) | data retrieval failed'});
             return;
         }
         res.json(results);
@@ -480,7 +484,6 @@ app.post('/api/data/add/cabinet', (req, res)=>{
         res.json({success: true, id: results.insertId});
     })
 })
-
 
 //UPDATE CODE:
 app.put('/api/data/update/user/firstname', (req,res)=>{
@@ -768,10 +771,176 @@ app.put('/api/data/update/cabinet/itemexpirationdate', (req,res)=>{
     })
 })
 
+app.put('/api/data/update/housecabinetindex', (req, res)=>{
+    const data = req.query;
+    const index = `household${data.UHID}`;
+
+    connection.query(`UPDATE ${index} SET cabinetCode = ? WHERE UHCIID = ?`, [data.cabinetCode, data.UHCIID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database update failed'});
+            return;
+        }
+        res.json({ success: true, affectedRows: results.affectedRows});
+    })
+})
+
+
 //DELETION CODE:
 
+app.delete('/api/data/delete/user', (req, res)=>{
+    const data = req.body;
+
+    connection.query('DELETE FROM usertable WHERE UUID = ?', [data.UUID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database deletion failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.delete('/api/data/delete/food', (req, res)=>{
+    const data = req.body;
+
+    connection.query('DELETE FROM foodtable WHERE UFID = ?', [data.UFID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database deletion failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.delete('/api/data/delete/houeshold', (req, res)=>{
+    const data = req.body;
+
+    connection.query('DELETE FROM householdtable WHERE UHID = ?', [data.UHID],(err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database deletion failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.delete('/api/data/delete/recipe', (req, res)=>{
+    const data = req.body;
+
+    connection.query('DELETE FROM recipetable WHERE URID = ?', [data.URID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database deletion failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.delete('/api/data/delete/cabinet/cabinet',  (req, res)=>{
+    const data = req.body;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`;
+
+    if (!(data.cabinetCode).isInteger()){
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer.'});
+        return;
+    }
+
+    connection.query(`DROP TABLE ${cabinetTableName}`, (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database deletion failed'});
+            return;
+        }
+        res.json(results);
+    })  
+})
+
+app.delete('/api/data/delete/cabinet/item', (req, res)=>{
+    const data = req.body;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`;
+
+    if (!(data.cabinetCode).isInteger()){
+        console.error("Provided cabinet code is not an integer.");
+        res.status(500).json({error: 'Provided cabinet code is not an integer'});
+        return;
+    }
+
+    connection.query(`DELETE FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database deletion failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.delete('/api/data/delete/housecabinetindex/single', (req, res)=>{
+    const data = req.body;
+    const index = `household${data.UHCIID}`;
+
+    connection.query(`DELETE FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database deletion failed'});
+            return;
+        }
+        res.json(results);
+    })
+})
+
+app.delete('/api/data/delete/housecabinetindex/index', (req, res)=>{
+    const data = req.body;
+    const index = `household${data.UHCIID}`
+
+    connection.query(`DROP TABLE ${index}`, (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({ error: 'Database deletion failed'});
+            return;
+        }
+        res.json(results);
+    });
+})
 
 //CREATION CODE:
+
+app.post('/api/data/create/cabinet', (req, res)=>{
+    const data = req.body;
+    const cabinetCode = data.cabinetCode;
+    const cabinetTableName = `cabinet${cabinetCode}`;
+
+    connection.query(`CREATE TABLE ${cabinetTableName} (UCID INT NULL AUTO_INCREMENT, itemDisplayName VARCHAR(90) NOT NULL, itemAmount INT NOT NULL, itemExpirationDate DATE NOT NULL, PRIMARY KEY (UCID));`, (err,results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database creation failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
+app.post('/api/data/create/housecabinetindex', (Req, res)=>{
+    const data = req.body;
+    const index = `household${data.UHCIID}`;
+
+    connection.query(`CREATE TABLE ${index} (UHCIID INT NULL AUTO_INCREMENT, cabinetCode VARCHAR(45) NOT NULL, PRIMARY KEY (UHCIID));`, (err, results)=>{
+        if(err){
+            console.error(err);
+            res.status(500).json({error: 'Database creation failed'});
+            return;
+        }
+        res.json({ success: true, id: results.insertId});
+    })
+})
+
 
 //SHUTDOWN CODE:
 
