@@ -1,9 +1,12 @@
+import { PhoneSquareComponent } from './phone-square/phone-square.component';
+import { NavBarComponent } from './phone-square/nav-bar/nav-bar.component';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, PhoneSquareComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,0 +1,58 @@
+.phone-frame {
+    aspect-ratio: 388/852;
+    width: auto;
+    height: min(90vh, 852px);
+    background-color: rgb(96.47% 94.12% 79.61%);
+    border-radius: 40px;
+
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    justify-self: center;
+}
+
+.phone-frame.locked {
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+}
+.phone-content {
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  
+  
+}
+.phone-bottom-nav.debug-nav {
+    position:absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(calc(-50%));
+    z-index: 10001;
+    width: 100%;
+    max-width: 388px;
+    margin: 0;
+    padding: 0;
+    max-width: 389px;
+    pointer-events: auto;
+    box-sizing: border-box;
+}
+
+.phone-bottom-nav .nav-bar {
+    width: 388px;
+    height: 70px;
+    border-bottom-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    justify-self: center;
+}
