@@ -7,6 +7,6 @@ import { appRoutes } from './app/app-routing.module';
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
 
-
-
-
+bootstrapApplication(AppComponent, {
+  providers: [ provideRouter(appRoutes) ]
+});
