@@ -1,10 +1,17 @@
 <div class="nav-bar">
-    <button class="grocery-list-but" ></button>
-    <button class="cabinets-but"></button>
-    <button class ="home-but" (click)="goHome()">
+    <button class="grocery-list-but" routerLink="/grocery-list" routerLinkActive="active">
+        <img class="button-icons" src="assets/images/icon-images/image-grocery.png" alt="Grocery List">
+    </button>
+    <button class="cabinets-but" routerLink="/cabinets" routerLinkActive="active">
+        <img class="button-icons" src="assets/images/icon-images/image-cabinets.png" alt="Cabinets">
+    </button>
+    <button class="home-but" routerLink="/home" routerLinkActive="active">
         <img class="button-icons" src="assets/images/icon-images/image-home.png" alt="Home">
     </button>
-    <button class="household-but"></button>
-    <button class="recipe-but"></button>
-
+    <button class="household-but" routerLink="/household" routerLinkActive="active">
+        <img class="button-icons" src="assets/images/icon-images/image-household.png" alt="Household">
+    </button>
+    <button class="recipe-but" routerLink="/recipe" routerLinkActive="active">
+        <img class="button-icons" src="assets/images/icon-images/image-recipe.png" alt="Recipe">
+    </button>
 </div>
