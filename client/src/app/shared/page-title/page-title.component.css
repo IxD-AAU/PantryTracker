@@ -1,0 +1,23 @@
+.page-title {
+  font-family: 'Sono', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  margin: 55px 0 12px 0;
+  padding: 0 16px;
+  text-align: left;
+  color: #404040;
+  position: relative;
+  padding-bottom: 16px;
+  display: inline-block;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  width: calc(100% - 32px);
+  height: 10px;
+  background-color: #A9BB77;
+  border-radius: 5px;
+}
