@@ -1,0 +1,8 @@
+<div class="list-wrapper">
+  <button class="list-button" (click)="onClick()">
+    <div class="shopping-lines">
+      <div class="line" *ngFor="let width of lineWidths" [style.width]="width"></div>
+    </div>
+  </button>
+  <span class="list-label">{{ label }}</span>
+</div>
