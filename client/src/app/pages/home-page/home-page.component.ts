@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { PageTitleComponent } from '../../shared/page-title/page-title.component';
 import { AddButtonComponent } from '../../shared/add-button/add-button.component';
+import { CabinetNormalComponent } from '../../shared/cabinet-normal/cabinet-normal.component';
+
 
 @Component({
   selector: 'app-home-page',
-  imports: [PageTitleComponent, AddButtonComponent],
+  imports: [PageTitleComponent, AddButtonComponent, CabinetNormalComponent],
   standalone: true,
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
@@ -12,5 +14,8 @@ import { AddButtonComponent } from '../../shared/add-button/add-button.component
 export class HomePageComponent {
   onAddClick() {
     console.log('Add button clicked!');
+  }
+ onCabinetClick() {
+    console.log('Cabinet button clicked!');
   }
 }

@@ -24,7 +24,6 @@
 
 .add-button:hover {
   background-color: #98a96a;
-  transform: scale(1.1);
 }
 
 .add-button:active {

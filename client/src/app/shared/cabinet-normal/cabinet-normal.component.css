@@ -1,0 +1,50 @@
+.cabinet-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 8px;
+  margin-left: 40px;
+}
+
+.cabinet-button {
+  width: 150px;
+  height: 150px;
+  background-color: #A9BB77;
+  color: #404040;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cabinet-button::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 12px;
+  height: 35px;
+  background-color: #9B9595;
+  border-radius: 8px;
+}
+
+.cabinet-button:hover {
+  background-color: #98a96a;
+}
+
+.cabinet-button:active {
+  transform: scale(0.95);
+}
+
+.cabinet-label {
+  font-family: 'Sono', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #404040;
+  text-align: center;
+  max-width: 100px;
+  word-wrap: break-word;
+  margin-left: 25px;
+}
