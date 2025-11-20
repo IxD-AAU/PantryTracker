@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PageTitleComponent } from '../../shared/page-title/page-title.component';
 import { AddButtonComponent } from '../../shared/add-button/add-button.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,9 @@ import { AddButtonComponent } from '../../shared/add-button/add-button.component
   styleUrl: './grocery-list-page.component.css'
 })
 export class GroceryListPageComponent {
-onAddClick() {
-    console.log('Add button clicked!');
+  constructor(private router: Router) {}
+
+  onAddClick() {
+    this.router.navigate(['/add-item']);
   }
 }

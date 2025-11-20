@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageTitleComponent } from '../../shared/page-title/page-title.component';
 import { AddButtonComponent } from '../../shared/add-button/add-button.component';
 
@@ -10,7 +11,9 @@ import { AddButtonComponent } from '../../shared/add-button/add-button.component
   styleUrl: './recipe-page.component.css'
 })
 export class RecipePageComponent {
- onAddClick() {
-    console.log('Add button clicked!');
+  constructor(private router: Router) {}
+
+  onAddClick() {
+    this.router.navigate(['/add-item']);
   }
 }

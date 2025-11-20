@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageTitleComponent } from '../../shared/page-title/page-title.component';
 import { AddButtonComponent } from '../../shared/add-button/add-button.component';
 import { CabinetNormalComponent } from '../../shared/cabinet-normal/cabinet-normal.component';
@@ -11,10 +12,13 @@ import { CabinetNormalComponent } from '../../shared/cabinet-normal/cabinet-norm
   styleUrl: './cabinets-page.component.css'
 })
 export class CabinetsPageComponent {
- onAddClick() {
-    console.log('Add button clicked!');
+  constructor(private router: Router) {}
+
+  onAddClick() {
+    this.router.navigate(['/add-item']);
   }
-   onCabinetClick() {
+
+  onCabinetClick() {
     console.log('Cabinet button clicked!');
   }
 }

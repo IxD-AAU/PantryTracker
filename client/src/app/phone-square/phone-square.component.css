@@ -55,3 +55,10 @@
     padding: 0;
     justify-self: center;
 }
+
+.recipe-box-phone {
+    justify-self: center;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+}
