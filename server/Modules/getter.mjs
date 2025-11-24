@@ -368,7 +368,7 @@ export const getCabinet = (connection, operation) => {
 
             if (!(data.cabinetCode).isInteger()){
                 console.error("Provided cabinet code is not an integer.");
-                res.status(500).json({error: 'Provided cabinet code is not an integer.'})
+                res.status(500).json({error: 'Provided cabinet code is not an integer.'});
                 return;
             }
 

@@ -10,6 +10,8 @@ import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet } 
 
 import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex } from './Modules/delete.mjs';
 
+import { createCabinet, createHouseIndex } from './Modules/create.mjs';
+
 const app = express();
 const PORT = 3000;
 
@@ -189,34 +191,9 @@ app.use(delHouseHoldIndex(connection, "Whole"));
 
 //CREATION CODE:
 
-app.post('/api/data/create/cabinet', (req, res)=>{
-    const data = req.body;
-    const cabinetCode = data.cabinetCode;
-    const cabinetTableName = `cabinet${cabinetCode}`;
+app.use(createCabinet(connection));
 
-    connection.query(`CREATE TABLE ${cabinetTableName} (UCID INT NULL AUTO_INCREMENT, itemDisplayName VARCHAR(90) NOT NULL, itemAmount INT NOT NULL, itemExpirationDate DATE NOT NULL, PRIMARY KEY (UCID));`, (err,results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database creation failed'});
-            return;
-        }
-        res.json({ success: true, id: results.insertId});
-    })
-})
-
-app.post('/api/data/create/housecabinetindex', (Req, res)=>{
-    const data = req.body;
-    const index = `household${data.UHCIID}`;
-
-    connection.query(`CREATE TABLE ${index} (UHCIID INT NULL AUTO_INCREMENT, cabinetCode VARCHAR(45) NOT NULL, PRIMARY KEY (UHCIID));`, (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database creation failed'});
-            return;
-        }
-        res.json({ success: true, id: results.insertId});
-    })
-})
+app.use(createHouseIndex(connection));
 
 
 //SHUTDOWN CODE:
