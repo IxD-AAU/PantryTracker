@@ -6,15 +6,19 @@ import { CabinetNormalComponent } from '../../shared/cabinet-normal/cabinet-norm
 import { AddCabinetButtonComponent } from '../../shared/add-cabinet-button/add-cabinet-button.component';
 import { FridgeComponent } from '../../shared/fridge/fridge.component';
 import { FreezerComponent } from '../../shared/freezer/freezer.component';
+import { AddCabinetPopupComponent } from './add-cabinet-popup/add-cabinet-popup.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cabinets-page',
   standalone: true,
-  imports: [PageTitleComponent, AddButtonComponent, CabinetNormalComponent, AddCabinetButtonComponent, FridgeComponent, FreezerComponent],
+  imports: [PageTitleComponent, AddButtonComponent, CabinetNormalComponent, AddCabinetButtonComponent, FridgeComponent, FreezerComponent, CommonModule, AddCabinetPopupComponent],
   templateUrl: './cabinets-page.component.html',
   styleUrl: './cabinets-page.component.css'
 })
 export class CabinetsPageComponent {
+  showAddCabinetPopup = false;
+
   constructor(private router: Router) {}
 
   onAddClick() {
@@ -26,7 +30,11 @@ export class CabinetsPageComponent {
   }
 
   onAddCabinetClick() {
-    console.log('Add cabinet button clicked!');
+    this.showAddCabinetPopup = true;
+  }
+
+  onPopupClosed() {
+    this.showAddCabinetPopup = false;
   }
 
   onFridgeClick() {

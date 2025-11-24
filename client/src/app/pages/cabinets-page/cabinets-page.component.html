@@ -7,3 +7,4 @@
 <div class="cabinets-row">
   <app-add-cabinet-button (clicked)="onAddCabinetClick()"></app-add-cabinet-button>
 </div>
+<app-add-cabinet-popup *ngIf="showAddCabinetPopup" (closed)="onPopupClosed()"></app-add-cabinet-popup>
