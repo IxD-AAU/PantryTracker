@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-manual-add-button',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './manual-add-button.component.css'
 })
 export class ManualAddButtonComponent {
+@Output() clicked = new EventEmitter<void>();
 
+  onClick() {
+    this.clicked.emit();
+  } 
 }

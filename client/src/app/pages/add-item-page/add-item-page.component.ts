@@ -14,10 +14,6 @@ import { AcceptButtonComponent } from './accept-button/accept-button.component';
   styleUrl: './add-item-page.component.css'
 })
 export class AddItemPageComponent {
-  scannerLabel: string = 'Brug Kamera';
-  manualLabel: string = 'Tast selv';
-  acceptLabel: string = 'Godkend';
-
   onScannerClick() {
     console.log('Scanner button clicked!');
   }

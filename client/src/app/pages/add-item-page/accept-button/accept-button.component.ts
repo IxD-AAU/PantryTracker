@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-accept-button',
@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './accept-button.component.html',
   styleUrl: './accept-button.component.css'
 })
-export class AcceptButtonComponent {
+export class AcceptButtonComponent { 
+  @Output() clicked = new EventEmitter<void>();
 
+  onClick() {
+    this.clicked.emit();
+  }
 }
