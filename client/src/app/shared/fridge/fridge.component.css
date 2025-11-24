@@ -1,0 +1,39 @@
+.fridge-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-left: 0;
+}
+
+.fridge-button {
+  width: 150px;
+  height: 150px;
+  background-color: #DADADA;
+  color: #404040;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.fridge-button:hover {
+  background-color: #BFBFBF;
+  
+}
+
+.fridge-button:active {
+  transform: scale(0.95);
+}
+
+.fridge-label {
+  font-family: 'Sono', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #404040;
+  text-align: center;
+  max-width: 100px;
+  word-wrap: break-word;
+}
