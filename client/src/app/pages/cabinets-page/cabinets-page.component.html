@@ -1,6 +1,9 @@
 <app-page-title [title]="'Skabe'"></app-page-title>
 <app-add-button (clicked)="onAddClick()"></app-add-button>
+<div class="cabinets-row cabinets-top-row">
+  <app-fridge (clicked)="onFridgeClick()"></app-fridge>
+  <app-cabinet-normal (clicked)="onCabinetClick()"></app-cabinet-normal>
+</div>
 <div class="cabinets-row">
-  <app-cabinet-normal (clicked)="onCabinetClick()"></app-cabinet-normal>
-  <app-cabinet-normal (clicked)="onCabinetClick()"></app-cabinet-normal>
+  <app-add-cabinet-button (clicked)="onAddCabinetClick()"></app-add-cabinet-button>
 </div>

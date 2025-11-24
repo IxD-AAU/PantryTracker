@@ -5,5 +5,18 @@
   gap: 30px;
   padding: 0 16px;
   margin-bottom: 20px;
+}
+
+.cabinets-row:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 30px;
+  padding: 0 16px;
+  margin-bottom: 20px;
+  padding-left: 30px;
+}
+
+.cabinets-top-row {
   margin-top: 40px;
 }
