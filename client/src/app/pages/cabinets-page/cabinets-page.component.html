@@ -1,10 +1,8 @@
 <app-page-title [title]="'Skabe'"></app-page-title>
 <app-add-button (clicked)="onAddClick()"></app-add-button>
-<div class="cabinets-row cabinets-top-row">
+<div class="cabinets-container">
   <app-fridge (clicked)="onFridgeClick()"></app-fridge>
   <app-freezer (clicked)="onFreezerClick()"></app-freezer>
-</div>
-<div class="cabinets-row">
   <app-add-cabinet-button (clicked)="onAddCabinetClick()"></app-add-cabinet-button>
 </div>
 <app-add-cabinet-popup *ngIf="showAddCabinetPopup" (closed)="onPopupClosed()"></app-add-cabinet-popup>
