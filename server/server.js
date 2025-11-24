@@ -6,7 +6,9 @@ import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetI
 
 import { addUser, addFood, addCabinet, addHousehold, addHouseholdCabinetIndex } from './Modules/insert.mjs';
 
-import { updateUser,updateFood,updateHouseHold,updateRecipe,updateCabinet } from './Modules/update.mjs';
+import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet } from './Modules/update.mjs';
+
+import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex } from './Modules/delete.mjs';
 
 const app = express();
 const PORT = 3000;
@@ -138,11 +140,9 @@ app.use(updateUser(connection,"AccessCode"));
 
 app.use(updateUser(connection,"UserEmail"));
 
-
 app.use(updateFood(connection,"DisplayName"));
 
 app.use(updateFood(connection,"BarCode"));
-
 
 app.use(updateHouseHold(connection,"DisplayName"));
 
@@ -160,11 +160,9 @@ app.use(updateHouseHold(connection,"HouseHoldM5"));
 
 app.use(updateHouseHold(connection,"HouseHoldM6"));
 
-
 app.use(updateRecipe(connection,"DisplayName"));
 
 app.use(updateRecipe(connection,"RecipeLink"));
-
 
 app.use(updateCabinet(connection,"itemdisplayname"));
 
@@ -173,127 +171,21 @@ app.use(updateCabinet(connection,"itemamount"));
 app.use(updateCabinet(connection,"itemexpirationdate"));
 //DELETION CODE:
 
-app.delete('/api/data/delete/user', (req, res)=>{
-    const data = req.body;
+app.use(delUser(connection));
 
-    connection.query('DELETE FROM usertable WHERE UUID = ?', [data.UUID], (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database deletion failed'});
-            return;
-        }
-        res.json(results);
-    })
-})
+app.use(delFood(connection));
 
-app.delete('/api/data/delete/food', (req, res)=>{
-    const data = req.body;
+app.use(delHouseHold(connection));
 
-    connection.query('DELETE FROM foodtable WHERE UFID = ?', [data.UFID], (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database deletion failed'});
-            return;
-        }
-        res.json(results);
-    })
-})
+app.use(delRecipe(connection));
 
-app.delete('/api/data/delete/houeshold', (req, res)=>{
-    const data = req.body;
+app.use(delCabinet(connection, "Entry"));
 
-    connection.query('DELETE FROM householdtable WHERE UHID = ?', [data.UHID],(err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database deletion failed'});
-            return;
-        }
-        res.json(results);
-    })
-})
+app.use(delCabinet(connection, "Whole"));
 
-app.delete('/api/data/delete/recipe', (req, res)=>{
-    const data = req.body;
+app.use(delHouseHoldIndex(connection, "Entry"));
 
-    connection.query('DELETE FROM recipetable WHERE URID = ?', [data.URID], (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database deletion failed'});
-            return;
-        }
-        res.json(results);
-    })
-})
-
-app.delete('/api/data/delete/cabinet/cabinet',  (req, res)=>{
-    const data = req.body;
-    const cabinetCode = data.cabinetCode;
-    const cabinetTableName = `cabinet${cabinetCode}`;
-
-    if (!(data.cabinetCode).isInteger()){
-        console.error("Provided cabinet code is not an integer.");
-        res.status(500).json({error: 'Provided cabinet code is not an integer.'});
-        return;
-    }
-
-    connection.query(`DROP TABLE ${cabinetTableName}`, (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database deletion failed'});
-            return;
-        }
-        res.json(results);
-    })  
-})
-
-app.delete('/api/data/delete/cabinet/item', (req, res)=>{
-    const data = req.body;
-    const cabinetCode = data.cabinetCode;
-    const cabinetTableName = `cabinet${cabinetCode}`;
-
-    if (!(data.cabinetCode).isInteger()){
-        console.error("Provided cabinet code is not an integer.");
-        res.status(500).json({error: 'Provided cabinet code is not an integer'});
-        return;
-    }
-
-    connection.query(`DELETE FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database deletion failed'});
-            return;
-        }
-        res.json(results);
-    })
-})
-
-app.delete('/api/data/delete/housecabinetindex/single', (req, res)=>{
-    const data = req.body;
-    const index = `household${data.UHCIID}`;
-
-    connection.query(`DELETE FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({error: 'Database deletion failed'});
-            return;
-        }
-        res.json(results);
-    })
-})
-
-app.delete('/api/data/delete/housecabinetindex/index', (req, res)=>{
-    const data = req.body;
-    const index = `household${data.UHCIID}`
-
-    connection.query(`DROP TABLE ${index}`, (err, results)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({ error: 'Database deletion failed'});
-            return;
-        }
-        res.json(results);
-    });
-})
+app.use(delHouseHoldIndex(connection, "Whole"));
 
 //CREATION CODE:
 
