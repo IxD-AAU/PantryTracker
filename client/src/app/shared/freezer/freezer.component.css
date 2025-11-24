@@ -1,4 +1,4 @@
-.fridge-wrapper {
+.freezer-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,7 @@
   margin-left: 0;
 }
 
-.fridge-button {
+.freezer-button {
   width: 150px;
   height: 150px;
   background-color: #DADADA;
@@ -19,27 +19,26 @@
   overflow: hidden;
 }
 
-.fridge-button::after {
+.freezer-button::after {
   content: '';
   position: absolute;
   bottom: 14px;
   right: 14px;
-  width: 12px;
-  height: 123px;
+  width: 123px;
+  height: 12px;
   background-color: #9B9595;
   border-radius: 8px;
 }
 
-.fridge-button:hover {
+.freezer-button:hover {
   background-color: #BFBFBF;
-  
 }
 
-.fridge-button:active {
+.freezer-button:active {
   transform: scale(0.95);
 }
 
-.fridge-label {
+.freezer-label {
   font-family: 'Sono', sans-serif;
   font-size: 14px;
   font-weight: 500;

@@ -5,11 +5,12 @@ import { AddButtonComponent } from '../../shared/add-button/add-button.component
 import { CabinetNormalComponent } from '../../shared/cabinet-normal/cabinet-normal.component';
 import { AddCabinetButtonComponent } from '../../shared/add-cabinet-button/add-cabinet-button.component';
 import { FridgeComponent } from '../../shared/fridge/fridge.component';
+import { FreezerComponent } from '../../shared/freezer/freezer.component';
 
 @Component({
   selector: 'app-cabinets-page',
   standalone: true,
-  imports: [PageTitleComponent, AddButtonComponent, CabinetNormalComponent, AddCabinetButtonComponent, FridgeComponent],
+  imports: [PageTitleComponent, AddButtonComponent, CabinetNormalComponent, AddCabinetButtonComponent, FridgeComponent, FreezerComponent],
   templateUrl: './cabinets-page.component.html',
   styleUrl: './cabinets-page.component.css'
 })
@@ -30,5 +31,9 @@ export class CabinetsPageComponent {
 
   onFridgeClick() {
     console.log('Fridge button clicked!');
+  }
+
+  onFreezerClick() {
+    console.log('Freezer button clicked!');
   }
 }
