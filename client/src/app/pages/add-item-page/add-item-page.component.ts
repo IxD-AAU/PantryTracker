@@ -18,4 +18,7 @@ export class AddItemPageComponent {
   manualLabel: string = 'Tast selv';
   acceptLabel: string = 'Godkend';
 
+  onScannerClick() {
+    console.log('Scanner button clicked!');
+  }
 }
