@@ -1,0 +1,16 @@
+.scanner-button {
+  border-radius: 15px;
+  width: 255px;
+  height: 90px;
+  top: 147px;
+  left: 69px;
+  position: absolute;
+  background-color: #A9BB77;;
+}
+.scanner-button:hover {
+  background-color: #98a96a;
+}
+
+.scanner-button:active {
+  transform: scale(0.95);
+}
