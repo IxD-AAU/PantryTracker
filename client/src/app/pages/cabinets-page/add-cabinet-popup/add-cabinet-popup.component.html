@@ -1,7 +1,7 @@
 <div class="popup-overlay" (click)="onClose()">
   <div class="popup-modal" (click)="$event.stopPropagation()">
     <button class="close-button" (click)="onClose()">✕</button>
-    <h2>Tilføj Skab</h2>
+    <input type="text" class="cabinet-input" placeholder="Navn på skab" [(ngModel)]="cabinetName">
     <!-- Add your form or content here -->
   </div>
 </div>

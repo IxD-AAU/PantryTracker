@@ -13,6 +13,7 @@
 
 .popup-modal {
   background-color: #F6F0CB;
+  border: 3px solid #768844;
   border-radius: 12px;
   padding: 20px;
   width: 302px;
@@ -33,4 +34,29 @@
 
 .close-button:hover {
   color: #666;
+}
+
+.cabinet-input {
+  width: 190px;
+  height: 39px;
+  padding: 10px 16px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 12px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background: #A9BB77;
+  border: none;
+  font-size: 18px;
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  text-align: center;
+  color: #404040;
+}
+
+.cabinet-input:focus {
+  outline: none;
+  border-color: #A9BB77;
 }
