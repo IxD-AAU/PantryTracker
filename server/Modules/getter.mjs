@@ -182,7 +182,7 @@ export const getUser = (connection, operation) => {
 
 export const getFood = (connection, operation) => {
     if (operation == "barcode"){
-        router.get('/api/data/get/food/barCode', (req, res)=>{
+        router.get('/api/data/get/food/barcode', (req, res)=>{
             const data = req.query;
             connection.query('SELECT barCode FROM foodtable WHERE UFID = ?', [data.UFID], (err, results)=>{
                 if(err){
@@ -389,7 +389,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
     if (operation == "DisplayName"){
         router.get('/api/data/get/householdcabinetindex/displayname', (req, res)=>{
             const data = req.query;
-            const index = `household${data.UHID}`;
+            const index = `household${data.IndexCode}`;
 
             connection.query(`SELECT displayName FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if (err){
@@ -404,7 +404,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
     else if (operation == "cabinetCode"){
         router.get('/api/data/get/housecabientindex/cabinetcode', (req, res)=>{
             const data = req.query;
-            const index = `household${data.UHID}`;
+            const index = `household${data.IndexCode}`;
 
             connection.query(`SELECT cabinetCode FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if (err){

@@ -27,7 +27,7 @@ export const createCabinet = (connection) => {
 export const createHouseIndex = (connection) => {
     router.post('/api/data/create/houseindex', (req, res)=>{
         const data = req.body;
-        const index = `household${[data.UHID]}`;
+        const index = `household${[data.IndexCode]}`;
 
         connection.query(`CREATE TABLE ${index} (UHCIID INT NULL AUTO_INCREMENT,displayName VARCHAR(90) NOT NULL, cabinetCode VARCHAR(45) NOT NULL, PRIMARY KEY (UHCIID));`,(err, results)=>{
             if (err){

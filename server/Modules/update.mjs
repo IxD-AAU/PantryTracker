@@ -60,7 +60,7 @@ export const updateUser = (connection, operation) => {
         })
     }
     else if (operation == "UserEmail"){
-        router.put('/api/data/update/user/useremail', (req, res)=>{
+        router.put('/api/data/update/user/email', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE usertable SET UserEmail = ? WHERE UUID = ?', [data.UserEmail, data.UUID], (err, results)=>{
@@ -109,7 +109,7 @@ export const updateFood = (connection, operation) => {
 }
 export const updateHouseHold = (connection, operation) => {
     if (operation == "DisplayName"){
-        router.put('/api/data/update/houeshold/displayname', (req, res)=>{
+        router.put('/api/data/update/household/displayname', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE householdtable SET displayName = ? WHERE UHID = ?', [data.displayName, data.UHID], (err, results)=>{
@@ -123,7 +123,7 @@ export const updateHouseHold = (connection, operation) => {
         })
     }
     else if (operation == "InviteCode"){
-        router.put('/api/data/update/houeshold/invitecode', (req, res)=>{
+        router.put('/api/data/update/household/invitecode', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE householdtable SET inviteCode = ? WHERE UHID = ?', [data.inviteCode, data.UHID], (err, results)=>{
@@ -136,8 +136,8 @@ export const updateHouseHold = (connection, operation) => {
             })
         })
     }
-    else if (operation == "HouesHoldM1"){
-        router.put('/api/data/update/houeshold/householdmember/1', (req, res)=>{
+    else if (operation == "HouseHoldM1"){
+        router.put('/api/data/update/household/householdmember/1', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE householdtable SET HouseHoldMember1 = ? WHERE UHID = ?', [data.HouseHoldMember1, data.UHID], (err, results)=>{
@@ -150,8 +150,8 @@ export const updateHouseHold = (connection, operation) => {
             })
         })
     }
-    else if (operation == "HouesHoldM2"){
-        router.put('/api/data/update/houeshold/householdmember/2', (req, res)=>{
+    else if (operation == "HouseHoldM2"){
+        router.put('/api/data/update/household/householdmember/2', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE householdtable SET HouseHoldMember2 = ? WHERE UHID= ?', [data.HouseHoldMember2, data.UHID], (err, results)=>{
@@ -164,8 +164,8 @@ export const updateHouseHold = (connection, operation) => {
             })
         })
     }
-    else if (operation == "HouesHoldM3"){
-        router.put('/api/data/update/houeshold/householdmember/3', (req, res)=>{
+    else if (operation == "HouseHoldM3"){
+        router.put('/api/data/update/household/householdmember/3', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE householdtable SET HouseHoldMember3 = ? WHERE UHID = ?', [data.HouseHoldMember3,data.UHID], (err, results)=>{
@@ -178,8 +178,8 @@ export const updateHouseHold = (connection, operation) => {
             })
         })
     }
-    else if (operation == "HouesHoldM4"){
-        router.put('/api/data/update/houeshold/householdmember/4', (req, res)=>{
+    else if (operation == "HouseHoldM4"){
+        router.put('/api/data/update/household/householdmember/4', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE householdtable SET HouseHoldMember4 = ? WHERE UHID = ?', [data.HouseHoldMember4, data.UHID], (err, results)=>{
@@ -192,8 +192,8 @@ export const updateHouseHold = (connection, operation) => {
             })
         })
     }
-    else if (operation == "HouesHoldM5"){
-        router.put('/api/data/update/houeshold/householdmember/5', (req, res)=>{
+    else if (operation == "HouseHoldM5"){
+        router.put('/api/data/update/household/householdmember/5', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE householdtable SET HouseHoldMember5 = ? WHERE UHID = ?', [data.HouseHoldMember5, data.UHID], (err, results)=>{
@@ -206,8 +206,8 @@ export const updateHouseHold = (connection, operation) => {
             })
         })
     }
-    else if (operation == "HouesHoldM6"){
-        router.put('/api/data/update/houeshold/householdmember/6', (req, res)=>{
+    else if (operation == "HouseHoldM6"){
+        router.put('/api/data/update/household/householdmember/6', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE householdtable SET HouseHoldMember6 = ? WHERE UHID = ?', [data.HouseHoldMember6, data.UHID], (err, results)=>{
@@ -238,7 +238,7 @@ export const updateRecipe = (connection, operation) => {
         })
     }
     else if (operation == "RecipeLink"){
-        router.put('/api/data/update/recipe/recipelink', (req, res)=>{
+        router.put('/api/data/update/recipe/link', (req, res)=>{
             const data = req.body;
 
             connection.query('UPDATE recipetable SET displayName = ? WHERE URID = ?',[data.recipeLink, data.URID], (err, results)=>{
@@ -255,62 +255,84 @@ export const updateRecipe = (connection, operation) => {
 }
 export const updateCabinet = (connection, operation) => {
     if (operation == "itemdisplayname"){
-        const data = req.query;
-        const cabinetTableName = `cabinet${[data.cabinetCode]}`;
+        router.put('/api/data/update/cabinet/displayname', (req, res)=>{
+            const data = req.query;
+            const cabinetTableName = `cabinet${[data.cabinetCode]}`;
 
-        if (!(data.cabinetCode).isInteger()){
-            console.error("Provided cabinet code is not an integer.");
-            res.status(500).json({error: "Provided cabinet code is not an integer"});
-            return;
-        }
-
-        connection.query(`UPDATE ${cabinetTableName} SET itemDisplayName = ? WHERE UCID = ?`, [data.displayName, data.UCID], (err, results)=>{
-            if(err){
-                console.error(err);
-                res.status(500).json({ error: 'Database Update (CABINET DISPLAYNAME) failed'});
+            if (!(data.cabinetCode).isInteger()){
+                console.error("Provided cabinet code is not an integer.");
+                res.status(500).json({error: "Provided cabinet code is not an integer."});
                 return;
             }
-            res.json({ success: true, affectedRows: results.affectedRows});
+
+            connection.query(`UPDATE ${cabinetTableName} SET itemDisplayName = ? WHERE UCID = ?`, [data.displayName, data.UCID], (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Database Update (CABINET DISPLAYNAME) failed'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
         })
+        
     }
     else if (operation == "itemamount"){
-        const data = req.query;
-        const cabinetTableName = `cabinet${[data.cabinetCode]}`;
+        router.put('/api/data/update/cabinet/amount', (req, res)=>{
+            const data = req.query;
+            const cabinetTableName = `cabinet${[data.cabinetCode]}`;
 
-        if(!(data.cabinetCode).isInteger()){
-            console.error(err);
-            res.status(500).json({ error: 'Database Update (CABINET ITEMAMOUNT) failed'});
-            return;
-        }
-
-        connection.query(`UPDATE ${cabinetTableName} SET itemAmount = ? WHERE UCID = ?`, [data.itemAmount, data.UCID], (err, results)=>{
-            if (err){
-                console.error(err);
-                res.status(500).json({ error: 'Database Update (CABINET AMOUNT) failed'});
+            if (!(data.cabinetCode).isInteger()){
+                console.error("Provided cabinet code is not an integer.");
+                res.status(500).json({ error: 'Provided cabinet code is not an integer.'});
                 return;
             }
-            res.json ({ success: true, affectedRows: results.affectedRows});
+            connection.query(`UPDATE ${cabinetTableName} SET itemAmount = ? WHERE UCID = ?`, [data.itemAmount, data.UCID], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Database Update (CABINET AMOUNT) failde'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
         })
     }
     else if (operation == "itemexpirationdate"){
+        router.put('/api/data/update/cabinet/expirationdate', (req, res)=>{
+            const data = req.query;
+            const cabinetTableName = `cabinet${[data.cabinetCode]}`;
+
+            if(!(data.cabinetCode).isInteger()){
+                console.error("Provided cabinet code is not an integer.");
+                res.status(500).json({ error: "Provided cabinet code is not an integer."});
+                return;
+            }
+
+            connection.query(`UPDATE ${cabinetTableName} SET itemExpirationDate = ? WHERE UCID = ?`, [data.itemExpirationDate, data.UCID], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Database Update (CABINET EXPIRATIONDATE) failed'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
+        })
+    }
+    return router;
+}
+export const updateHouseHoldCabinetIndex = (connection) => {
+    router.put('/api/data/update/householdcabinetindex/displayname', (req, res)=>{
         const data = req.query;
-        const cabinetTableName = `cabinet${[data.cabinetCode]}`;
+        const index = `household${data.IndexCode}`;
 
-        if(!(data.cabinetCode).isInteger()){
-            console.error(err);
-            res.status(500).json({ error: 'Database Update (CABINET EXPIRATIONDATE'});
-            return;
-        }
-
-        connection.query(`UPDATE ${cabinetTableName} SET itemExpirationDate = ? WHERE UCID = ?`, [data.itemExpirationDate, data.UCID], (err, results)=>{
+        connection.query(`UPDATE ${index} SET DisplayName = ? WHERE = ?`, [data.displayName], (err, results)=>{
             if (err){
                 console.error(err);
-                res.status(500).json({ error: 'Database Update (CABINET EXPIRATIONDATE) failed'});
+                res.status(500).json({ error: 'Database Update (INDEX DISPLAYNAME) failed'});
                 return;
             }
             res.json({ success: true, affectedRows: results.affectedRows});
         })
-    }
+    })
     return router;
 }
 

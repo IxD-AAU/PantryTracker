@@ -6,7 +6,7 @@ import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetI
 
 import { addUser, addFood, addCabinet, addHousehold, addHouseholdCabinetIndex } from './Modules/insert.mjs';
 
-import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet } from './Modules/update.mjs';
+import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet, updateHouseHoldCabinetIndex } from './Modules/update.mjs';
 
 import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex } from './Modules/delete.mjs';
 
@@ -171,6 +171,8 @@ app.use(updateCabinet(connection,"itemdisplayname"));
 app.use(updateCabinet(connection,"itemamount"));
 
 app.use(updateCabinet(connection,"itemexpirationdate"));
+
+app.use(updateHouseHoldCabinetIndex(connection));
 //DELETION CODE:
 
 app.use(delUser(connection));

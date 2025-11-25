@@ -71,7 +71,7 @@ export const addCabinet = (connection)=>{
 export const addHouseholdCabinetIndex = (connection)=>{
     router.post('/api/data/add/houescabinetindex', (req, res)=>{
         const data = req.body;
-        const index = `household${data.UHID}`;
+        const index = `household${data.IndexCode}`;
 
         connection.query(`INSERT INTO ${index} (displayname, cabinetCode) VALUES (?,?)`, [data.displayName, data.cabinetCode], (err, results)=>{
             if (err){
