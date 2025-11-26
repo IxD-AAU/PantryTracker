@@ -42,7 +42,7 @@ export class DatabaseHandlerService {
  *    - "InviteCode"   -> returns the household's InviteCode based on its ID.
  *    - "HouseHoldMember1".. "HouseHoldMember6"
  *                     -> returns the ID of the householdmember based on the households ID
- *  - "Cabinet"
+ *  - "Cabinet" (Remember to provide the CabinetCode via the body OBJ).
  *    - "ItemDisplayName"     -> returns the displayname of a given item based on its ID.
  *    - "ItemAmount"          -> returns the amount of a given item based on its ID.
  *    - "ItemExpirationDate"  -> returns the expiration date of a given item based on its ID.
@@ -62,7 +62,8 @@ export class DatabaseHandlerService {
  * - "User" -> user's email
  * - "Food" -> the food's BarCode
  * - "HouseHold" -> a given user's ID compared against all the user ID's tied as memberships of said household.
- * ).
+ * )
+ * For all other operations/suboperations used the assosiated ID.
  * @returns Observable<any> - An observable that emits the HTTP GET response from the constructed endpoint.
  */
 getEntryDatabase(operation: String, subOperation: String, body: any): Observable<any>{
