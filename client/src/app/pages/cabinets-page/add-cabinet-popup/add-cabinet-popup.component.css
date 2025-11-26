@@ -73,24 +73,35 @@
 .nav-button {
   background-color: #A9BB77;
   border: none;
-  border-radius: 50%;
   width: 50px;
   height: 50px;
-  font-size: 24px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 0;
 }
 
 .nav-button:hover {
   background-color: #98a96a;
-
+  
 }
 
 .nav-button:active {
   transform: scale(0.95);
+}
+
+/* Left triangle - points left */
+.nav-button.left-button {
+  clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
+  border-radius: 8px 0 0 8px;
+}
+
+/* Right triangle - points right */
+.nav-button.right-button {
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  border-radius: 0 8px 8px 0;
 }
 
 .cabinet-display {

@@ -5,7 +5,7 @@
     <input type="text" class="cabinet-input" placeholder="Navn på skab" [(ngModel)]="cabinetName">
     
     <div class="carousel-container">
-      <button class="nav-button" (click)="previousCabinet()"></button>
+      <button class="nav-button left-button" (click)="previousCabinet()"></button>
       
       <div class="cabinet-display">
         <app-fridge *ngIf="currentCabinetIndex === 0"></app-fridge>
@@ -13,7 +13,7 @@
         <app-cabinet-normal *ngIf="currentCabinetIndex === 2"></app-cabinet-normal>
       </div>
       
-      <button class="nav-button" (click)="nextCabinet()"></button>
+      <button class="nav-button right-button" (click)="nextCabinet()"></button>
     </div>
   </div>
 </div>
