@@ -24,7 +24,7 @@
     justify-content: center;
 }
 
-.home-but:active {
+.home-but.active-route {
     background-color:rgb(66.27%, 73.33%, 46.67%); 
 }
 
@@ -53,7 +53,7 @@
     align-items: center;
     justify-content: center;
 }
-.cabinets-but:active {
+.cabinets-but.active-route {
     background-color: rgb(66.27%, 73.33%, 46.67%);
 }
 
@@ -75,7 +75,7 @@
     box-sizing: border-box;
 }
 
-.grocery-list-but:active {
+.grocery-list-but.active-route {
     background-color: rgb(66.27%, 73.33%, 46.67%);
 }
 
@@ -102,7 +102,7 @@
     justify-content: center;
 }
 
-.recipe-but:active {
+.recipe-but.active-route {
     background-color: rgb(66.27%, 73.33%, 46.67%);
 }
 
@@ -123,7 +123,7 @@
     justify-content: center;
 }
 
-.household-but:active {
+.household-but.active-route {
     background-color: rgb(66.27%, 73.33%, 46.67%);
 }
 
