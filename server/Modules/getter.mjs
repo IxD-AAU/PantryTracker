@@ -320,7 +320,7 @@ export const getHousehold = (connection, operation) => {
 
 export const getCabinet = (connection, operation) => {
     if (operation == "itemdisplayname"){
-        router.get('/api/data/get/cabinet/itemdisplayname', (req, res)=>{
+        router.get('/api/data/get/cabinet/itemID', (req, res)=>{
             const data = req.query;
             const cabinetTableName = `cabient${[data.cabinetCode]}`;
 
@@ -330,10 +330,10 @@ export const getCabinet = (connection, operation) => {
                 return;
             }
 
-            connection.query(`SELECT itemDisplayName FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
+            connection.query(`SELECT itemID FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
                 if(err){
                     console.error(err);
-                    res.status(500).json({error: 'Dataset: CABINET(itemDisplayBame) | data retrieval failed'});
+                    res.status(500).json({error: 'Dataset: CABINET(itemID) | data retrieval failed'});
                     return;
                 }
                 res.json(results);

@@ -56,7 +56,7 @@ export const addCabinet = (connection)=>{
             return;
         }
 
-        connection.query(`INSERT INTO ${cabinetTableName} (itemDisplayName, itemAmount, itemExpirationDate) VALUES (?,?,?)`, [data.displayName, data.amount, data.expirationDate], (err, results)=>{
+        connection.query(`INSERT INTO ${cabinetTableName} (itemID, itemAmount, itemExpirationDate) VALUES (?,?,?)`, [data.UFID, data.amount, data.expirationDate], (err, results)=>{
             if(err){
                 console.error(err);
                 res.status(500).json({error: 'Database insertion (Cabinet) failed'});

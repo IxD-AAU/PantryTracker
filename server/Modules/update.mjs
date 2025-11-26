@@ -255,7 +255,7 @@ export const updateRecipe = (connection, operation) => {
 }
 export const updateCabinet = (connection, operation) => {
     if (operation == "itemdisplayname"){
-        router.put('/api/data/update/cabinet/displayname', (req, res)=>{
+        router.put('/api/data/update/cabinet/ID', (req, res)=>{
             const data = req.query;
             const cabinetTableName = `cabinet${[data.cabinetCode]}`;
 
@@ -265,10 +265,10 @@ export const updateCabinet = (connection, operation) => {
                 return;
             }
 
-            connection.query(`UPDATE ${cabinetTableName} SET itemDisplayName = ? WHERE UCID = ?`, [data.displayName, data.UCID], (err, results)=>{
+            connection.query(`UPDATE ${cabinetTableName} SET itemID = ? WHERE UCID = ?`, [data.displayName, data.UCID], (err, results)=>{
                 if(err){
                     console.error(err);
-                    res.status(500).json({ error: 'Database Update (CABINET DISPLAYNAME) failed'});
+                    res.status(500).json({ error: 'Database Update (CABINET ITEMID) failed'});
                     return;
                 }
                 res.json({ success: true, affectedRows: results.affectedRows});
