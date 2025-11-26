@@ -8,7 +8,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
   styleUrl: './cabinet-normal.component.css'
 })
 export class CabinetNormalComponent {
-  @Input() label: string = 'Hjørneskab';
+  @Input() label: string = 'Skab';
   @Output() clicked = new EventEmitter<void>();
 
   onClick() {
