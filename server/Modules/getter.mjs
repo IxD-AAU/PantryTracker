@@ -382,6 +382,27 @@ export const getCabinet = (connection, operation) => {
             })
         })
     }
+    else if (operation == "everything"){
+        router.get('/api/data/get/cabinet/everything', (req, res)=>{
+            const data = req.query;
+            const cabinetTableName = `cabinet${data.cabinetCode}`;
+
+            if (!(data.cabinetCode).isInteger()){
+                console.error("Provided cabinet code is not an integer.");
+                res.status(500).json({error: 'Provided cabinet code is not an integer.'});
+                return;
+            }
+
+            connection.query(`SELECT * FROM ${cabinetTableName}`,(err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Dataset: CABINET (EVERYTHING) | data retreival failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+    }
     return router;
 }
 
