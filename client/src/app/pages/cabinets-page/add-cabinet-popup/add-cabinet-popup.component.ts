@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { FridgeComponent } from '../../../shared/fridge/fridge.component';
 import { FreezerComponent } from '../../../shared/freezer/freezer.component';
 import { CabinetNormalComponent } from '../../../shared/cabinet-normal/cabinet-normal.component';
+import { SubmitButtonComponent } from '../../../shared/submit-button/submit-button.component';
 
 @Component({
   selector: 'app-add-cabinet-popup',
   standalone: true,
-  imports: [CommonModule, FormsModule, FridgeComponent, FreezerComponent, CabinetNormalComponent],
+  imports: [CommonModule, FormsModule, FridgeComponent, FreezerComponent, CabinetNormalComponent, SubmitButtonComponent],
   templateUrl: './add-cabinet-popup.component.html',
   styleUrl: './add-cabinet-popup.component.css'
 })
@@ -32,5 +33,11 @@ export class AddCabinetPopupComponent {
 
   previousCabinet() {
     this.currentCabinetIndex = (this.currentCabinetIndex - 1 + this.cabinets.length) % this.cabinets.length;
+  }
+
+  onSubmit() {
+    console.log('Cabinet submitted:', this.cabinetName, 'Type:', this.cabinets[this.currentCabinetIndex].name);
+    // Add your submit logic here
+    this.onClose();
   }
 }
