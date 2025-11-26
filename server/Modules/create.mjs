@@ -13,7 +13,7 @@ export const createCabinet = (connection) => {
             return;
         }
 
-        connection.query(`CREATE TABLE ${cabinetTableName} (UCID INT NULL AUTO_INCREMENT, itemDisplayName VARCHAR(90) NOT NULL, itemAmount INT NOT NULL, itemExpirationDate NOT NULL, PRIMARY KEY (UCID));`, (err, results)=>{
+        connection.query(`CREATE TABLE ${cabinetTableName} (UCID INT NULL AUTO_INCREMENT, itemDisplayName VARCHAR(90) NOT NULL, itemAmount INT NOT NULL, itemExpirationDate DATE NOT NULL, PRIMARY KEY (UCID));`, (err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database Creation (CABINET) failde'});
