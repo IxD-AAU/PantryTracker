@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CabinetsPageComponent {
   showAddCabinetPopup = false;
+  userCabinets: any[] = []; // Store selected cabinet types
 
   constructor(private router: Router) {}
 
@@ -43,5 +44,9 @@ export class CabinetsPageComponent {
 
   onFreezerClick() {
     console.log('Freezer button clicked!');
+  }
+
+  onCabinetAdded(cabinetType: string, cabinetName: string) {
+    this.userCabinets.push({ type: cabinetType, name: cabinetName });
   }
 }

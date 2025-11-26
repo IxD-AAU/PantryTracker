@@ -15,6 +15,7 @@ import { SubmitButtonComponent } from '../../../shared/submit-button/submit-butt
 })
 export class AddCabinetPopupComponent {
   @Output() closed = new EventEmitter<void>();
+  @Output() cabinetAdded = new EventEmitter<{type: string, name: string}>();
   cabinetName = '';
   currentCabinetIndex = 0;
   cabinets = [
@@ -36,8 +37,10 @@ export class AddCabinetPopupComponent {
   }
 
   onSubmit() {
-    console.log('Cabinet submitted:', this.cabinetName, 'Type:', this.cabinets[this.currentCabinetIndex].name);
-    // Add your submit logic here
+    const selectedCabinet = this.cabinets[this.currentCabinetIndex];
+    this.cabinetAdded.emit({ type: selectedCabinet.type, name: this.cabinetName });
+    this.cabinetName = ''; // Reset input
+    this.currentCabinetIndex = 0; // Reset carousel
     this.onClose();
   }
 }
