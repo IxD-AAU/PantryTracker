@@ -110,6 +110,8 @@ app.use(getCabinet(connection, "itemamount"));
 
 app.use(getCabinet(connection, "itemexpirationdate"));
 
+app.use(getCabinet(connection, "everything"))
+
     //Getter code for Household Cabinet Index
 app.use(getHouesholdCabinetIndex(connection, "DisplayName"));
 

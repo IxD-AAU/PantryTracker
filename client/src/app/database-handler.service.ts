@@ -46,6 +46,7 @@ export class DatabaseHandlerService {
  *    - "ItemDisplayName"     -> returns the displayname of a given item based on its ID.
  *    - "ItemAmount"          -> returns the amount of a given item based on its ID.
  *    - "ItemExpirationDate"  -> returns the expiration date of a given item based on its ID.
+ *    - "Everything"          -> returns all the content in a cabinet.
  *  - "HouseHoldCabinetIndex"
  *    - "DisplayName"  -> returns the display name of a given cabinet based on its ID.
  *    - "CabinetCode"  -> returns the internal CabinetCode for a given cabinet based on its ID.
@@ -189,6 +190,9 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
 			case "ItemExpirationDate":
 				this.path2 = '/itemexpirationdate';
 				break;
+      case "Everything":
+        this.path2 = '/everything'
+        break;
 			default:
 				break;
 		}
