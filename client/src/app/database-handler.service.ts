@@ -42,8 +42,8 @@ export class DatabaseHandlerService {
  *    - "InviteCode"   -> returns the household's InviteCode based on its ID.
  *    - "HouseHoldMember1".. "HouseHoldMember6"
  *                     -> returns the ID of the householdmember based on the households ID
- *  - "Cabinet"
- *    - "ItemDisplayName"     -> returns the displayname of a given item based on its ID.
+ *  - "Cabinet" (Remember to provide the CabinetCode via the body OBJ).
+ *    - "ItemID"     -> returns the foodID of a given item based on its ID.
  *    - "ItemAmount"          -> returns the amount of a given item based on its ID.
  *    - "ItemExpirationDate"  -> returns the expiration date of a given item based on its ID.
  *    - "Everything"          -> returns all the content in a cabinet.
@@ -62,7 +62,8 @@ export class DatabaseHandlerService {
  * - "User" -> user's email
  * - "Food" -> the food's BarCode
  * - "HouseHold" -> a given user's ID compared against all the user ID's tied as memberships of said household.
- * ).
+ * )
+ * For all other operations/suboperations used the assosiated ID.
  * @returns Observable<any> - An observable that emits the HTTP GET response from the constructed endpoint.
  */
 getEntryDatabase(operation: String, subOperation: String, body: any): Observable<any>{
@@ -181,8 +182,8 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
 	else if (operation == "Cabinet"){
 		this.path1 = '/get/cabinet';
 		switch (subOperation){
-			case "ItemDisplayName":
-				this.path2 = '/itemdisplayname';
+			case "itemID":
+				this.path2 = '/itemID';
 				break;
 			case "ItemAmount":
 				this.path2 = '/itemamount';
@@ -349,8 +350,8 @@ updateEntryDatabase(operation: String, subOperation: String, body: any): Observa
   else if (operation == "Cabinet"){
 	  this.path1 = '/update/cabinet';
 	  switch (subOperation){
-		  case "ItemDisplayName":
-			  this.path2 = '/displayname';
+		  case "ItemID":
+			  this.path2 = '/ID';
   			break;
 	    case "ItemAmount":
 		  	this.path2 = '/amount';
