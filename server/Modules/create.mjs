@@ -29,7 +29,7 @@ export const createHouseIndex = (connection) => {
         const data = req.body;
         const index = `household${[data.IndexCode]}`;
 
-        connection.query(`CREATE TABLE ${index} (UHCIID INT NULL AUTO_INCREMENT,displayName VARCHAR(90) NOT NULL, cabinetCode VARCHAR(45) NOT NULL, PRIMARY KEY (UHCIID));`,(err, results)=>{
+        connection.query(`CREATE TABLE ${index} (UHCIID INT NULL AUTO_INCREMENT,displayName VARCHAR(90) NOT NULL, cabinetCode VARCHAR(45) NOT NULL, cabinetType VARCHAR(8) NOT NULL PRIMARY KEY (UHCIID));`,(err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database Creation (HOUSEINDEX) failed'});

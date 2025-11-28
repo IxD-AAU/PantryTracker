@@ -50,6 +50,7 @@ export class DatabaseHandlerService {
  *  - "HouseHoldCabinetIndex"
  *    - "DisplayName"  -> returns the display name of a given cabinet based on its ID.
  *    - "CabinetCode"  -> returns the internal CabinetCode for a given cabinet based on its ID.
+ *    - "CabinetType"  -> returns the internal cabinetType for a given cabinet based on its ID.
  *  - "Recipe"
  *    - "DisplayName"  -> returns the recipe's DisplayName based on its ID.
  *    - "Link"         -> returns the recipe's external website link based on its ID.
@@ -263,7 +264,9 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
  *   - "DisplayName" -> updates the recipe's DisplayName, provide: new DisplayName & ID via Body OBJ.
  *   - "RecipeLink"  -> updates the recipe's external link, provide: New Link & ID via Body OBJ
  *
- * - "HouseHoldCabinetIndex" updates the DisplayName for a cabinet, provide: New DisplayName & ID via Body OBJ
+ * - "HouseHoldCabinetIndex"
+ *   - "DisplayName" -> updates the DisplayName for a cabinet, provide: New DisplayName & ID via Body OBJ.
+ *   - "CabinetType" -> updates the CabinetType for a cabinet, provide: New CabinetType & ID via Body OBJ.
  *
  * Parameters:
  * @param operation - The top-level operation/category (e.g. "User", "Food", "HouseHold", "Cabinet", "Recipe").
@@ -378,7 +381,16 @@ updateEntryDatabase(operation: String, subOperation: String, body: any): Observa
   }
   else if (operation == "HouseHoldCabinetIndex"){
     this.path1 = '/update/householdcabinetindex';
-    this.path2 = '/displayname';
+    switch (subOperation){
+      case "DisplayName":
+        this.path2 = '/displayname';
+        break;
+      case "CabinetType":
+        this.path2 = '/cabinettype';
+        break;
+      default:
+        break;
+  }
   }
 
   return this.http.put(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);

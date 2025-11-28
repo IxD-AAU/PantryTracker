@@ -319,20 +319,37 @@ export const updateCabinet = (connection, operation) => {
     }
     return router;
 }
-export const updateHouseHoldCabinetIndex = (connection) => {
-    router.put('/api/data/update/householdcabinetindex/displayname', (req, res)=>{
-        const data = req.query;
-        const index = `household${data.IndexCode}`;
+export const updateHouseHoldCabinetIndex = (connection, operation) => {
+    if (operation == "DisplayName"){
+        router.put('/api/data/update/householdcabinetindex/displayname', (req, res)=>{
+            const data = req.query;
+            const index = `household${data.IndexCode}`;
 
-        connection.query(`UPDATE ${index} SET DisplayName = ? WHERE = ?`, [data.displayName], (err, results)=>{
-            if (err){
-                console.error(err);
-                res.status(500).json({ error: 'Database Update (INDEX DISPLAYNAME) failed'});
-                return;
-            }
-            res.json({ success: true, affectedRows: results.affectedRows});
+            connection.query(`UPDATE ${index} SET DisplayName = ? WHERE = ?`, [data.displayName], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Database Update (INDEX DISPLAYNAME) failed'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
         })
-    })
+    }
+    else if (operation == "CabinetType"){
+        router.put('/api/data/update/householdcabinetindex/cabinettype', (req, res)=>{
+            const data = req.query;
+            const index = `household${data.IndexCode}`;
+
+            connection.query(`UPDATE ${index} SET cabinetType = ? WHERE = ?`, [data.cabinetType], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({error: 'Database Update (INDEX CABINETTYPE) failed'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
+        })
+    }
     return router;
 }
 

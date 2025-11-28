@@ -117,6 +117,8 @@ app.use(getHouesholdCabinetIndex(connection, "DisplayName"));
 
 app.use(getHouesholdCabinetIndex(connection, "cabinetCode"));
 
+app.use(getHouesholdCabinetIndex(connection, "cabinetTYpe"));
+
     //Getter code for recipe
 app.use(getRecipe(connection, "displayname"));
 
@@ -174,7 +176,9 @@ app.use(updateCabinet(connection,"itemamount"));
 
 app.use(updateCabinet(connection,"itemexpirationdate"));
 
-app.use(updateHouseHoldCabinetIndex(connection));
+app.use(updateHouseHoldCabinetIndex(connection, "DisplayName"));
+
+app.use(updateHouseHoldCabinetIndex(connection, "cabinetType"));
 //DELETION CODE:
 
 app.use(delUser(connection));
