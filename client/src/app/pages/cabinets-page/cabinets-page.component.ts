@@ -31,8 +31,8 @@ export class CabinetsPageComponent implements OnInit {
     this.router.navigate(['/add-item']);
   }
 
-  onCabinetClick() {
-    console.log('Cabinet button clicked!');
+  onCabinetClick(cabinetIndex: number) {
+    this.router.navigate(['/cabinet', cabinetIndex]);
   }
 
   onAddCabinetClick() {

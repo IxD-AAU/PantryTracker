@@ -1,10 +1,19 @@
 <app-page-title [title]="'Skabe'"></app-page-title>
 <app-add-button (clicked)="onAddClick()"></app-add-button>
 <div class="cabinets-container">
-  <div *ngFor="let cabinet of userCabinets" [ngSwitch]="cabinet.index">
-    <app-fridge *ngSwitchCase="0" [cabinetName]="cabinet.name"></app-fridge>
-    <app-freezer *ngSwitchCase="1" [cabinetName]="cabinet.name"></app-freezer>
-    <app-cabinet-normal *ngSwitchCase="2" [cabinetName]="cabinet.name"></app-cabinet-normal>
+  <div *ngFor="let cabinet of userCabinets; let i = index">
+    <app-fridge *ngIf="cabinet.index === 0" 
+      [cabinetName]="cabinet.name"
+      [cabinetIndex]="i"
+      (cabinetClicked)="onCabinetClick($event)"></app-fridge>
+    <app-freezer *ngIf="cabinet.index === 1" 
+      [cabinetName]="cabinet.name"
+      [cabinetIndex]="i"
+      (cabinetClicked)="onCabinetClick($event)"></app-freezer>
+    <app-cabinet-normal *ngIf="cabinet.index === 2" 
+      [cabinetName]="cabinet.name"
+      [cabinetIndex]="i"
+      (cabinetClicked)="onCabinetClick($event)"></app-cabinet-normal>
   </div>
   <app-add-cabinet-button (clicked)="onAddCabinetClick()"></app-add-cabinet-button>
 </div>

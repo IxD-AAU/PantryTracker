@@ -10,9 +10,12 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 export class FridgeComponent {
   @Input() label: string = 'Køleskab';
   @Input() cabinetName: string = 'Fridge';
+  @Input() cabinetIndex: number = 0;  
   @Output() clicked = new EventEmitter<void>();
+  @Output() cabinetClicked = new EventEmitter<number>();  
 
   onClick() {
     this.clicked.emit();
+    this.cabinetClicked.emit(this.cabinetIndex); 
   }
 }
