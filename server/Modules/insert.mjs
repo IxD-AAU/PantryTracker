@@ -73,7 +73,7 @@ export const addHouseholdCabinetIndex = (connection)=>{
         const data = req.body;
         const index = `household${data.IndexCode}`;
 
-        connection.query(`INSERT INTO ${index} (displayname, cabinetCode) VALUES (?,?)`, [data.displayName, data.cabinetCode], (err, results)=>{
+        connection.query(`INSERT INTO ${index} (displayname, cabinetCode, cabinetType) VALUES (?,?,?)`, [data.displayName, data.cabinetCode], (err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database insertion (HouseholdCabinetIndex) failed'});

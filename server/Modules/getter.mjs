@@ -415,7 +415,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
             connection.query(`SELECT displayName FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if (err){
                     console.error(err);
-                    res.status(500).json({error: 'Dataset: HOUSECABINEYINDEX (displayName) | data retrieval failed'});
+                    res.status(500).json({error: 'Dataset: HOUSECABINETINDEX (displayName) | data retrieval failed'});
                     return;
                 }
                 res.json(results);
@@ -423,7 +423,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
         })
     }
     else if (operation == "cabinetCode"){
-        router.get('/api/data/get/housecabientindex/cabinetcode', (req, res)=>{
+        router.get('/api/data/get/householdcabientindex/cabinetcode', (req, res)=>{
             const data = req.query;
             const index = `household${data.IndexCode}`;
 
@@ -431,6 +431,21 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
                 if (err){
                     console.error(err);
                     res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabinetCode) | data retrieval failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+    }
+    else if (operation == "cabinetType"){
+        router.get('/api/data/householdcabinetindex/cabinetType', (req, res)=>{
+            const data = req.query;
+            const index = `household${data.IndexCode}`;
+
+            connection.query(`SELECT cabinetType FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabinetType) | data retrieval failed'});
                     return;
                 }
                 res.json(results);
