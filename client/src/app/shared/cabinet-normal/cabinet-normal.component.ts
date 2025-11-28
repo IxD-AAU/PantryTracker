@@ -9,6 +9,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 })
 export class CabinetNormalComponent {
   @Input() label: string = 'Skab';
+  @Input() cabinetName: string = 'Cabinet';
   @Output() clicked = new EventEmitter<void>();
 
   onClick() {

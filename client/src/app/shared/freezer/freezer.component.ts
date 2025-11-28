@@ -9,6 +9,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 })
 export class FreezerComponent {
   @Input() label: string = 'Fryser';
+  @Input() cabinetName: string = 'Freezer';
   @Output() clicked = new EventEmitter<void>();
 
   onClick() {
