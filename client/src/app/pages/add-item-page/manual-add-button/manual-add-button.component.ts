@@ -10,7 +10,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class ManualAddButtonComponent {
 @Output() clicked = new EventEmitter<void>();
 
-  onClick() {
+  onManualAddClicked() {
     this.clicked.emit();
   } 
+
+
 }

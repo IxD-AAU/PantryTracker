@@ -1,6 +1,16 @@
 <div class="popup-overlay" (click)="onClose()">
   <div class="popup-modal" (click)="$event.stopPropagation()">
     <button class="close-button" (click)="onClose()">✕</button>
+
+    <input
+      type="text"
+      class="food-item-input"
+      placeholder="Indtast varenavn"
+      [(ngModel)]="itemName"
+    />
+<div style="margin-top: 20px; display: flex; justify-content: center;">
+      <app-small-green-line></app-small-green-line>
+    </div>
   </div>
 </div>
 
