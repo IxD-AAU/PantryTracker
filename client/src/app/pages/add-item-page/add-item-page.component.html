@@ -1,10 +1,10 @@
 <app-page-title [title]="'Tilføj varer'"></app-page-title>
-<app-scanner-button class="scanner-button" (Clicked)="onScannerClick()" ></app-scanner-button>
+<app-scanner-button class="scanner-button" (clicked)="onScannerClicked()" ></app-scanner-button>
 <span class="AIP-title"> eller </span>
-<app-manual-add-button class="manual-add-button" (Clicked)="onManualAddClick()" ></app-manual-add-button>
+<app-manual-add-button class="manual-add-button" (clicked)="onManualAddClicked()" ></app-manual-add-button>
 
 <app-aip-line class="aip-line"></app-aip-line>
-<app-accept-button class="accept-button" (clicked)="onAcceptClick()" ></app-accept-button>
+<app-accept-button class="accept-button" (clicked)="onAcceptClicked()" ></app-accept-button>
 <app-add-item-popup-m *ngIf="showAddItemPopupM" (closed)="onPopupClosed()"></app-add-item-popup-m>
 
 <!-- app-add-cabinet-button (clicked)="onAddCabinetClick()"></app-add-cabinet-button>-->

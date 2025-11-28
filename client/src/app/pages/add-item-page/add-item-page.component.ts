@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { PageTitleComponent } from '../../shared/page-title/page-title.component';
 import { RouterModule } from '@angular/router';
 import { ScannerButtonComponent } from './scanner-button/scanner-button.component';
@@ -8,24 +8,27 @@ import { AcceptButtonComponent } from './accept-button/accept-button.component';
 import { AddItemPopupMComponent } from './manual-add-button/add-item-popup-m/add-item-popup-m.component';
 import { CommonModule } from '@angular/common'; 
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-item-page',
   standalone: true,
-  imports: [PageTitleComponent, ScannerButtonComponent, ManualAddButtonComponent, AIPLineComponent, AcceptButtonComponent, AddItemPopupMComponent, CommonModule, RouterModule],
+  imports: [PageTitleComponent, ScannerButtonComponent, ManualAddButtonComponent, AIPLineComponent, AcceptButtonComponent, AddItemPopupMComponent, CommonModule, RouterModule, FormsModule],
   templateUrl: './add-item-page.component.html',
   styleUrl: './add-item-page.component.css'
 })
 export class AddItemPageComponent {
+  @Output() clicked = new EventEmitter<void>();
+    itemName = '';
     showAddItemPopupM = false;
 
   constructor(private router: Router) {}
 
-  onScannerClick() {
+  onScannerClicked() {
     console.log('Scanner button clicked!');
   }
 
-  onAcceptClick() {
+  onAcceptClicked() {
     console.log('Accept button clicked!');
   }
 

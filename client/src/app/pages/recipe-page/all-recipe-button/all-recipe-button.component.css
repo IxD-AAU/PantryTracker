@@ -1,0 +1,38 @@
+.all-recipe-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-recipe-button {
+    width: 80px;
+    height: 34px;
+    background-color:  #A9BB77;
+    border: none;
+    border-radius: 10px;
+    position: absolute;
+    top: 110px;
+    left: 175px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: absolute;
+}
+
+.all-recipe-button:hover {
+    background-color: #98a96a;
+}
+
+.all-recipe-button:active {
+    transform: scale(0.95);
+}
+
+.all-recipe-text {
+    font-family: 'Sono', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #404040;
+    font-style: semi-bold;
+}

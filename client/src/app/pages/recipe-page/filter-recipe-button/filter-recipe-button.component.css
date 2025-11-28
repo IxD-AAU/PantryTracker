@@ -1,0 +1,15 @@
+.filter-recipe-button {
+ width: 34px;
+ height: 34px;
+ top: 110px;
+ left: 275px;
+ background-color: #A9BB77;
+ border: none;
+ border-radius: 10px;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ transition: all 0.2s ease;
+ position: absolute;
+}
