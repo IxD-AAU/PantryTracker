@@ -1,3 +1,9 @@
 <app-page-title [title]="'Indkøbslister'"></app-page-title>
 <app-add-button (clicked)="onAddClick()"></app-add-button>
 <app-add-list-button (clicked)="onAddList()"></app-add-list-button>
+
+<app-add-list-popup 
+  *ngIf="showAddListPopup" 
+  (closed)="onPopupClosed()" 
+  (listAdded)="onListAdded($event)">
+</app-add-list-popup>
