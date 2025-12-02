@@ -2,8 +2,8 @@
 <app-add-button (clicked)="onAddClick()"></app-add-button>
 
 <div class="lists-container">
-  <div *ngFor="let list of userLists">
-    <app-list [label]="list.name"></app-list>
+  <div *ngFor="let list of userLists; let i = index">
+    <app-list [label]="list.name" (clicked)="onListClick(i)"></app-list>
   </div>
   <app-add-list-button (clicked)="onAddList()"></app-add-list-button>
 </div>
