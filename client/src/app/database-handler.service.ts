@@ -42,13 +42,15 @@ export class DatabaseHandlerService {
  *    - "InviteCode"   -> returns the household's InviteCode based on its ID.
  *    - "HouseHoldMember1".. "HouseHoldMember6"
  *                     -> returns the ID of the householdmember based on the households ID
- *  - "Cabinet"
- *    - "ItemDisplayName"     -> returns the displayname of a given item based on its ID.
+ *  - "Cabinet" (Remember to provide the CabinetCode via the body OBJ).
+ *    - "ItemID"     -> returns the foodID of a given item based on its ID.
  *    - "ItemAmount"          -> returns the amount of a given item based on its ID.
  *    - "ItemExpirationDate"  -> returns the expiration date of a given item based on its ID.
+ *    - "Everything"          -> returns all the content in a cabinet.
  *  - "HouseHoldCabinetIndex"
  *    - "DisplayName"  -> returns the display name of a given cabinet based on its ID.
  *    - "CabinetCode"  -> returns the internal CabinetCode for a given cabinet based on its ID.
+ *    - "CabinetType"  -> returns the internal cabinetType for a given cabinet based on its ID.
  *  - "Recipe"
  *    - "DisplayName"  -> returns the recipe's DisplayName based on its ID.
  *    - "Link"         -> returns the recipe's external website link based on its ID.
@@ -61,7 +63,8 @@ export class DatabaseHandlerService {
  * - "User" -> user's email
  * - "Food" -> the food's BarCode
  * - "HouseHold" -> a given user's ID compared against all the user ID's tied as memberships of said household.
- * ).
+ * )
+ * For all other operations/suboperations used the assosiated ID.
  * @returns Observable<any> - An observable that emits the HTTP GET response from the constructed endpoint.
  */
 getEntryDatabase(operation: String, subOperation: String, body: any): Observable<any>{
@@ -180,8 +183,8 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
 	else if (operation == "Cabinet"){
 		this.path1 = '/get/cabinet';
 		switch (subOperation){
-			case "ItemDisplayName":
-				this.path2 = '/itemdisplayname';
+			case "itemID":
+				this.path2 = '/itemID';
 				break;
 			case "ItemAmount":
 				this.path2 = '/itemamount';
@@ -189,6 +192,9 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
 			case "ItemExpirationDate":
 				this.path2 = '/itemexpirationdate';
 				break;
+      case "Everything":
+        this.path2 = '/everything'
+        break;
 			default:
 				break;
 		}
@@ -258,7 +264,9 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
  *   - "DisplayName" -> updates the recipe's DisplayName, provide: new DisplayName & ID via Body OBJ.
  *   - "RecipeLink"  -> updates the recipe's external link, provide: New Link & ID via Body OBJ
  *
- * - "HouseHoldCabinetIndex" updates the DisplayName for a cabinet, provide: New DisplayName & ID via Body OBJ
+ * - "HouseHoldCabinetIndex"
+ *   - "DisplayName" -> updates the DisplayName for a cabinet, provide: New DisplayName & ID via Body OBJ.
+ *   - "CabinetType" -> updates the CabinetType for a cabinet, provide: New CabinetType & ID via Body OBJ.
  *
  * Parameters:
  * @param operation - The top-level operation/category (e.g. "User", "Food", "HouseHold", "Cabinet", "Recipe").
@@ -345,8 +353,8 @@ updateEntryDatabase(operation: String, subOperation: String, body: any): Observa
   else if (operation == "Cabinet"){
 	  this.path1 = '/update/cabinet';
 	  switch (subOperation){
-		  case "ItemDisplayName":
-			  this.path2 = '/displayname';
+		  case "ItemID":
+			  this.path2 = '/ID';
   			break;
 	    case "ItemAmount":
 		  	this.path2 = '/amount';
@@ -373,7 +381,16 @@ updateEntryDatabase(operation: String, subOperation: String, body: any): Observa
   }
   else if (operation == "HouseHoldCabinetIndex"){
     this.path1 = '/update/householdcabinetindex';
-    this.path2 = '/displayname';
+    switch (subOperation){
+      case "DisplayName":
+        this.path2 = '/displayname';
+        break;
+      case "CabinetType":
+        this.path2 = '/cabinettype';
+        break;
+      default:
+        break;
+  }
   }
 
   return this.http.put(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);

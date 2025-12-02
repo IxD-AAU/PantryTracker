@@ -60,6 +60,7 @@ export const delRecipe = (connection) => {
             res.json(results);
         })
     })
+    return router;
 }
 export const delCabinet = (connection, operation) => {
     if (operation == "Entry"){
@@ -110,7 +111,7 @@ export const delHouseHoldIndex = (connection, operation) => {
     if(operation == "Entry"){
         router.delete('/api/data/delete/householdindex/entry', (req, res)=>{
             const data = req.body;
-            const index = `household${data.IndexCode}`;
+            const index = `household${data.UHID}`;
 
             connection.query(`DELETE FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if(err){
@@ -125,7 +126,7 @@ export const delHouseHoldIndex = (connection, operation) => {
     else if(operation == "Whole"){
         router.delete('/api/data/delete/householdindex/whole', (req, res)=>{
             const data = req.body;
-            const index = `household${data.IndexCode}`;
+            const index = `household${data.UHID}`;
 
             connection.query(`DELETE FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if(err){

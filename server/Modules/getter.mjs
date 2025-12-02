@@ -320,7 +320,7 @@ export const getHousehold = (connection, operation) => {
 
 export const getCabinet = (connection, operation) => {
     if (operation == "itemdisplayname"){
-        router.get('/api/data/get/cabinet/itemdisplayname', (req, res)=>{
+        router.get('/api/data/get/cabinet/itemID', (req, res)=>{
             const data = req.query;
             const cabinetTableName = `cabient${[data.cabinetCode]}`;
 
@@ -330,10 +330,10 @@ export const getCabinet = (connection, operation) => {
                 return;
             }
 
-            connection.query(`SELECT itemDisplayName FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
+            connection.query(`SELECT itemID FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
                 if(err){
                     console.error(err);
-                    res.status(500).json({error: 'Dataset: CABINET(itemDisplayBame) | data retrieval failed'});
+                    res.status(500).json({error: 'Dataset: CABINET(itemID) | data retrieval failed'});
                     return;
                 }
                 res.json(results);
@@ -382,6 +382,27 @@ export const getCabinet = (connection, operation) => {
             })
         })
     }
+    else if (operation == "everything"){
+        router.get('/api/data/get/cabinet/everything', (req, res)=>{
+            const data = req.query;
+            const cabinetTableName = `cabinet${data.cabinetCode}`;
+
+            if (!(data.cabinetCode).isInteger()){
+                console.error("Provided cabinet code is not an integer.");
+                res.status(500).json({error: 'Provided cabinet code is not an integer.'});
+                return;
+            }
+
+            connection.query(`SELECT * FROM ${cabinetTableName}`,(err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Dataset: CABINET (EVERYTHING) | data retreival failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+    }
     return router;
 }
 
@@ -389,12 +410,12 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
     if (operation == "DisplayName"){
         router.get('/api/data/get/householdcabinetindex/displayname', (req, res)=>{
             const data = req.query;
-            const index = `household${data.IndexCode}`;
+            const index = `household${data.UHID}`;
 
             connection.query(`SELECT displayName FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if (err){
                     console.error(err);
-                    res.status(500).json({error: 'Dataset: HOUSECABINEYINDEX (displayName) | data retrieval failed'});
+                    res.status(500).json({error: 'Dataset: HOUSECABINETINDEX (displayName) | data retrieval failed'});
                     return;
                 }
                 res.json(results);
@@ -402,14 +423,29 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
         })
     }
     else if (operation == "cabinetCode"){
-        router.get('/api/data/get/housecabientindex/cabinetcode', (req, res)=>{
+        router.get('/api/data/get/householdcabientindex/cabinetcode', (req, res)=>{
             const data = req.query;
-            const index = `household${data.IndexCode}`;
+            const index = `household${data.UHID}`;
 
             connection.query(`SELECT cabinetCode FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if (err){
                     console.error(err);
                     res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabinetCode) | data retrieval failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+    }
+    else if (operation == "cabinetType"){
+        router.get('/api/data/householdcabinetindex/cabinetType', (req, res)=>{
+            const data = req.query;
+            const index = `household${data.UHID}`;
+
+            connection.query(`SELECT cabinetType FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabinetType) | data retrieval failed'});
                     return;
                 }
                 res.json(results);
@@ -447,4 +483,39 @@ export const getRecipe = (connection, operation) => {
         })
     }
     return router;
+}
+
+export const getNotes = (connection, operation) => {
+    if (operation == "Amount"){
+        router.get('/api/data/get/note/amount', (req, res)=>{
+            const data = req.query;
+            const index = `noteIndex${data.UHID}`;
+
+            connection.query(`SELECT amount FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({error: 'Dataset: NOTEINDEX(amount) | data retrieval failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+        return router;
+    }
+    else if (operation == "Text"){
+        router.get('/api/data/get/note/Text', (req, res)=>{
+            const data = req.query;
+            const index = `noteIndex${data.UHID}`;
+
+            connection.query(`SELECT text FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({error: 'Dataset: NOTEINDEX(text) | data retrieval failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+        return router;
+    }
 }

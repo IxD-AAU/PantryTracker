@@ -56,7 +56,7 @@ export const addCabinet = (connection)=>{
             return;
         }
 
-        connection.query(`INSERT INTO ${cabinetTableName} (itemDisplayName, itemAmount, itemExpirationDate) VALUES (?,?,?)`, [data.displayName, data.amount, data.expirationDate], (err, results)=>{
+        connection.query(`INSERT INTO ${cabinetTableName} (itemID, itemAmount, itemExpirationDate) VALUES (?,?,?)`, [data.UFID, data.amount, data.expirationDate], (err, results)=>{
             if(err){
                 console.error(err);
                 res.status(500).json({error: 'Database insertion (Cabinet) failed'});
@@ -71,9 +71,9 @@ export const addCabinet = (connection)=>{
 export const addHouseholdCabinetIndex = (connection)=>{
     router.post('/api/data/add/houescabinetindex', (req, res)=>{
         const data = req.body;
-        const index = `household${data.IndexCode}`;
+        const index = `household${data.UHID}`;
 
-        connection.query(`INSERT INTO ${index} (displayname, cabinetCode) VALUES (?,?)`, [data.displayName, data.cabinetCode], (err, results)=>{
+        connection.query(`INSERT INTO ${index} (displayname, cabinetCode, cabinetType) VALUES (?,?,?)`, [data.displayName, data.cabinetCode], (err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database insertion (HouseholdCabinetIndex) failed'});
@@ -84,3 +84,20 @@ export const addHouseholdCabinetIndex = (connection)=>{
     })
     return router;
 }
+
+export const addNote = (connection =>{
+    router.post('/api/data/add/note', (req, res)=>{
+        const data = req.body;
+        const index = `noteIndex${data.UHID}`;
+
+        connection.query(`INSERT INTO ${index} (amount, text) VALUES (?,?)`, [data.amount, data.text], (err, results)=>{
+            if (err){
+                console.error(err);
+                res.status(500).json({error: 'Database insertion (NoteIndex) failed'});
+                return;
+            }
+            res.json({ success: true, id: results.insertId});
+        })
+    })
+    return router;
+})

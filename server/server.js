@@ -101,7 +101,7 @@ app.use(getHousehold(connection, "householdmember4"));
 
 app.use(getHousehold(connection, "householdmember5"));
 
-app.use(getHousehold(connection, "householdmember6"));z
+app.use(getHousehold(connection, "householdmember6"));
 
     //Getter code for Cabinets
 app.use(getCabinet(connection, "itemdisplayname"));
@@ -110,10 +110,14 @@ app.use(getCabinet(connection, "itemamount"));
 
 app.use(getCabinet(connection, "itemexpirationdate"));
 
+app.use(getCabinet(connection, "everything"))
+
     //Getter code for Household Cabinet Index
 app.use(getHouesholdCabinetIndex(connection, "DisplayName"));
 
 app.use(getHouesholdCabinetIndex(connection, "cabinetCode"));
+
+app.use(getHouesholdCabinetIndex(connection, "cabinetTYpe"));
 
     //Getter code for recipe
 app.use(getRecipe(connection, "displayname"));
@@ -172,7 +176,9 @@ app.use(updateCabinet(connection,"itemamount"));
 
 app.use(updateCabinet(connection,"itemexpirationdate"));
 
-app.use(updateHouseHoldCabinetIndex(connection));
+app.use(updateHouseHoldCabinetIndex(connection, "DisplayName"));
+
+app.use(updateHouseHoldCabinetIndex(connection, "cabinetType"));
 //DELETION CODE:
 
 app.use(delUser(connection));

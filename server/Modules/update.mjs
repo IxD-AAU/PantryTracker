@@ -255,7 +255,7 @@ export const updateRecipe = (connection, operation) => {
 }
 export const updateCabinet = (connection, operation) => {
     if (operation == "itemdisplayname"){
-        router.put('/api/data/update/cabinet/displayname', (req, res)=>{
+        router.put('/api/data/update/cabinet/ID', (req, res)=>{
             const data = req.query;
             const cabinetTableName = `cabinet${[data.cabinetCode]}`;
 
@@ -265,10 +265,10 @@ export const updateCabinet = (connection, operation) => {
                 return;
             }
 
-            connection.query(`UPDATE ${cabinetTableName} SET itemDisplayName = ? WHERE UCID = ?`, [data.displayName, data.UCID], (err, results)=>{
+            connection.query(`UPDATE ${cabinetTableName} SET itemID = ? WHERE UCID = ?`, [data.displayName, data.UCID], (err, results)=>{
                 if(err){
                     console.error(err);
-                    res.status(500).json({ error: 'Database Update (CABINET DISPLAYNAME) failed'});
+                    res.status(500).json({ error: 'Database Update (CABINET ITEMID) failed'});
                     return;
                 }
                 res.json({ success: true, affectedRows: results.affectedRows});
@@ -319,21 +319,71 @@ export const updateCabinet = (connection, operation) => {
     }
     return router;
 }
-export const updateHouseHoldCabinetIndex = (connection) => {
-    router.put('/api/data/update/householdcabinetindex/displayname', (req, res)=>{
-        const data = req.query;
-        const index = `household${data.IndexCode}`;
+export const updateHouseHoldCabinetIndex = (connection, operation) => {
+    if (operation == "DisplayName"){
+        router.put('/api/data/update/householdcabinetindex/displayname', (req, res)=>{
+            const data = req.query;
+            const index = `household${data.UHID}`;
 
-        connection.query(`UPDATE ${index} SET DisplayName = ? WHERE = ?`, [data.displayName], (err, results)=>{
-            if (err){
-                console.error(err);
-                res.status(500).json({ error: 'Database Update (INDEX DISPLAYNAME) failed'});
-                return;
-            }
-            res.json({ success: true, affectedRows: results.affectedRows});
+            connection.query(`UPDATE ${index} SET DisplayName = ? WHERE UHCIID = ?`, [data.displayName, data.UHCIID], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Database Update (INDEX DISPLAYNAME) failed'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
         })
-    })
+    }
+    else if (operation == "CabinetType"){
+        router.put('/api/data/update/householdcabinetindex/cabinettype', (req, res)=>{
+            const data = req.query;
+            const index = `household${data.UHID}`;
+
+            connection.query(`UPDATE ${index} SET cabinetType = ? WHERE UHCIID = ?`, [data.cabinetType, data.UHCIID], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({error: 'Database Update (INDEX CABINETTYPE) failed'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
+        })
+    }
     return router;
 }
 
+export const updateNoteIndex = (connection, operation) => {
+    if (operation == "Amount"){
+        router.put('/api/data/update/note/amount', (req, res)=>{
+            const data = req.query;
+            const index = `noteIndex${data.UHID}`;
 
+            connection.query(`UPDATE ${index} SET amount = ? WHERE UNID = ?`, [data.itemAmount, data.UNID], (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({error: 'Database Update (NOTEINDEX) failed'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
+        })
+        return router;
+    }
+    else if (operation == "Text"){
+        router.put('/api/data/update/note/text', (req, res)=>{
+            const data = req.query;
+            const index = `noteIndex${data.UHID}`;
+
+            connection.query(`UPDATE ${index} SET text = ? WHERE UNID = ?`, [data.text, data.UNID], (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({error: 'Database Update (NOTEINDEX) failed'});
+                    return;
+                }
+                res.json({ success: true, affectedRows: results.affectedRows});
+            })
+        })
+        return router;
+    }
+}
