@@ -2,6 +2,7 @@
   "dependencies": {
     "@angular/cli": "^19.2.19",
     "express": "^5.1.0",
-    "node.js": "^0.0.1-security"
+    "node.js": "^0.0.1-security",
+    "scanbot-web-sdk": "^8.0.0"
   }
 }
