@@ -1,0 +1,17 @@
+.lists-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 30px;
+  padding: 20px 16px;
+  margin-top: 15px;
+}
+
+::ng-deep .lists-container app-add-list-button .list-wrapper {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+::ng-deep .lists-container app-list .list-wrapper {
+  margin-left: 0;
+}

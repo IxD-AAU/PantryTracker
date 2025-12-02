@@ -1,11 +1,19 @@
 import { Component } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-but',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './home-but.component.html',
-  styleUrl: './home-but.component.css'
+  styleUrls: ['./home-but.component.css']
 })
 export class HomeButComponent {
-
+  constructor(private router: Router) {}
+  goHome() {
+    this.router.navigate(['/home-page']);
+  }
 }
+
+
+

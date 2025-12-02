@@ -1,0 +1,88 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.popup-modal {
+  background-color: #F6F0CB;
+  border-radius: 12px;
+  padding: 20px;
+  width: 326px;
+  height: 495px;
+  position: relative;
+  border: 4px solid #768844;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #404040;
+}
+
+.close-button:hover {
+  color: #666;
+}
+
+.food-item-input {
+  width: 246px;
+  height: 50px;
+  padding: 10px 16px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 12px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background: #A9BB77;
+  border: none;
+  font-size: 18px;
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  text-align: center;
+  color: #404040;
+}
+.food-item-input::placeholder {
+  color: #404040;
+  opacity: 0.7;
+}
+.food-item-input:focus {
+  outline: none;
+  border-color: #A9BB77;
+}
+
+app-small-green-line {
+    position: absolute;
+    top: 204px;
+    display: block;
+    align-self: center;
+}
+
+app-small-green-line:nth-of-type(2) {
+    top: 314px;
+}
+
+.AIPopup-title {
+    position: absolute;
+    top: 224px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Sono', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    font-style: medium;
+    color: #404040;
+}

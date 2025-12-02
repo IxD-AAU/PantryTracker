@@ -1,0 +1,20 @@
+<div class="popup-overlay" (click)="onClose()">
+  <div class="popup-modal" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="onClose()">✕</button>
+    
+    <input type="text" class="cabinet-input" placeholder="Navn på skab" [(ngModel)]="cabinetName">
+    
+    <div class="carousel-container">
+      <button class="nav-button left-button" (click)="previousCabinet()"></button>
+      
+      <div class="cabinet-display">
+        <app-fridge *ngIf="currentCabinetIndex === 0"></app-fridge>
+        <app-freezer *ngIf="currentCabinetIndex === 1"></app-freezer>
+        <app-cabinet-normal *ngIf="currentCabinetIndex === 2"></app-cabinet-normal>
+      </div>
+      
+      <button class="nav-button right-button" (click)="nextCabinet()"></button>
+    </div>
+    <app-submit-button (clicked)="onSubmit()"></app-submit-button>
+  </div>
+</div>

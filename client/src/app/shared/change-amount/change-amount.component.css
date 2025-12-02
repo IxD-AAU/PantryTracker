@@ -1,0 +1,23 @@
+.change-amount-wrapper {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+}
+
+.Increase-button, .Decrease-button {
+    width: 40px;
+    height: 40px;
+    background-color: #A9BB77;
+    border: none;
+    border-radius: 8px;
+    font-size: 24px;
+    color: #404040;
+    cursor: pointer;
+}
+
+.amount-display {
+    width: 46px;
+    height: 46px;
+    background-color: #FFFFFF;
+    border: 1px solid #404040;
+}

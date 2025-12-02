@@ -1,0 +1,57 @@
+.add-to-list-button {
+  padding: 12px 12px;
+  background-color: #A9BB77;
+  color: #404040;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Sono', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-to-list-button:hover {
+  background-color: #98a96a;
+}
+
+.add-to-list-button:active {
+  transform: scale(0.95);
+}
+
+.button-text {
+  font-weight: 600;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  padding-left: 30px;
+}
+
+.add-to-list-btn {
+  background-color: #A9BB77;
+  color: #404040;
+  border: none;
+  height: 40px;
+  width: 100px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-family: 'Sono', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.add-to-list-btn:hover {
+  background-color: #98a96a;
+}
+
+.add-to-list-btn:active {
+  transform: scale(0.95);
+}

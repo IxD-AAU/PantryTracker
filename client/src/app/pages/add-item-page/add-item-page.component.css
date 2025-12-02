@@ -1,0 +1,18 @@
+.aip-line {
+  position: absolute;
+  top: 407px;
+  left: 13px;
+  width: 367px;
+  height: 15px;
+  border-radius: 15px;
+  background-color: #768844;
+}
+.AIP-title {
+  position: absolute;
+  top: 250px;
+  left: 163px;
+  font-family: 'Sono', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #404040;
+}

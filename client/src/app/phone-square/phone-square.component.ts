@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-phone-square',
-  imports: [NavBarComponent],
+  standalone: true,
+  imports: [NavBarComponent, RouterOutlet],
   templateUrl: './phone-square.component.html',
-  styleUrl: './phone-square.component.css'
+  styleUrls: ['./phone-square.component.css']
 })
 export class PhoneSquareComponent {
 

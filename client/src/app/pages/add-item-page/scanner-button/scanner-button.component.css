@@ -1,0 +1,40 @@
+.scanner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scanner-button {
+  width: 255px;
+  height: 90px;
+  background-color: #A9BB77;
+  color: #404040;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: absolute;
+  top: 147px;
+  left: 69px;
+}
+
+.scanner-button:hover {
+  background-color: #98a96a;
+}
+
+.scanner-button:active {
+  transform: scale(0.95);
+}
+
+.scanner-text {
+  font-family: 'Sono', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #404040;
+}
+
+
