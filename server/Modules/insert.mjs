@@ -88,7 +88,7 @@ export const addHouseholdCabinetIndex = (connection)=>{
 export const addNote = (connection =>{
     router.post('/api/data/add/note', (req, res)=>{
         const data = req.body;
-        const index = `noteIndex${data.UHID}`;
+        const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
 
         connection.query(`INSERT INTO ${index} (amount, text) VALUES (?,?)`, [data.amount, data.text], (err, results)=>{
             if (err){

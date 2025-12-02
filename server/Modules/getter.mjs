@@ -489,7 +489,7 @@ export const getNotes = (connection, operation) => {
     if (operation == "Amount"){
         router.get('/api/data/get/note/amount', (req, res)=>{
             const data = req.query;
-            const index = `noteIndex${data.UHID}`;
+            const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
 
             connection.query(`SELECT amount FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
                 if(err){
@@ -503,9 +503,9 @@ export const getNotes = (connection, operation) => {
         return router;
     }
     else if (operation == "Text"){
-        router.get('/api/data/get/note/Text', (req, res)=>{
+        router.get('/api/data/get/note/text', (req, res)=>{
             const data = req.query;
-            const index = `noteIndex${data.UHID}`;
+            const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
 
             connection.query(`SELECT text FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
                 if(err){

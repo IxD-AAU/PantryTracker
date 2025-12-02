@@ -128,10 +128,43 @@ export const delHouseHoldIndex = (connection, operation) => {
             const data = req.body;
             const index = `household${data.UHID}`;
 
-            connection.query(`DELETE FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+            connection.query(`DROP TABLE ${index}`, (err, results)=>{
                 if(err){
                     console.error(err);
                     res.status(500).json({ error: 'Database Deletion (HOUSEINDEX WHOLE) failde'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+    }
+    return router;
+}
+export const delNotes = (connection, operation) => {
+    if (operation == "Entry"){
+        router.delete('/api/data/delete/notes/entry', (req, res)=>{
+            const data = req.body;
+            const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
+
+            connection.query(`DELTE FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Database Deletion (NOTEINDEX ENTRY) failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+    }
+    else if (operation == "Whole"){
+        router.delete('/api/data/delete/notes/whole', (req, res)=>{
+            const data = req.body;
+            const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
+
+            connection.query(`DROP TABLE ${index}`, (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Database Deletion (NOTEINDEX WHOLE) failed'});
                     return;
                 }
                 res.json(results);
