@@ -64,10 +64,25 @@
   border-color: #A9BB77;
 }
 
-.app-small-green-line {
+app-small-green-line {
     position: absolute;
     top: 204px;
-    left: 34px;
     display: block;
+    align-self: center;
 }
 
+app-small-green-line:nth-of-type(2) {
+    top: 314px;
+}
+
+.AIPopup-title {
+    position: absolute;
+    top: 224px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Sono', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    font-style: medium;
+    color: #404040;
+}
