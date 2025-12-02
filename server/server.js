@@ -101,7 +101,7 @@ app.use(getHousehold(connection, "householdmember4"));
 
 app.use(getHousehold(connection, "householdmember5"));
 
-app.use(getHousehold(connection, "householdmember6"));z
+app.use(getHousehold(connection, "householdmember6"));
 
     //Getter code for Cabinets
 app.use(getCabinet(connection, "itemdisplayname"));
