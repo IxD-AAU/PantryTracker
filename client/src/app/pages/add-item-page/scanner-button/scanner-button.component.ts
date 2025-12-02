@@ -16,11 +16,3 @@ export class ScannerButtonComponent {
     await this.scannerService.startScanner();
   }
 }
-
-
- /* @Output() clicked = new EventEmitter<void>();
-
-  onClick() {
-    this.clicked.emit();
-  }
-} */

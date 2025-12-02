@@ -6,6 +6,7 @@
   height: 15px;
   border-radius: 15px;
   background-color: #768844;
+  z-index: 2000;
 }
 .AIP-title {
   position: absolute;
@@ -15,4 +16,5 @@
   font-size: 20px;
   font-weight: 500;
   color: #404040;
+  z-index: 2000;
 }
