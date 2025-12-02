@@ -410,7 +410,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
     if (operation == "DisplayName"){
         router.get('/api/data/get/householdcabinetindex/displayname', (req, res)=>{
             const data = req.query;
-            const index = `household${data.IndexCode}`;
+            const index = `household${data.UHID}`;
 
             connection.query(`SELECT displayName FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if (err){
@@ -425,7 +425,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
     else if (operation == "cabinetCode"){
         router.get('/api/data/get/householdcabientindex/cabinetcode', (req, res)=>{
             const data = req.query;
-            const index = `household${data.IndexCode}`;
+            const index = `household${data.UHID}`;
 
             connection.query(`SELECT cabinetCode FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if (err){
@@ -440,7 +440,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
     else if (operation == "cabinetType"){
         router.get('/api/data/householdcabinetindex/cabinetType', (req, res)=>{
             const data = req.query;
-            const index = `household${data.IndexCode}`;
+            const index = `household${data.UHID}`;
 
             connection.query(`SELECT cabinetType FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
                 if (err){
@@ -483,4 +483,39 @@ export const getRecipe = (connection, operation) => {
         })
     }
     return router;
+}
+
+export const getNotes = (connection, operation) => {
+    if (operation == "Amount"){
+        router.get('/api/data/get/note/amount', (req, res)=>{
+            const data = req.query;
+            const index = `noteIndex${data.UHID}`;
+
+            connection.query(`SELECT amount FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({error: 'Dataset: NOTEINDEX(amount) | data retrieval failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+        return router;
+    }
+    else if (operation == "Text"){
+        router.get('/api/data/get/note/Text', (req, res)=>{
+            const data = req.query;
+            const index = `noteIndex${data.UHID}`;
+
+            connection.query(`SELECT text FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
+                if(err){
+                    console.error(err);
+                    res.status(500).json({error: 'Dataset: NOTEINDEX(text) | data retrieval failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+        return router;
+    }
 }
