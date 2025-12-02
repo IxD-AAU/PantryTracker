@@ -43,7 +43,7 @@ export const createHouseIndex = (connection) => {
 export const createNoteIndex = (connection) => {
     router.post('/api/data/create/noteindex', (req, res)=>{
         const data = req.body;
-        const index = `noteIndex${data.UHID}`;
+        const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
 
         connection.query(`CREATE TABLE ${index} (UNID INT AUTO_INCREMENT, amount INT NOT NULL, text VARCHAR(500) PRIMARY KEY(UNID));`, (err, results)=>{
             if (err){

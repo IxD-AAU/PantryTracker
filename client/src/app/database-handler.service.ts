@@ -54,6 +54,9 @@ export class DatabaseHandlerService {
  *  - "Recipe"
  *    - "DisplayName"  -> returns the recipe's DisplayName based on its ID.
  *    - "Link"         -> returns the recipe's external website link based on its ID.
+ *  - "Note"
+ *    - "Amount"       -> returns the amount of items noted based on its ID.
+ *    - "Text"         -> returns the text of a note entry based on its ID.
  *
  * @param operation - Primary operation category used to select the base path (e.g., "ID", "User", "Food", "HouseHold", "Cabinet", "HouseHoldCabinetIndex", "Recipe").
  * @param subOperation - Secondary operation (selector) used to refine the path (see mapping above for allowed values).
@@ -225,6 +228,19 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
 				break;
 		}
 	}
+  else if (operation == "Note"){
+    this.path1 = '/get/note';
+    switch(subOperation){
+      case "Amount":
+        this.path2 = '/amount';
+        break;
+      case "Text":
+        this.path2 = '/text'
+        break;
+      default:
+        break;
+    }
+  }
 	return this.http.get(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);
 }
 
@@ -268,6 +284,9 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
  *   - "DisplayName" -> updates the DisplayName for a cabinet, provide: New DisplayName & ID via Body OBJ.
  *   - "CabinetType" -> updates the CabinetType for a cabinet, provide: New CabinetType & ID via Body OBJ.
  *
+ * - "Note"
+ *   - "Amount" -> updates the Amount for a note, provide: New Amount & ID via Body OBJ.
+ *   - "Text" -> updates the Text for a note, provide: New Text & ID via Body OBJ.
  * Parameters:
  * @param operation - The top-level operation/category (e.g. "User", "Food", "HouseHold", "Cabinet", "Recipe").
  * @param subOperation - The specific field or sub-operation to update (must match one of the accepted values above).
@@ -392,6 +411,19 @@ updateEntryDatabase(operation: String, subOperation: String, body: any): Observa
         break;
   }
   }
+  else if (operation == "Note"){
+    this.path1 = '/update/note';
+    switch (subOperation){
+      case "Amount":
+        this.path2 = '/amount';
+        break;
+      case "Text":
+        this.path2 = '/text';
+        break;
+      default:
+        break;
+    }
+  }
 
   return this.http.put(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);
 }
@@ -407,6 +439,7 @@ updateEntryDatabase(operation: String, subOperation: String, body: any): Observa
  * - `"Household"` -> New HouseHold `DisplayName`, `InviteCode` & `HouseHoldMember1`..`HouseHoldMember6` via Body OBJ
  * - `"Cabinet"` -> New Cabinet, provide: `CabinetCode`, `DisplayName`, `Amount` & `ExpirationDate` via Body OBJ
  * - `"HouseholdCabinet"` -> New HouseHoldCabinetIndex, provide: `DisplayName` & `CabinetCode` via Body OBJ
+ * - `"Note"` -> New Note, Provide: `Amount` & `Text` via Body OBJ
  *
  * @param operation - A string identifying which resource to add. See supported values above.
  * @param body - The payload to send in the POST request (typically the new resource representation).
@@ -434,6 +467,9 @@ insertIntoDatabase(operation: String, body: any): Observable<any>{
 	else if (operation == "HouseholdCabinet"){
 		this.path2 = '/householdcabinetindex';
 	}
+  else if (operation == "Note"){
+    this.path2 = '/note';
+  }
 
 	return this.http.post(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);
 }
@@ -453,6 +489,8 @@ insertIntoDatabase(operation: String, body: any): Observable<any>{
  *   - "CabinetWhole" -> Deletes Entire Cabinet
  *   - "HouseHoldIndexEntry" -> Deletes HouseHoldCabinetIndex Entry
  *   - "HouseHoldIndexWhole" -> Deletes Entire HouseHoldCabinetIndex
+ *   - "NoteEntry" -> Deletes Note Entry
+ *   - "NoteWhole" -> Deletes Entire Notes
  * @param body - The request body to send with the DELETE request, containing needed (ID/ cabinetCode / HouseHoldCode) for deletion specification.
  * @returns An `Observable<any>` that emits the server's response to the DELETE request.
  */
@@ -490,6 +528,14 @@ deleteEntryDatabase(operation: String, body: any): Observable<any>{
     this.path2 = '/householdindex';
     this.path3 = '/whole';
   }
+  else if (operation == "NoteEntry"){
+    this.path2 = '/notes';
+    this.path3 = '/entry';
+  }
+  else if (operation == "NoteWhole"){
+    this.path2 = '/notes';
+    this.path3 = '/whole';
+  }
 
   return this.http.delete(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);
 }
@@ -512,6 +558,9 @@ createTableDatabase(operation: string, body: any): Observable<any>{
   }
   else if (operation == "HouseHoldIndex"){
     this.path2 = '/houseindex';
+  }
+  else if (operation == "note"){
+    this.path2 = '/noteindex';
   }
   return this.http.post(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);
 }

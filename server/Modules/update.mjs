@@ -357,7 +357,7 @@ export const updateNoteIndex = (connection, operation) => {
     if (operation == "Amount"){
         router.put('/api/data/update/note/amount', (req, res)=>{
             const data = req.query;
-            const index = `noteIndex${data.UHID}`;
+            const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
 
             connection.query(`UPDATE ${index} SET amount = ? WHERE UNID = ?`, [data.itemAmount, data.UNID], (err, results)=>{
                 if(err){
@@ -373,7 +373,7 @@ export const updateNoteIndex = (connection, operation) => {
     else if (operation == "Text"){
         router.put('/api/data/update/note/text', (req, res)=>{
             const data = req.query;
-            const index = `noteIndex${data.UHID}`;
+            const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
 
             connection.query(`UPDATE ${index} SET text = ? WHERE UNID = ?`, [data.text, data.UNID], (err, results)=>{
                 if(err){
