@@ -27,9 +27,9 @@ export const createCabinet = (connection) => {
 export const createHouseIndex = (connection) => {
     router.post('/api/data/create/houseindex', (req, res)=>{
         const data = req.body;
-        const index = `household${[data.IndexCode]}`;
+        const index = `household${data.UHID}`;
 
-        connection.query(`CREATE TABLE ${index} (UHCIID INT NULL AUTO_INCREMENT,displayName VARCHAR(90) NOT NULL, cabinetCode VARCHAR(45) NOT NULL, cabinetType VARCHAR(8) NOT NULL PRIMARY KEY (UHCIID));`,(err, results)=>{
+        connection.query(`CREATE TABLE ${index} (UHCIID INT AUTO_INCREMENT,displayName VARCHAR(90) NOT NULL, cabinetCode VARCHAR(45) NOT NULL, cabinetType VARCHAR(8) NOT NULL PRIMARY KEY (UHCIID));`,(err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database Creation (HOUSEINDEX) failed'});
@@ -38,4 +38,21 @@ export const createHouseIndex = (connection) => {
             res.json({ success: true, id: results.insertId});
         })
     })
+    return router;
+}
+export const createNoteIndex = (connection) => {
+    router.post('/api/data/create/noteindex', (req, res)=>{
+        const data = req.body;
+        const index = `noteIndex${data.UHID}`;
+
+        connection.query(`CREATE TABLE ${index} (UNID INT AUTO_INCREMENT, amount INT NOT NULL, text VARCHAR(500) PRIMARY KEY(UNID));`, (err, results)=>{
+            if (err){
+                console.error(err);
+                res.status(500).json({error: 'Database Creation (NOTEINDEX) failed'});
+                return;
+            }
+            res.json({ success: true, id: results.insertId});
+        })
+    })
+    return router;
 }
