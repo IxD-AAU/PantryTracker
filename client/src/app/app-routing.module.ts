@@ -9,6 +9,7 @@ import { HouseholdPageComponent } from './pages/household-page/household-page.co
 import { RecipePageComponent } from './pages/recipe-page/recipe-page.component';
 import { AddItemPageComponent } from './pages/add-item-page/add-item-page.component';
 import { CabinetDetailComponent } from './pages/cabinet-detail/cabinet-detail.component';
+import { ListDetailComponent } from './pages/list-detail/list-detail.component';
 
 export const appRoutes: Routes = [
   { 
@@ -22,7 +23,8 @@ export const appRoutes: Routes = [
       { path: 'household', component: HouseholdPageComponent },
       { path: 'recipe', component: RecipePageComponent },
       { path: 'add-item', component: AddItemPageComponent },
-      { path: 'cabinet/:id', component: CabinetDetailComponent }
+      { path: 'cabinet/:id', component: CabinetDetailComponent },
+      { path: 'list/:id', component: ListDetailComponent }
     ]
   }
 ];

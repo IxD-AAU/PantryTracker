@@ -43,4 +43,8 @@ export class GroceryListPageComponent implements OnInit {
     this.userLists = this.listService.getLists();
     this.showAddListPopup = false;
   }
+
+  onListClick(listIndex: number) {
+    this.router.navigate(['/list', listIndex]);
+  }
 }
