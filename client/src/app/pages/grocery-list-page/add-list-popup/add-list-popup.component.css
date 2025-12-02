@@ -17,7 +17,7 @@
   border-radius: 12px;
   padding: 30px;
   width: 302px;
-  min-height: 200px;
+  min-height: 100px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
 }
@@ -34,16 +34,25 @@
 }
 
 .list-input {
-  width: 100%;
-  padding: 10px;
+  width: 190px;
+  height: 39px;
+  padding: 10px 16px;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color: #A9BB77;
+  border: none;
+  border-radius: 12px;
   font-family: 'Sono', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 500;
   box-sizing: border-box;
+  color: #404040;
+  text-align: center;
 }
 
 .list-input::placeholder {
-  color: #999;
+  color: #666666;
+  opacity: 0.7;
 }

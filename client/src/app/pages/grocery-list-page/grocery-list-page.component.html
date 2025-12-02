@@ -1,6 +1,12 @@
 <app-page-title [title]="'Indkøbslister'"></app-page-title>
 <app-add-button (clicked)="onAddClick()"></app-add-button>
-<app-add-list-button (clicked)="onAddList()"></app-add-list-button>
+
+<div class="lists-container">
+  <div *ngFor="let list of userLists">
+    <app-list [label]="list.name"></app-list>
+  </div>
+  <app-add-list-button (clicked)="onAddList()"></app-add-list-button>
+</div>
 
 <app-add-list-popup 
   *ngIf="showAddListPopup" 
