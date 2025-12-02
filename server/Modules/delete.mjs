@@ -60,6 +60,7 @@ export const delRecipe = (connection) => {
             res.json(results);
         })
     })
+    return router;
 }
 export const delCabinet = (connection, operation) => {
     if (operation == "Entry"){
