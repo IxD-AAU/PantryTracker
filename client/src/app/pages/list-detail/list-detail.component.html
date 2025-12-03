@@ -1,4 +1,21 @@
 <app-page-title [title]="listName"></app-page-title>
+
+<div class="items-list">
+  <div *ngFor="let item of items; let i = index" class="item">
+    <div class="item-row">
+      <input type="checkbox" [id]="'item-' + i" class="item-checkbox">
+      <label [for]="'item-' + i" class="item-label">{{ item }}</label>
+    </div>
+    <app-small-green-line></app-small-green-line>
+  </div>
+</div>
+
 <div class="button-container">
   <app-add-to-list-button (clicked)="onAddToListClick()"></app-add-to-list-button>
 </div>
+
+<app-add-item-to-list-popup 
+  *ngIf="showAddItemPopup"
+  (closed)="onPopupClosed()"
+  (itemAdded)="onItemAdded($event)">
+</app-add-item-to-list-popup>
