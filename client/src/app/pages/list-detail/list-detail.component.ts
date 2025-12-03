@@ -5,17 +5,21 @@ import { PageTitleComponent } from '../../shared/page-title/page-title.component
 import { AddButtonComponent } from '../../shared/add-button/add-button.component';
 import { AddToListButtonComponent } from '../../shared/add-to-list-button/add-to-list-button.component';
 import { ListService } from '../../services/list.service';
+import { AddItemToListPopupComponent } from './add-item-to-list-popup/add-item-to-list-popup.component';
+import { ListItemDividerComponent } from '../../shared/list-item-divider/list-item-divider.component';
 
 @Component({
   selector: 'app-list-detail',
   standalone: true,
-  imports: [CommonModule, PageTitleComponent, AddButtonComponent, AddToListButtonComponent],
+  imports: [CommonModule, PageTitleComponent, AddButtonComponent, AddToListButtonComponent, AddItemToListPopupComponent, ListItemDividerComponent],
   templateUrl: './list-detail.component.html',
   styleUrl: './list-detail.component.css'
 })
 export class ListDetailComponent implements OnInit {
   listName: string = '';
   listIndex: number = 0;
+  showAddItemPopup: boolean = false;
+  items: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +33,7 @@ export class ListDetailComponent implements OnInit {
       const lists = this.listService.getLists();
       if (lists[this.listIndex]) {
         this.listName = lists[this.listIndex].name;
+        this.items = lists[this.listIndex].items || [];
       }
     });
   }
@@ -38,6 +43,16 @@ export class ListDetailComponent implements OnInit {
   }
 
   onAddToListClick() {
-    // Add your logic here (e.g., add item to list)
+    this.showAddItemPopup = true;
+  }
+
+  onPopupClosed() {
+    this.showAddItemPopup = false;
+  }
+
+  onItemAdded(itemName: string) {
+    this.items.push(itemName);
+    this.listService.addItemToList(this.listIndex, itemName);
+    this.showAddItemPopup = false;
   }
 }
