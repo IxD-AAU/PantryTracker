@@ -2,6 +2,8 @@
     display: flex;
     gap: 10px;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .Increase-button, .Decrease-button {
@@ -13,6 +15,25 @@
     font-size: 24px;
     color: #404040;
     cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.plus-icon, .minus-icon {
+    width: 400px;
+    height: 400px;
+    stroke-width: 3.5;
+}
+
+.Increase-button:hover, .Decrease-button:hover {
+    background-color: #98a96a;
+}
+
+.Increase-button:active, .Decrease-button:active {
+    transform: scale(0.95);
 }
 
 .amount-display {
@@ -20,4 +41,14 @@
     height: 46px;
     background-color: #FFFFFF;
     border: 1px solid #404040;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.amount-display-text {
+    font-size: 18px;
+    color: #404040;
+    text-align: center;
+    line-height: 46px;
 }
