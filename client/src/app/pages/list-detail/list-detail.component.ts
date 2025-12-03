@@ -33,6 +33,7 @@ export class ListDetailComponent implements OnInit {
       const lists = this.listService.getLists();
       if (lists[this.listIndex]) {
         this.listName = lists[this.listIndex].name;
+        this.items = lists[this.listIndex].items || [];
       }
     });
   }
@@ -51,6 +52,7 @@ export class ListDetailComponent implements OnInit {
 
   onItemAdded(itemName: string) {
     this.items.push(itemName);
+    this.listService.addItemToList(this.listIndex, itemName);
     this.showAddItemPopup = false;
   }
 }
