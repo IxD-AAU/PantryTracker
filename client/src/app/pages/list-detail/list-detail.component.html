@@ -1,4 +1,5 @@
 <app-page-title [title]="listName"></app-page-title>
+<app-add-button (clicked)="onAddClick()"></app-add-button>
 
 <div class="items-list">
   <div *ngFor="let item of items; let i = index" class="item">
