@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  margin-top: 30px;
   margin-bottom: 5px;
   padding-bottom: 0px;
 }
@@ -29,8 +30,8 @@
 .item {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 15px;
+  gap: 0px;
+  padding: 5px 15px;
   font-family: 'Sono', sans-serif;
   font-size: 16px;
   color: #404040;
@@ -51,11 +52,4 @@
 .item-label {
   cursor: pointer;
   flex: 1;
-}
-
-app-small-green-line {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 10px 0;
 }

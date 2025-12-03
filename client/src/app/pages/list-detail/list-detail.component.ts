@@ -6,12 +6,12 @@ import { AddButtonComponent } from '../../shared/add-button/add-button.component
 import { AddToListButtonComponent } from '../../shared/add-to-list-button/add-to-list-button.component';
 import { ListService } from '../../services/list.service';
 import { AddItemToListPopupComponent } from './add-item-to-list-popup/add-item-to-list-popup.component';
-import { SmallGreenLineComponent } from '../../shared/small-green-line/small-green-line.component';
+import { ListItemDividerComponent } from '../../shared/list-item-divider/list-item-divider.component';
 
 @Component({
   selector: 'app-list-detail',
   standalone: true,
-  imports: [CommonModule, PageTitleComponent, AddButtonComponent, AddToListButtonComponent, AddItemToListPopupComponent, SmallGreenLineComponent],
+  imports: [CommonModule, PageTitleComponent, AddButtonComponent, AddToListButtonComponent, AddItemToListPopupComponent, ListItemDividerComponent],
   templateUrl: './list-detail.component.html',
   styleUrl: './list-detail.component.css'
 })
