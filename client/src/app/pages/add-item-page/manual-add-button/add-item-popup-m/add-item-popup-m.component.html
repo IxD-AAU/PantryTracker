@@ -1,0 +1,36 @@
+<div class="popup-overlay" (click)="onClose()">
+  <div class="popup-modal" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="onClose()">✕</button>
+
+    <input
+      type="text"
+      class="food-item-input"
+      placeholder="Indtast varenavn"
+      [(ngModel)]="itemName"
+    />
+ <span class="AIPopup-title1"> Antal </span>   
+    <app-change-amount></app-change-amount>
+
+    <span class="AIPopup-title2"> Udløbsdato </span>
+  
+  <input
+      type="text"
+      class="date-input"
+      placeholder="00.00.00"
+      pattern="\d{2}\.\d{2}\.\d{2}\"
+      maxlength="8"
+      [(ngModel)]="expirationDate"
+      (input)="formatDate($event)"
+    />
+
+    <button class="submit-button" (click)="onSubmit()"> Godkend </button>
+
+<div style="margin-top: 20px; display: flex; justify-content: center;">
+      <app-small-green-line></app-small-green-line>  
+
+      <app-small-green-line></app-small-green-line>
+    </div>
+  </div>
+</div>
+
+

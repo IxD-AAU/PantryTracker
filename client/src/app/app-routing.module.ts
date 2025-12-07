@@ -7,6 +7,9 @@ import { GroceryListPageComponent } from './pages/grocery-list-page/grocery-list
 import { CabinetsPageComponent } from './pages/cabinets-page/cabinets-page.component';
 import { HouseholdPageComponent } from './pages/household-page/household-page.component';
 import { RecipePageComponent } from './pages/recipe-page/recipe-page.component';
+import { AddItemPageComponent } from './pages/add-item-page/add-item-page.component';
+import { CabinetDetailComponent } from './pages/cabinet-detail/cabinet-detail.component';
+import { ListDetailComponent } from './pages/list-detail/list-detail.component';
 
 export const appRoutes: Routes = [
   { 
@@ -18,7 +21,10 @@ export const appRoutes: Routes = [
       { path: 'grocery-list', component: GroceryListPageComponent },
       { path: 'cabinets', component: CabinetsPageComponent },
       { path: 'household', component: HouseholdPageComponent },
-      { path: 'recipe', component: RecipePageComponent }
+      { path: 'recipe', component: RecipePageComponent },
+      { path: 'add-item', component: AddItemPageComponent },
+      { path: 'cabinet/:id', component: CabinetDetailComponent },
+      { path: 'list/:id', component: ListDetailComponent }
     ]
   }
 ];

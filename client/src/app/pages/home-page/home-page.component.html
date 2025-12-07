@@ -1,1 +1,10 @@
-<p>home-page works!</p>
+<app-page-title [title]="'Oversigt'"></app-page-title>
+<app-add-button (clicked)="onAddClick()"></app-add-button>
+<h3>Hurtig adgang</h3>
+<div class="quick-access-container">
+  <app-cabinet-normal (clicked)="onCabinetClick()"></app-cabinet-normal>
+  <app-list (clicked)="onListClick()"></app-list>
+</div>
+<h3>Ugens opskrift</h3>
+<app-recipe-box (clicked)="onRecipeClick()"></app-recipe-box>
+<h3>Varer tæt på dato</h3>

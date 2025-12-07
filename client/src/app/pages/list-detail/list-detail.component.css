@@ -1,0 +1,55 @@
+:host {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 150px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  padding-left: 15px;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  padding-bottom: 0px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  padding: 5px 15px;
+  font-family: 'Sono', sans-serif;
+  font-size: 16px;
+  color: #404040;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-checkbox {
+  width: 33px;
+  height: 33px;
+  cursor: pointer;
+}
+
+.item-label {
+  cursor: pointer;
+  flex: 1;
+}

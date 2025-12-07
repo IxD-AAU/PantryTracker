@@ -1,0 +1,40 @@
+.recommend-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.recommend-button {
+  width: 138px;
+  height: 34px;
+  background-color:  #A9BB77;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+  top: 110px;
+  left: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: absolute;
+}
+
+.recommend-button:hover {
+    background-color: #98a96a;
+}
+
+.recommend-button:active {
+    transform: scale(0.95);
+}
+
+.recommend-text {
+    font-family: 'Sono', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #404040;
+    font-style: semi-bold;
+}

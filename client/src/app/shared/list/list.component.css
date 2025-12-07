@@ -1,0 +1,55 @@
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-left: 30px;
+}
+
+.list-button {
+  width: 100px;
+  height: 150px;
+  background-color: #A9BB77;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.list-button:hover {
+  background-color: #98a96a;
+}
+
+.list-button:active {
+  transform: scale(0.95);
+}
+
+.list-label {
+  font-family: 'Sono', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #404040;
+  text-align: center;
+  max-width: 110px;
+  word-wrap: break-word;
+  margin-left: 0px;
+}
+
+.shopping-lines {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 8px;
+  margin-left: 3px;
+}
+
+.line {
+  width: 100%;
+  height: 4px;
+  background-color: #768844;
+  border-radius: 2px;
+}

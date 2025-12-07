@@ -27,6 +27,7 @@
     bottom: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    z-index: 1;
   
   
 }
@@ -54,4 +55,11 @@
     margin: 0;
     padding: 0;
     justify-self: center;
+}
+
+.recipe-box-phone {
+    justify-self: center;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
 }

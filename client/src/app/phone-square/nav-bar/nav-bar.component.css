@@ -18,19 +18,21 @@
     border: 0;
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.home-but:active {
+.home-but.active-route {
     background-color:rgb(66.27%, 73.33%, 46.67%); 
 }
 
 .button-icons {
-    width: 79 px;
-    height: 70 px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     display: block;
-    margin: 14px auto 0; 
     pointer-events: none;
 }
 
@@ -45,9 +47,12 @@
     border: 0;
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.cabinets-but:active {
+.cabinets-but.active-route {
     background-color: rgb(66.27%, 73.33%, 46.67%);
 }
 
@@ -66,17 +71,11 @@
     align-items: center;
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
-.grocery-list-but:active {
+.grocery-list-but.active-route {
     background-color: rgb(66.27%, 73.33%, 46.67%);
-}
-
-.button-icons {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
 }
 
 .recipe-but {
@@ -90,10 +89,13 @@
     border: 0;
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.recipe-but:active {
+.recipe-but.active-route {
     background-color: rgb(66.27%, 73.33%, 46.67%);
 }
 
@@ -108,14 +110,16 @@
     border: 0;
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.household-but:active {
+.household-but.active-route {
     background-color: rgb(66.27%, 73.33%, 46.67%);
 }
 
 
 
 
-    
