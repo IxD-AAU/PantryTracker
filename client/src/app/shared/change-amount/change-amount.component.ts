@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-change-amount',
@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 
 export class ChangeAmountComponent {
-  amount: number = 1;
+  @Input() amount: number = 1;
 
   increase() {
     this.amount++;
