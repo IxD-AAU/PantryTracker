@@ -3,8 +3,30 @@
 <span class="AIP-title"> eller </span>
 <app-manual-add-button class="manual-add-button" (clicked)="onManualAddClicked()" ></app-manual-add-button>
 
+<div class="added-items-list">
+    <div *ngFor="let item of addedItems" class="item-card">
+        <div class="item-info">
+            <div class="item-name">{{ item.name }}</div>
+            <div class="item-date"> Bedst før: {{ item.expirationDate }}</div>
+        </div>
+        <app-change-amount [amount]="item.amount"></app-change-amount>
+    </div>
+</div>
+
+<app-change-amount 
+  *ngIf="selectedItemIndex !== null" 
+  [amount]="addedItems[selectedItemIndex]!.amount">
+</app-change-amount>
+
 <app-aip-line class="aip-line"></app-aip-line>
+
 <app-accept-button class="accept-button" (clicked)="onAcceptClicked()" ></app-accept-button>
-<app-add-item-popup-m *ngIf="showAddItemPopupM" (closed)="onPopupClosed()"></app-add-item-popup-m>
+
+<app-add-item-popup-m 
+    *ngIf="showAddItemPopupM"
+    [itemName]="itemName"
+    (itemNameChange)="itemName = $event"
+    (closed)="onPopupClosed()" 
+    (itemSubmitted)="onItemSubmitted($event)"></app-add-item-popup-m>
 
 <!-- app-add-cabinet-button (clicked)="onAddCabinetClick()"></app-add-cabinet-button>-->

@@ -573,4 +573,94 @@ createTableDatabase(operation: string, body: any): Observable<any>{
   return this.http.post(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);
 }
 
+/**
+ * Create a noteIndex table for a household (one-time setup)
+ * @param householdId - The household ID (UHID)
+ * @returns Observable containing the creation response
+ */
+createNoteIndex(householdId: number): Observable<any> {
+  return this.http.post(`${this.apiUrl}/create/noteindex`, {
+    UHID: householdId
+  });
+}
+
+/**
+ * Get all grocery lists/notes for a household
+ * @param householdId - The household ID (UHID)
+ * @returns Observable containing array of all notes
+ */
+getAllNotes(householdId: number): Observable<any> {
+  return this.http.get(`${this.apiUrl}/get/note/all`, {
+    params: { UHID: householdId.toString() }
+  });
+}
+
+/**
+ * Get a specific note field by ID
+ * @param householdId - The household ID (UHID)
+ * @param noteId - The note ID (UNID)
+ * @param field - Which field to get: 'amount' or 'text'
+ * @returns Observable containing the requested field value
+ */
+getNoteById(householdId: number, noteId: number, field: 'amount' | 'text'): Observable<any> {
+  const endpoint = field === 'amount' ? '/get/note/amount' : '/get/note/Text';
+  return this.http.get(`${this.apiUrl}${endpoint}`, {
+    params: {
+      UHID: householdId.toString(),
+      UNID: noteId.toString()
+    }
+  });
+}
+
+/**
+ * Add a new grocery list/note
+ * @param householdId - The household ID (UHID)
+ * @param text - The list name/note text
+ * @param amount - Optional amount field (default: 0)
+ * @param parentId - Optional parent list ID (for items belonging to a list)
+ * @returns Observable containing the creation response with new ID
+ */
+addNote(householdId: number, text: string, amount: number = 0, parentId?: number): Observable<any> {
+  return this.http.post(`${this.apiUrl}/add/note`, {
+    UHID: householdId,
+    text: text,
+    amount: amount,
+    parentId: parentId || null
+  });
+}
+
+/**
+ * Update the text of a grocery list/note
+ * @param householdId - The household ID (UHID)
+ * @param noteId - The note ID (UNID)
+ * @param newText - The new text value
+ * @returns Observable containing the update response
+ */
+updateNoteText(householdId: number, noteId: number, newText: string): Observable<any> {
+  return this.http.put(`${this.apiUrl}/update/note/text`, null, {
+    params: {
+      UHID: householdId.toString(),
+      UNID: noteId.toString(),
+      text: newText
+    }
+  });
+}
+
+/**
+ * Update the amount field of a grocery list/note
+ * @param householdId - The household ID (UHID)
+ * @param noteId - The note ID (UNID)
+ * @param newAmount - The new amount value
+ * @returns Observable containing the update response
+ */
+updateNoteAmount(householdId: number, noteId: number, newAmount: number): Observable<any> {
+  return this.http.put(`${this.apiUrl}/update/note/amount`, null, {
+    params: {
+      UHID: householdId.toString(),
+      UNID: noteId.toString(),
+      itemAmount: newAmount.toString()
+    }
+  });
+}
+
 }

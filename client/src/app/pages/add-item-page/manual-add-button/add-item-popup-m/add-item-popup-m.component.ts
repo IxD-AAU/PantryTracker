@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SmallGreenLineComponent } from '../../../../shared/small-green-line/small-green-line.component';
@@ -13,9 +13,15 @@ import { ChangeAmountComponent } from '../../../../shared/change-amount/change-a
 })
 
 export class AddItemPopupMComponent {
+  @ViewChild(ChangeAmountComponent) changeAmountComponent!: ChangeAmountComponent;
+
   @Output() closed = new EventEmitter<void>();
   @Input() itemName: string = '';
   @Output() itemNameChange = new EventEmitter<string>();
+  @Output() itemSubmitted = new EventEmitter<{ name: string; amount: number; expirationDate: string }>();
+
+  expirationDate: string = '';
+  amount: number = 1;
 
   onClose() {
     this.closed.emit();
@@ -24,8 +30,6 @@ export class AddItemPopupMComponent {
   onItemNameChange(value: string) {
     this.itemNameChange.emit(value);
   }
-
-  expirationDate: string = '';
 
   formatDate(event: any) {
     let value = event.target.value.replace(/\D/g, '');
@@ -40,6 +44,17 @@ export class AddItemPopupMComponent {
   }
 
   onSubmit() {
-    console.log('Submit clicked');
+    const amountComponent = this.changeAmountComponent?.amount || 1;
+    if (this.itemName.trim() && this.expirationDate.trim()) {
+      this.itemSubmitted.emit({
+        name: this.itemName,
+        amount: amountComponent,
+        expirationDate: this.expirationDate
+      });
+      this.itemName = '';
+      this.expirationDate = '';
+      this.amount = 1;
+      this.onClose();
+    }
   }
 }

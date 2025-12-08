@@ -69,10 +69,12 @@ app-small-green-line {
     top: 204px;
     display: block;
     align-self: center;
+    width: 270px;
 }
 
 app-small-green-line:nth-of-type(2) {
     top: 314px;
+    width: 270px;
 }
 
 .AIPopup-title1 {

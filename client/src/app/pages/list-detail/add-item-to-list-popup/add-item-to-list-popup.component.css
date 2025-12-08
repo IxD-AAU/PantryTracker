@@ -61,3 +61,25 @@
   outline: none;
   box-shadow: 0 0 0 2px #768844;
 }
+
+.submit-button {
+  background-color: #A9BB77;
+  color: #404040;
+  border: none;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-family: 'sono', sans-serif;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: block;
+  margin: 20px auto;
+}
+
+.submit-button:hover {
+  background-color: #98a96a;
+}
+
+.submit-button:active {
+  transform: scale(0.95);
+}

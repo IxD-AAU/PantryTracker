@@ -7,16 +7,18 @@ import { AddToListButtonComponent } from '../../shared/add-to-list-button/add-to
 import { ListService } from '../../services/list.service';
 import { AddItemToListPopupComponent } from './add-item-to-list-popup/add-item-to-list-popup.component';
 import { ListItemDividerComponent } from '../../shared/list-item-divider/list-item-divider.component';
+import { TrashIconComponent } from '../../shared/trash-icon/trash-icon.component';
 
 @Component({
   selector: 'app-list-detail',
   standalone: true,
-  imports: [CommonModule, PageTitleComponent, AddButtonComponent, AddToListButtonComponent, AddItemToListPopupComponent, ListItemDividerComponent],
+  imports: [CommonModule, PageTitleComponent, AddButtonComponent, AddToListButtonComponent, AddItemToListPopupComponent, ListItemDividerComponent, TrashIconComponent],
   templateUrl: './list-detail.component.html',
   styleUrl: './list-detail.component.css'
 })
 export class ListDetailComponent implements OnInit {
   listName: string = '';
+  listId: number = 0;
   listIndex: number = 0;
   showAddItemPopup: boolean = false;
   items: string[] = [];
@@ -29,11 +31,23 @@ export class ListDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.listIndex = +params['id'];
+      this.listId = +params['id']; // This is now the database ID
       const lists = this.listService.getLists();
-      if (lists[this.listIndex]) {
-        this.listName = lists[this.listIndex].name;
-        this.items = lists[this.listIndex].items || [];
+      
+      // Find the list by database ID instead of array index
+      const listIndex = lists.findIndex(list => list.id === this.listId);
+      
+      if (listIndex !== -1) {
+        this.listIndex = listIndex;
+        this.listName = lists[listIndex].name;
+        this.items = lists[listIndex].items || [];
+        
+        // Log the amount from database for debugging
+        console.log(`📦 List ${this.listId} has ${lists[listIndex].amount || 0} items in database`);
+      } else {
+        // List not found, maybe redirect back to grocery-list page
+        console.error(`List with ID ${this.listId} not found`);
+        this.listName = 'Liste ikke fundet';
       }
     });
   }
@@ -51,8 +65,54 @@ export class ListDetailComponent implements OnInit {
   }
 
   onItemAdded(itemName: string) {
-    this.items.push(itemName);
-    this.listService.addItemToList(this.listIndex, itemName);
-    this.showAddItemPopup = false;
+    // Add item to database as a new note entry with the list ID as parent
+    this.listService.addItemToList(this.listId, itemName).subscribe({
+      next: () => {
+        console.log(`✅ Added item: ${itemName}`);
+        // Reload the current lists (data is already loaded at this point)
+        this.refreshList();
+      },
+      error: (err) => {
+        console.error('Failed to add item:', err);
+      }
+    });
+  }
+  
+  refreshList() {
+    // Refresh lists from service and update local view
+    const lists = this.listService.getLists();
+    const listIndex = lists.findIndex(list => list.id === this.listId);
+    if (listIndex !== -1) {
+      this.items = lists[listIndex].items || [];
+    }
+  }
+
+  onDeleteItem(index: number) {
+    const itemName = this.items[index];
+    // Delete the item from the database
+    this.listService.deleteItemFromList(this.listId, itemName).subscribe({
+      next: () => {
+        console.log(`🗑️ Deleted item: ${itemName}`);
+        // Reload the current lists
+        this.refreshList();
+      },
+      error: (err) => {
+        console.error('Failed to delete item:', err);
+      }
+    });
+  }
+
+  onDeleteList() {
+    // Delete the entire list and navigate back
+    this.listService.deleteList(this.listId).subscribe({
+      next: () => {
+        console.log(`🗑️ Deleted list: ${this.listName}`);
+        // Navigate back to grocery list page
+        this.router.navigate(['/grocery-list']);
+      },
+      error: (err) => {
+        console.error('Failed to delete list:', err);
+      }
+    });
   }
 }

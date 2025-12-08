@@ -4,11 +4,38 @@
   height: 100%;
   width: 100%;
   padding-bottom: 150px;
+  overflow-x: hidden;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  padding-right: 15px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.title-row app-page-title {
+  flex: 0 1 auto;
+}
+
+.title-actions {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  flex-shrink: 0;
+  padding-top: 30px;
 }
 
 .button-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin-top: 30px;
   margin-bottom: 40px;
@@ -25,6 +52,7 @@
   margin-top: 30px;
   margin-bottom: 5px;
   padding-bottom: 0px;
+  padding-top: 100px;
 }
 
 .item {
@@ -41,12 +69,14 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  justify-content: space-between;
 }
 
 .item-checkbox {
   width: 33px;
   height: 33px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .item-label {

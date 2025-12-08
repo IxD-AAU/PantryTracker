@@ -797,5 +797,21 @@ export const getNotes = (connection, operation) => {
             });
         });
     }
+}
+
+export const getAllNotes = (connection) => {
+    router.get('/api/data/get/note/all', (req, res) => {
+        const data = req.query;
+        const index = `noteIndex${data.UHID}`;
+
+        connection.query(`SELECT * FROM ${index} ORDER BY UNID DESC`, (err, results) => {
+            if(err){
+                console.error(err);
+                res.status(500).json({error: 'Dataset: NOTEINDEX(all) | data retrieval failed'});
+                return;
+            }
+            res.json(results);
+        })
+    })
     return router;
-};
+}

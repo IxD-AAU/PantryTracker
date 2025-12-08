@@ -1,11 +1,17 @@
-<app-page-title [title]="listName"></app-page-title>
-<app-add-button (clicked)="onAddClick()"></app-add-button>
+<div class="title-row">
+  <app-page-title [title]="listName"></app-page-title>
+  <div class="title-actions">
+    <app-add-button (clicked)="onAddClick()"></app-add-button>
+    <app-trash-icon (clicked)="onDeleteList()"></app-trash-icon>
+  </div>
+</div>
 
 <div class="items-list">
   <div *ngFor="let item of items; let i = index" class="item">
     <div class="item-row">
       <input type="checkbox" [id]="'item-' + i" class="item-checkbox">
       <label [for]="'item-' + i" class="item-label">{{ item }}</label>
+      <app-trash-icon (clicked)="onDeleteItem(i)"></app-trash-icon>
     </div>
     <app-list-item-divider></app-list-item-divider>
   </div>
