@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { query } from 'express';
 
 
 @Injectable({
@@ -70,7 +71,7 @@ export class DatabaseHandlerService {
  * For all other operations/suboperations used the assosiated ID.
  * @returns Observable<any> - An observable that emits the HTTP GET response from the constructed endpoint.
  */
-getEntryDatabase(operation: String, subOperation: String, body: any): Observable<any>{
+getEntryDatabase(operation: String, subOperation: String, query: any): Observable<any>{
   this.path1 = '';
   this.path2 = '';
   this.path3 = '';
@@ -205,9 +206,9 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
 	else if (operation == "HouseHoldCabinetIndex"){
 		this.path1 = '/get/householdcabinetindex';
 		switch (subOperation){
-	  case "DisplayName":
-		this.path2 = '/displayname'
-		break;
+	    case "DisplayName":
+		    this.path2 = '/displayname'
+		    break;
 			case "CabinetCode":
 				this.path2 = '/cabinetcode';
 				break;
@@ -241,7 +242,7 @@ getEntryDatabase(operation: String, subOperation: String, body: any): Observable
         break;
     }
   }
-	return this.http.get(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);
+	return this.http.get(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, query);
 }
 
 /**
