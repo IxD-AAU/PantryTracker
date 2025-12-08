@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { query } from 'express';
 
@@ -242,7 +242,14 @@ getEntryDatabase(operation: String, subOperation: String, query: any): Observabl
         break;
     }
   }
-	return this.http.get(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, query);
+
+
+  const params = new HttpParams({ fromObject: query});
+
+  console.log(`constructed URL: ${this.apiUrl}${this.path1}${this.path2}${this.path3}${params}`);
+  console.log('params: ',params);
+
+	return this.http.get(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, { params });
 }
 
 /**
