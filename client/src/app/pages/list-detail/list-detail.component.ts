@@ -64,11 +64,11 @@ export class ListDetailComponent implements OnInit {
   }
 
   onItemAdded(itemName: string) {
-    // Add item to database as a new note entry
-    this.listService.addItemToList(itemName).subscribe({
+    // Add item to database as a new note entry with the list ID as parent
+    this.listService.addItemToList(this.listId, itemName).subscribe({
       next: () => {
         console.log(`✅ Added item: ${itemName}`);
-        // Reload the current lists
+        // Reload the current lists (data is already loaded at this point)
         this.refreshList();
       },
       error: (err) => {

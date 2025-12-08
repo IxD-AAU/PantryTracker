@@ -11,7 +11,7 @@ import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet, u
 
 import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex } from './Modules/delete.mjs';
 
-import { createCabinet, createHouseIndex, createNoteIndex } from './Modules/create.mjs';
+import { createCabinet, createHouseIndex, createNoteIndex, migrateNoteIndex } from './Modules/create.mjs';
 
 const app = express();
 const PORT = 3000;
@@ -37,6 +37,35 @@ connection.connect(function(err){
         process.exit(1);
     }
     console.log('DB connected as id ' + connection.threadId);
+    
+    // Auto-migrate existing noteIndex tables to add parentId column
+    connection.query("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'noteIndex%'", (err, tables) => {
+        if (err) {
+            console.error('Error checking for noteIndex tables:', err);
+            return;
+        }
+        
+        tables.forEach(table => {
+            const tableName = table.TABLE_NAME;
+            connection.query(`SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='${tableName}' AND COLUMN_NAME='parentId'`, (checkErr, columns) => {
+                if (checkErr) {
+                    console.error(`Error checking ${tableName}:`, checkErr);
+                    return;
+                }
+                
+                if (columns.length === 0) {
+                    console.log(`Adding parentId column to ${tableName}...`);
+                    connection.query(`ALTER TABLE ${tableName} ADD COLUMN parentId INT NULL`, (alterErr) => {
+                        if (alterErr) {
+                            console.error(`Error altering ${tableName}:`, alterErr);
+                        } else {
+                            console.log(`✓ Successfully added parentId column to ${tableName}`);
+                        }
+                    });
+                }
+            });
+        });
+    });
 });
 
 app.listen(PORT,() => {
@@ -45,6 +74,25 @@ app.listen(PORT,() => {
 
 app.get('/', (req, res) => {
     res.send('Welcome to Pantry Tracker API');
+});
+
+app.get('/api/debug/notes/:householdId', (req, res) => {
+    const householdId = req.params.householdId;
+    const index = `noteIndex${householdId}`;
+    
+    connection.query(`SELECT * FROM ${index}`, (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Debug query failed', details: err.message });
+            return;
+        }
+        res.json({
+            table: index,
+            rowCount: results.length,
+            columns: results.length > 0 ? Object.keys(results[0]) : [],
+            rows: results
+        });
+    });
 });
 
 app.get('/api/data', (req, res) => {
@@ -211,6 +259,8 @@ app.use(createCabinet(connection));
 app.use(createHouseIndex(connection));
 
 app.use(createNoteIndex(connection));
+
+app.use(migrateNoteIndex(connection));
 
 //NOTE/GROCERY LIST CODE:
 

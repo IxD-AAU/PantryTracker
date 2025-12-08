@@ -89,8 +89,9 @@ export const addNote = (connection) =>{
     router.post('/api/data/add/note', (req, res)=>{
         const data = req.body;
         const index = `noteIndex${data.UHID}`;
+        const parentId = data.parentId || null;
 
-        connection.query(`INSERT INTO ${index} (amount, text) VALUES (?,?)`, [data.amount, data.text], (err, results)=>{
+        connection.query(`INSERT INTO ${index} (amount, text, parentId) VALUES (?,?,?)`, [data.amount, data.text, parentId], (err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database insertion (NoteIndex) failed'});

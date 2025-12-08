@@ -45,13 +45,44 @@ export const createNoteIndex = (connection) => {
         const data = req.body;
         const index = `noteIndex${data.UHID}`;
 
-        connection.query(`CREATE TABLE ${index} (UNID INT AUTO_INCREMENT, amount INT NOT NULL, text VARCHAR(500), PRIMARY KEY(UNID));`, (err, results)=>{
+        connection.query(`CREATE TABLE ${index} (UNID INT AUTO_INCREMENT, amount INT NOT NULL, text VARCHAR(500), parentId INT NULL, PRIMARY KEY(UNID));`, (err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database Creation (NOTEINDEX) failed'});
                 return;
             }
             res.json({ success: true, id: results.insertId});
+        })
+    })
+    return router;
+}
+
+export const migrateNoteIndex = (connection) => {
+    router.post('/api/data/migrate/noteindex', (req, res)=>{
+        const data = req.body;
+        const index = `noteIndex${data.UHID}`;
+
+        // Check if parentId column exists
+        connection.query(`SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='${index}' AND COLUMN_NAME='parentId'`, (err, results)=>{
+            if (err){
+                console.error(err);
+                res.status(500).json({error: 'Migration check failed'});
+                return;
+            }
+
+            // If parentId doesn't exist, add it
+            if (results.length === 0) {
+                connection.query(`ALTER TABLE ${index} ADD COLUMN parentId INT NULL`, (alterErr, alterResults)=>{
+                    if (alterErr){
+                        console.error(alterErr);
+                        res.status(500).json({error: 'Migration failed'});
+                        return;
+                    }
+                    res.json({ success: true, message: 'parentId column added' });
+                })
+            } else {
+                res.json({ success: true, message: 'parentId column already exists' });
+            }
         })
     })
     return router;

@@ -560,13 +560,15 @@ getNoteById(householdId: number, noteId: number, field: 'amount' | 'text'): Obse
  * @param householdId - The household ID (UHID)
  * @param text - The list name/note text
  * @param amount - Optional amount field (default: 0)
+ * @param parentId - Optional parent list ID (for items belonging to a list)
  * @returns Observable containing the creation response with new ID
  */
-addNote(householdId: number, text: string, amount: number = 0): Observable<any> {
+addNote(householdId: number, text: string, amount: number = 0, parentId?: number): Observable<any> {
   return this.http.post(`${this.apiUrl}/add/note`, {
     UHID: householdId,
     text: text,
-    amount: amount
+    amount: amount,
+    parentId: parentId || null
   });
 }
 

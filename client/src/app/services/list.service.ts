@@ -10,29 +10,46 @@ export class ListService {
   private currentHouseholdId: number = 1; // UHID for TestHousehold
   
   constructor(private dbHandler: DatabaseHandlerService) {
-    this.loadListsFromDatabase();
+    this.loadListsFromDatabase().subscribe();
   }
   
   /**
-   * Load all lists from database
+   * Load all lists from database and update the subject
+   * Returns an observable that completes when the load is done
    */
-  private loadListsFromDatabase() {
-    this.dbHandler.getAllNotes(this.currentHouseholdId).subscribe({
-      next: (notes) => {
-        const transformedLists = notes.map((note: any) => ({
-          id: note.UNID,
-          name: note.text,
-          amount: note.amount,
-          items: [] // Items would be loaded separately or stored differently
-        }));
-        this.listsSubject.next(transformedLists);
-      },
-      error: (err) => {
-        console.error('Failed to load lists from database:', err);
-        // If table doesn't exist, it was already created in Phase 2
-        // Just show empty list
-        this.listsSubject.next([]);
-      }
+  private loadListsFromDatabase(): Observable<void> {
+    return new Observable(observer => {
+      this.dbHandler.getAllNotes(this.currentHouseholdId).subscribe({
+        next: (notes) => {
+          // Filter to only top-level lists (parentId is null)
+          const topLevelLists = notes.filter((note: any) => note.parentId === null || note.parentId === undefined);
+          
+          // For each list, find its items (notes where parentId matches the list's UNID)
+          const transformedLists = topLevelLists.map((list: any) => {
+            const items = notes
+              .filter((note: any) => note.parentId === list.UNID)
+              .map((note: any) => note.text);
+            
+            return {
+              id: list.UNID,
+              name: list.text,
+              amount: list.amount,
+              items: items
+            };
+          });
+          
+          this.listsSubject.next(transformedLists);
+          observer.next();
+          observer.complete();
+        },
+        error: (err) => {
+          console.error('Failed to load lists from database:', err);
+          // If table doesn't exist, it was already created in Phase 2
+          // Just show empty list
+          this.listsSubject.next([]);
+          observer.error(err);
+        }
+      });
     });
   }
   
@@ -59,9 +76,15 @@ export class ListService {
       this.dbHandler.addNote(this.currentHouseholdId, list.name).subscribe({
         next: (response) => {
           // Reload lists from database to get the new one with its ID
-          this.loadListsFromDatabase();
-          observer.next(response);
-          observer.complete();
+          this.loadListsFromDatabase().subscribe({
+            next: () => {
+              observer.next(response);
+              observer.complete();
+            },
+            error: (err) => {
+              observer.error(err);
+            }
+          });
         },
         error: (err) => {
           console.error('Failed to add list:', err);
@@ -78,9 +101,15 @@ export class ListService {
     return new Observable(observer => {
       this.dbHandler.updateNoteText(this.currentHouseholdId, listId, newName).subscribe({
         next: (response) => {
-          this.loadListsFromDatabase();
-          observer.next(response);
-          observer.complete();
+          this.loadListsFromDatabase().subscribe({
+            next: () => {
+              observer.next(response);
+              observer.complete();
+            },
+            error: (err) => {
+              observer.error(err);
+            }
+          });
         },
         error: (err) => {
           console.error('Failed to update list:', err);
@@ -91,17 +120,23 @@ export class ListService {
   }
 
   /**
-   * Add item to a specific list (stored as separate notes in database)
+   * Add item to a specific list (stored as separate notes in database with parent ID)
    */
-  addItemToList(listName: string): Observable<any> {
+  addItemToList(listId: number, itemName: string): Observable<any> {
     return new Observable(observer => {
-      // Add the item as a new note entry (e.g., "2 milks")
-      this.dbHandler.addNote(this.currentHouseholdId, listName).subscribe({
+      // Add the item as a new note entry with the list ID as parent
+      this.dbHandler.addNote(this.currentHouseholdId, itemName, 0, listId).subscribe({
         next: (response) => {
           // Reload lists from database to get the new item
-          this.loadListsFromDatabase();
-          observer.next(response);
-          observer.complete();
+          this.loadListsFromDatabase().subscribe({
+            next: () => {
+              observer.next(response);
+              observer.complete();
+            },
+            error: (err) => {
+              observer.error(err);
+            }
+          });
         },
         error: (err) => {
           console.error('Failed to add item:', err);
@@ -114,8 +149,8 @@ export class ListService {
   /**
    * Refresh lists from database
    */
-  refreshLists() {
-    this.loadListsFromDatabase();
+  refreshLists(): Observable<void> {
+    return this.loadListsFromDatabase();
   }
 
   /**
@@ -123,6 +158,6 @@ export class ListService {
    */
   setHouseholdId(householdId: number) {
     this.currentHouseholdId = householdId;
-    this.loadListsFromDatabase();
+    this.loadListsFromDatabase().subscribe();
   }
 }
