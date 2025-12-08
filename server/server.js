@@ -1,5 +1,5 @@
 import mysql from 'mysql2';
-
+import cors from 'cors';
 import express from 'express';
 import cors from 'cors';
 
@@ -9,16 +9,16 @@ import { addUser, addFood, addCabinet, addHousehold, addHouseholdCabinetIndex, a
 
 import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet, updateHouseHoldCabinetIndex, updateNoteIndex } from './Modules/update.mjs';
 
-import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex, delNote } from './Modules/delete.mjs';
+import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex, delNotes } from './Modules/delete.mjs';
 
 import { createCabinet, createHouseIndex, createNoteIndex, migrateNoteIndex } from './Modules/create.mjs';
 
 const app = express();
 const PORT = 3000;
 
-// Enable CORS for Angular app
 app.use(cors({
     origin: 'http://localhost:4200',
+    methods: ['GET','POST','PUT','DELETE'],
     credentials: true
 }));
 
@@ -252,7 +252,9 @@ app.use(delHouseHoldIndex(connection, "Entry"));
 
 app.use(delHouseHoldIndex(connection, "Whole"));
 
-app.use(delNote(connection));
+app.use(delNotes(connection, "Entry"));
+
+app.use(delNotes(connection, "Whole"));
 
 //CREATION CODE:
 

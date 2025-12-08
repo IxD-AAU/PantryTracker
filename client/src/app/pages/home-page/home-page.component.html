@@ -8,3 +8,14 @@
 <h3>Ugens opskrift</h3>
 <app-recipe-box (clicked)="onRecipeClick()"></app-recipe-box>
 <h3>Varer tæt på dato</h3>
+<div *ngIf="dataLoaded; else loading">
+  <div *ngFor="let item of expiringItemsSorted; let i = index">
+    <app-cabinet-item
+    [item]="item[i]"
+    [displayName]="displayNameMap.get(item.itemID)"></app-cabinet-item>
+  </div>
+</div>
+
+<ng-template #loading class="loading">
+  <p class="dot-animation">læser skabe<span class="dots"></span></p>
+</ng-template>
