@@ -1,6 +1,8 @@
-<app-page-title [title]="cabinetName"></app-page-title>
-<div class="button-container">
-  <app-add-button (clicked)="onAddClick()"></app-add-button>
+<div class="title-row">
+  <app-page-title [title]="cabinetName"></app-page-title>
+  <div class="title-actions">
+    <app-add-button (clicked)="onAddClick()"></app-add-button>
+    <app-trash-icon (clicked)="onDeleteCabinet()"></app-trash-icon>
+  </div>
 </div>
-<!-- Rest of your content -->
 

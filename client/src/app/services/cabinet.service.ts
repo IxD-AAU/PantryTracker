@@ -137,4 +137,29 @@ export class CabinetService {
       });
     });
   }
+
+  /**
+   * Delete a cabinet
+   */
+  deleteCabinet(cabinetId: number): Observable<any> {
+    return new Observable(observer => {
+      this.dbHandler.deleteCabinet(this.currentHouseholdId, cabinetId).subscribe({
+        next: (response) => {
+          this.loadCabinetsFromDatabase().subscribe({
+            next: () => {
+              observer.next(response);
+              observer.complete();
+            },
+            error: (err) => {
+              observer.error(err);
+            }
+          });
+        },
+        error: (err) => {
+          console.error('Failed to delete cabinet:', err);
+          observer.error(err);
+        }
+      });
+    });
+  }
 }

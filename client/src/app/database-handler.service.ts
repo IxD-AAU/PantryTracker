@@ -545,7 +545,7 @@ deleteEntryDatabase(operation: String, body: any): Observable<any>{
     this.path3 = '/whole';
   }
 
-  return this.http.delete(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, body);
+  return this.http.delete(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, {body});
 }
 
 
@@ -717,6 +717,20 @@ updateCabinetName(householdId: number, cabinetId: number, newName: string): Obse
       displayName: newName
     }
   });
+}
+
+/**
+ * Delete a cabinet from the household
+ * @param householdId - The household ID (UHID)
+ * @param cabinetId - The cabinet ID (HCIID)
+ * @returns Observable containing the delete response
+ */
+deleteCabinet(householdId: number, cabinetId: number): Observable<any> {
+  const body = {
+    UHID: householdId.toString(),
+    HCIID: cabinetId.toString()
+  };
+  return this.deleteEntryDatabase('HouseHoldIndexEntry', body);
 }
 
 }
