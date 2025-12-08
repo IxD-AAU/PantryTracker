@@ -797,6 +797,7 @@ export const getNotes = (connection, operation) => {
             });
         });
     }
+    return router;
 }
 
 export const getAllNotes = (connection) => {

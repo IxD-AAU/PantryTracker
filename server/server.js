@@ -1,7 +1,6 @@
 import mysql from 'mysql2';
 import cors from 'cors';
 import express from 'express';
-import cors from 'cors';
 
 import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetIndex, getRecipe, getNotes, getAllNotes } from './Modules/getter.mjs';
 
