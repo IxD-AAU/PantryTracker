@@ -325,7 +325,7 @@ export const updateHouseHoldCabinetIndex = (connection, operation) => {
             const data = req.query;
             const index = `household${data.UHID}`;
 
-            connection.query(`UPDATE ${index} SET DisplayName = ? WHERE UHCIID = ?`, [data.displayName, data.UHCIID], (err, results)=>{
+            connection.query(`UPDATE ${index} SET DisplayName = ? WHERE HCIID = ?`, [data.displayName, data.HCIID], (err, results)=>{
                 if (err){
                     console.error(err);
                     res.status(500).json({ error: 'Database Update (INDEX DISPLAYNAME) failed'});
@@ -340,7 +340,7 @@ export const updateHouseHoldCabinetIndex = (connection, operation) => {
             const data = req.query;
             const index = `household${data.UHID}`;
 
-            connection.query(`UPDATE ${index} SET cabinetType = ? WHERE UHCIID = ?`, [data.cabinetType, data.UHCIID], (err, results)=>{
+            connection.query(`UPDATE ${index} SET cabinetType = ? WHERE HCIID = ?`, [data.cabinetType, data.HCIID], (err, results)=>{
                 if (err){
                     console.error(err);
                     res.status(500).json({error: 'Database Update (INDEX CABINETTYPE) failed'});

@@ -113,7 +113,7 @@ export const delHouseHoldIndex = (connection, operation) => {
             const data = req.body;
             const index = `household${data.UHID}`;
 
-            connection.query(`DELETE FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+            connection.query(`DELETE FROM ${index} WHERE HCIID = ?`, [data.HCIID], (err, results)=>{
                 if(err){
                     console.error(err);
                     res.status(500).json({ error: 'Database Deletion (HOUSEINDEX ENTRY) failed'});

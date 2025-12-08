@@ -324,12 +324,6 @@ export const getCabinet = (connection, operation) => {
             const data = req.query;
             const cabinetTableName = `cabient${[data.cabinetCode]}`;
 
-            if (!(data.cabinetCode).isInteger()){
-                console.error("Provided cabinet code is not an integer.");
-                res.status(500).json({error: 'Provided cabinet code is not an integer.'})
-                return;
-            }
-
             connection.query(`SELECT itemID FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
                 if(err){
                     console.error(err);
@@ -345,11 +339,6 @@ export const getCabinet = (connection, operation) => {
             const data = req.query;
             const cabinetTableName = `cabient${[data.cabinetCode]}`;
 
-            if (!(data.cabinetCode).isInteger()){
-                console.error("Provided cabinet code is not an integer.");
-                res.status(500).json({error: 'Provided cabinet code is not an integer.'})
-                return;
-            }
 
             connection.query(`SELECT itemAmount FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
                 if(err){
@@ -366,12 +355,6 @@ export const getCabinet = (connection, operation) => {
             const data = req.query;
             const cabinetTableName = `cabient${[data.cabinetCode]}`;
 
-            if (!(data.cabinetCode).isInteger()){
-                console.error("Provided cabinet code is not an integer.");
-                res.status(500).json({error: 'Provided cabinet code is not an integer.'});
-                return;
-            }
-
             connection.query(`SELECT itemExpirationDate FROM ${cabinetTableName} WHERE UCID = ?`, [data.UCID], (err, results)=>{
                 if(err){
                     console.error(err);
@@ -386,12 +369,6 @@ export const getCabinet = (connection, operation) => {
         router.get('/api/data/get/cabinet/everything', (req, res)=>{
             const data = req.query;
             const cabinetTableName = `cabinet${data.cabinetCode}`;
-
-            if (!(data.cabinetCode).isInteger()){
-                console.error("Provided cabinet code is not an integer.");
-                res.status(500).json({error: 'Provided cabinet code is not an integer.'});
-                return;
-            }
 
             connection.query(`SELECT * FROM ${cabinetTableName}`,(err, results)=>{
                 if(err){
@@ -412,7 +389,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
             const data = req.query;
             const index = `household${data.UHID}`;
 
-            connection.query(`SELECT displayName FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+            connection.query(`SELECT displayName FROM ${index} WHERE HCIID = ?`, [data.HCIID], (err, results)=>{
                 if (err){
                     console.error(err);
                     res.status(500).json({error: 'Dataset: HOUSECABINETINDEX (displayName) | data retrieval failed'});
@@ -423,11 +400,11 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
         })
     }
     else if (operation == "cabinetCode"){
-        router.get('/api/data/get/householdcabientindex/cabinetcode', (req, res)=>{
+        router.get('/api/data/get/householdcabinetindex/cabinetcode', (req, res)=>{
             const data = req.query;
             const index = `household${data.UHID}`;
 
-            connection.query(`SELECT cabinetCode FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+            connection.query(`SELECT cabinetCode FROM ${index} WHERE HCIID = ?`, [data.HCIID], (err, results)=>{
                 if (err){
                     console.error(err);
                     res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabinetCode) | data retrieval failed'});
@@ -442,7 +419,7 @@ export const getHouesholdCabinetIndex = (connection, operation) => {
             const data = req.query;
             const index = `household${data.UHID}`;
 
-            connection.query(`SELECT cabinetType FROM ${index} WHERE UHCIID = ?`, [data.UHCIID], (err, results)=>{
+            connection.query(`SELECT cabinetType FROM ${index} WHERE HCIID = ?`, [data.HCIID], (err, results)=>{
                 if (err){
                     console.error(err);
                     res.status(500).json({error: 'Dataset: HOUSECABINETINDEX(cabinetType) | data retrieval failed'});

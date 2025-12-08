@@ -1,5 +1,5 @@
 import mysql from 'mysql2';
-
+import cors from 'cors';
 import express from 'express';
 
 import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetIndex, getRecipe } from './Modules/getter.mjs';
@@ -14,6 +14,12 @@ import { createCabinet, createHouseIndex } from './Modules/create.mjs';
 
 const app = express();
 const PORT = 3000;
+
+app.use(cors({
+    origin: 'http://localhost:4200',
+    methods: ['GET','POST','PUT','DELETE'],
+    credentials: true
+}));
 
 app.use(express.json());
 
