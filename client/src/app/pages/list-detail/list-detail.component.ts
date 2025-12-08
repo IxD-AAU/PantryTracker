@@ -7,11 +7,12 @@ import { AddToListButtonComponent } from '../../shared/add-to-list-button/add-to
 import { ListService } from '../../services/list.service';
 import { AddItemToListPopupComponent } from './add-item-to-list-popup/add-item-to-list-popup.component';
 import { ListItemDividerComponent } from '../../shared/list-item-divider/list-item-divider.component';
+import { TrashIconComponent } from '../../shared/trash-icon/trash-icon.component';
 
 @Component({
   selector: 'app-list-detail',
   standalone: true,
-  imports: [CommonModule, PageTitleComponent, AddButtonComponent, AddToListButtonComponent, AddItemToListPopupComponent, ListItemDividerComponent],
+  imports: [CommonModule, PageTitleComponent, AddButtonComponent, AddToListButtonComponent, AddItemToListPopupComponent, ListItemDividerComponent, TrashIconComponent],
   templateUrl: './list-detail.component.html',
   styleUrl: './list-detail.component.css'
 })
@@ -84,5 +85,34 @@ export class ListDetailComponent implements OnInit {
     if (listIndex !== -1) {
       this.items = lists[listIndex].items || [];
     }
+  }
+
+  onDeleteItem(index: number) {
+    const itemName = this.items[index];
+    // Delete the item from the database
+    this.listService.deleteItemFromList(this.listId, itemName).subscribe({
+      next: () => {
+        console.log(`🗑️ Deleted item: ${itemName}`);
+        // Reload the current lists
+        this.refreshList();
+      },
+      error: (err) => {
+        console.error('Failed to delete item:', err);
+      }
+    });
+  }
+
+  onDeleteList() {
+    // Delete the entire list and navigate back
+    this.listService.deleteList(this.listId).subscribe({
+      next: () => {
+        console.log(`🗑️ Deleted list: ${this.listName}`);
+        // Navigate back to grocery list page
+        this.router.navigate(['/grocery-list']);
+      },
+      error: (err) => {
+        console.error('Failed to delete list:', err);
+      }
+    });
   }
 }

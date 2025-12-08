@@ -9,7 +9,7 @@ import { addUser, addFood, addCabinet, addHousehold, addHouseholdCabinetIndex, a
 
 import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet, updateHouseHoldCabinetIndex, updateNoteIndex } from './Modules/update.mjs';
 
-import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex } from './Modules/delete.mjs';
+import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex, delNote } from './Modules/delete.mjs';
 
 import { createCabinet, createHouseIndex, createNoteIndex, migrateNoteIndex } from './Modules/create.mjs';
 
@@ -251,6 +251,8 @@ app.use(delCabinet(connection, "Whole"));
 app.use(delHouseHoldIndex(connection, "Entry"));
 
 app.use(delHouseHoldIndex(connection, "Whole"));
+
+app.use(delNote(connection));
 
 //CREATION CODE:
 

@@ -140,3 +140,24 @@ export const delHouseHoldIndex = (connection, operation) => {
     }
     return router;
 }
+
+export const delNote = (connection) => {
+    router.delete('/api/data/delete/note', (req, res) => {
+        const data = req.body;
+        const index = `noteIndex${data.UHID}`;
+
+        // Delete by UNID if provided, otherwise by text
+        const queryParam = data.UNID || data.text;
+        const whereClause = data.UNID ? 'UNID = ?' : 'text = ?';
+
+        connection.query(`DELETE FROM ${index} WHERE ${whereClause}`, [queryParam], (err, results) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Database Deletion (NOTE) failed' });
+                return;
+            }
+            res.json(results);
+        })
+    })
+    return router;
+}
