@@ -2,8 +2,10 @@
   <div class="popup-modal" (click)="$event.stopPropagation()">
     <button class="close-button" (click)="onClose()">✕</button>
     
-    <input type="text" class="item-input" placeholder="Navn på vare" [(ngModel)]="itemName">
-    
-    <app-submit-button (clicked)="onSubmit()"></app-submit-button>
+    <form (ngSubmit)="onSubmit()">
+      <input type="text" class="item-input" placeholder="Navn på vare" [(ngModel)]="itemName" name="itemName" autofocus>
+      
+      <button type="submit" class="submit-button">Opret</button>
+    </form>
   </div>
 </div>

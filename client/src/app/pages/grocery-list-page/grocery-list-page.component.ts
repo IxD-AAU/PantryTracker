@@ -19,11 +19,20 @@ import { ListService } from '../../services/list.service';
 export class GroceryListPageComponent implements OnInit {
   showAddListPopup = false;
   userLists: any[] = [];
+  isLoading = true;
 
   constructor(private router: Router, private listService: ListService) {}
 
   ngOnInit() {
-    this.userLists = this.listService.getLists();
+    // Subscribe to list changes for real-time updates
+    this.listService.getLists$().subscribe(lists => {
+      this.userLists = lists;
+      this.isLoading = false;
+      console.log('📋 Lists updated:', lists);
+    });
+    
+    // Trigger initial load
+    this.listService.refreshLists();
   }
 
   onAddClick() {
@@ -38,13 +47,34 @@ export class GroceryListPageComponent implements OnInit {
     this.showAddListPopup = false;
   }
 
+  /**
+   * Handle new list creation - saves to database
+   */
   onListAdded(listName: string) {
-    this.listService.addList({ name: listName });
-    this.userLists = this.listService.getLists();
-    this.showAddListPopup = false;
+    this.isLoading = true;
+    
+    this.listService.addList({ name: listName }).subscribe({
+      next: (response) => {
+        console.log('✅ List created successfully:', response);
+        this.showAddListPopup = false;
+        // The subscription will automatically update the list
+      },
+      error: (err) => {
+        console.error('❌ Error creating list:', err);
+        alert('Failed to create list. Please check the console for details.');
+        this.isLoading = false;
+      }
+    });
   }
 
   onListClick(listIndex: number) {
-    this.router.navigate(['/list', listIndex]);
+    // Use the database ID instead of array index
+    const list = this.userLists[listIndex];
+    if (list && list.id) {
+      this.router.navigate(['/list', list.id]);
+    } else {
+      // Fallback to index if no ID (shouldn't happen with database)
+      this.router.navigate(['/list', listIndex]);
+    }
   }
 }

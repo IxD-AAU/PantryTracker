@@ -14,17 +14,29 @@ export class AddItemToListPopupComponent {
   @Output() closed = new EventEmitter<void>();
   @Output() itemAdded = new EventEmitter<string>();
   itemName = '';
+  private isSubmitting = false;
 
   onClose() {
     this.closed.emit();
   }
 
   onSubmit() {
+    // Prevent double submission
+    if (this.isSubmitting) {
+      return;
+    }
+    
     const name = this.itemName.trim();
     if (name) {
+      this.isSubmitting = true;
       this.itemAdded.emit(name);
       this.itemName = '';
-      this.onClose();
+      this.closed.emit();
+      
+      // Reset flag after a short delay
+      setTimeout(() => {
+        this.isSubmitting = false;
+      }, 300);
     }
   }
 }

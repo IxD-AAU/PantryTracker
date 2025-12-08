@@ -1,19 +1,26 @@
 import mysql from 'mysql2';
 
 import express from 'express';
+import cors from 'cors';
 
-import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetIndex, getRecipe } from './Modules/getter.mjs';
+import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetIndex, getRecipe, getNotes, getAllNotes } from './Modules/getter.mjs';
 
-import { addUser, addFood, addCabinet, addHousehold, addHouseholdCabinetIndex } from './Modules/insert.mjs';
+import { addUser, addFood, addCabinet, addHousehold, addHouseholdCabinetIndex, addNote } from './Modules/insert.mjs';
 
-import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet, updateHouseHoldCabinetIndex } from './Modules/update.mjs';
+import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet, updateHouseHoldCabinetIndex, updateNoteIndex } from './Modules/update.mjs';
 
 import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex } from './Modules/delete.mjs';
 
-import { createCabinet, createHouseIndex } from './Modules/create.mjs';
+import { createCabinet, createHouseIndex, createNoteIndex } from './Modules/create.mjs';
 
 const app = express();
 const PORT = 3000;
+
+// Enable CORS for Angular app
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}));
 
 app.use(express.json());
 
@@ -203,6 +210,21 @@ app.use(createCabinet(connection));
 
 app.use(createHouseIndex(connection));
 
+app.use(createNoteIndex(connection));
+
+//NOTE/GROCERY LIST CODE:
+
+app.use(addNote(connection));
+
+app.use(getNotes(connection, "Amount"));
+
+app.use(getNotes(connection, "Text"));
+
+app.use(getAllNotes(connection));
+
+app.use(updateNoteIndex(connection, "Amount"));
+
+app.use(updateNoteIndex(connection, "Text"));
 
 //SHUTDOWN CODE:
 

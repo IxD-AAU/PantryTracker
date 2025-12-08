@@ -85,7 +85,7 @@ export const addHouseholdCabinetIndex = (connection)=>{
     return router;
 }
 
-export const addNote = (connection =>{
+export const addNote = (connection) =>{
     router.post('/api/data/add/note', (req, res)=>{
         const data = req.body;
         const index = `noteIndex${data.UHID}`;
@@ -100,4 +100,4 @@ export const addNote = (connection =>{
         })
     })
     return router;
-})
+}

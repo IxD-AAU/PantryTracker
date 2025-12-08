@@ -45,7 +45,7 @@ export const createNoteIndex = (connection) => {
         const data = req.body;
         const index = `noteIndex${data.UHID}`;
 
-        connection.query(`CREATE TABLE ${index} (UNID INT AUTO_INCREMENT, amount INT NOT NULL, text VARCHAR(500) PRIMARY KEY(UNID));`, (err, results)=>{
+        connection.query(`CREATE TABLE ${index} (UNID INT AUTO_INCREMENT, amount INT NOT NULL, text VARCHAR(500), PRIMARY KEY(UNID));`, (err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database Creation (NOTEINDEX) failed'});
