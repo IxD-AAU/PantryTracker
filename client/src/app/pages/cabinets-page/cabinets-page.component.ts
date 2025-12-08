@@ -19,12 +19,21 @@ import { CabinetService } from '../../services/cabinet.service';
 })
 export class CabinetsPageComponent implements OnInit {
   showAddCabinetPopup = false;
-  userCabinets: any[] = []; // Store selected cabinet types
+  userCabinets: any[] = [];
+  isLoading = true;
 
   constructor(private router: Router, private cabinetService: CabinetService) {}
 
   ngOnInit() {
-    this.userCabinets = this.cabinetService.getCabinets();
+    // Subscribe to cabinet changes for real-time updates
+    this.cabinetService.getCabinets$().subscribe(cabinets => {
+      this.userCabinets = cabinets;
+      this.isLoading = false;
+      console.log('🗄️ Cabinets updated:', cabinets);
+    });
+    
+    // Trigger initial load
+    this.cabinetService.refreshCabinets();
   }
 
   onAddClick() {
@@ -32,7 +41,14 @@ export class CabinetsPageComponent implements OnInit {
   }
 
   onCabinetClick(cabinetIndex: number) {
-    this.router.navigate(['/cabinet', cabinetIndex]);
+    // Use the database ID instead of array index
+    const cabinet = this.userCabinets[cabinetIndex];
+    if (cabinet && cabinet.id) {
+      this.router.navigate(['/cabinet', cabinet.id]);
+    } else {
+      // Fallback to index if no ID (shouldn't happen with database)
+      this.router.navigate(['/cabinet', cabinetIndex]);
+    }
   }
 
   onAddCabinetClick() {
@@ -51,8 +67,25 @@ export class CabinetsPageComponent implements OnInit {
     console.log('Freezer button clicked!');
   }
 
+  /**
+   * Handle new cabinet creation - saves to database
+   * @param index - Cabinet type (0=fridge, 1=freezer, 2=cabinet)
+   * @param name - Cabinet display name
+   */
   onCabinetAdded(index: number, name: string) {
-    this.cabinetService.addCabinet({ index, name });
-    this.userCabinets = this.cabinetService.getCabinets();
+    this.isLoading = true;
+    
+    this.cabinetService.addCabinet({ name: name, type: index }).subscribe({
+      next: (response) => {
+        console.log('✅ Cabinet created successfully:', response);
+        this.showAddCabinetPopup = false;
+        // The subscription will automatically update the cabinet list
+      },
+      error: (err) => {
+        console.error('❌ Error creating cabinet:', err);
+        alert('Failed to create cabinet. Please check the console for details.');
+        this.isLoading = false;
+      }
+    });
   }
 }

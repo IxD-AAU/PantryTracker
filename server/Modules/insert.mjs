@@ -69,11 +69,11 @@ export const addCabinet = (connection)=>{
 }
 
 export const addHouseholdCabinetIndex = (connection)=>{
-    router.post('/api/data/add/houescabinetindex', (req, res)=>{
+    router.post('/api/data/add/householdcabinetindex', (req, res)=>{
         const data = req.body;
         const index = `household${data.UHID}`;
 
-        connection.query(`INSERT INTO ${index} (displayname, cabinetCode, cabinetType) VALUES (?,?,?)`, [data.displayName, data.cabinetCode], (err, results)=>{
+        connection.query(`INSERT INTO ${index} (displayname, cabinetCode, cabinetType) VALUES (?,?,?)`, [data.displayName, data.cabinetCode, data.cabinetType], (err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database insertion (HouseholdCabinetIndex) failed'});

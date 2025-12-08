@@ -585,6 +585,17 @@ createNoteIndex(householdId: number): Observable<any> {
 }
 
 /**
+ * Create a household cabinet index table (one-time setup)
+ * @param householdId - The household ID (UHID)
+ * @returns Observable containing the creation response
+ */
+createHouseholdCabinetIndex(householdId: number): Observable<any> {
+  return this.http.post(`${this.apiUrl}/create/houseindex`, {
+    UHID: householdId
+  });
+}
+
+/**
  * Get all grocery lists/notes for a household
  * @param householdId - The household ID (UHID)
  * @returns Observable containing array of all notes
@@ -659,6 +670,51 @@ updateNoteAmount(householdId: number, noteId: number, newAmount: number): Observ
       UHID: householdId.toString(),
       UNID: noteId.toString(),
       itemAmount: newAmount.toString()
+    }
+  });
+}
+
+/**
+ * Get all cabinets for a household
+ * @param householdId - The household ID (UHID)
+ * @returns Observable containing array of all cabinets
+ */
+getAllCabinets(householdId: number): Observable<any> {
+  return this.http.get(`${this.apiUrl}/get/cabinet/all`, {
+    params: { UHID: householdId.toString() }
+  });
+}
+
+/**
+ * Add a new cabinet to a household
+ * @param householdId - The household ID (UHID)
+ * @param displayName - The cabinet name
+ * @param cabinetType - The cabinet type as integer (0=fridge, 1=freezer, 2=cabinet)
+ * @param cabinetCode - Optional cabinet code (can be empty string or auto-generated)
+ * @returns Observable containing the creation response with new ID
+ */
+addCabinet(householdId: number, displayName: string, cabinetType: number, cabinetCode: string = ''): Observable<any> {
+  return this.http.post(`${this.apiUrl}/add/householdcabinetindex`, {
+    UHID: householdId,
+    displayName: displayName,
+    cabinetType: cabinetType.toString(), // Convert to string for VARCHAR field
+    cabinetCode: cabinetCode
+  });
+}
+
+/**
+ * Update the display name of a cabinet
+ * @param householdId - The household ID (UHID)
+ * @param cabinetId - The cabinet ID (HCIID)
+ * @param newName - The new display name
+ * @returns Observable containing the update response
+ */
+updateCabinetName(householdId: number, cabinetId: number, newName: string): Observable<any> {
+  return this.http.put(`${this.apiUrl}/update/householdcabinetindex/displayname`, null, {
+    params: {
+      UHID: householdId.toString(),
+      HCIID: cabinetId.toString(),
+      displayName: newName
     }
   });
 }

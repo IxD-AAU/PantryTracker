@@ -816,3 +816,20 @@ export const getAllNotes = (connection) => {
     })
     return router;
 }
+
+export const getAllCabinets = (connection) => {
+    router.get('/api/data/get/cabinet/all', (req, res) => {
+        const data = req.query;
+        const index = `household${data.UHID}`;
+
+        connection.query(`SELECT * FROM ${index} ORDER BY HCIID ASC`, (err, results) => {
+            if(err){
+                console.error(err);
+                res.status(500).json({error: 'Dataset: HOUSEHOLD_CABINET_INDEX(all) | data retrieval failed'});
+                return;
+            }
+            res.json(results);
+        })
+    })
+    return router;
+}
