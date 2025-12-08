@@ -75,7 +75,7 @@ app-small-green-line:nth-of-type(2) {
     top: 314px;
 }
 
-.AIPopup-title {
+.AIPopup-title1 {
     position: absolute;
     top: 224px;
     left: 50%;
@@ -85,4 +85,81 @@ app-small-green-line:nth-of-type(2) {
     font-size: 20px;
     font-style: medium;
     color: #404040;
+}
+
+.change-amount-wrapper {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+}
+
+app-change-amount {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 254px;
+    display: block;
+}
+
+.AIPopup-title2 {
+   position: absolute;
+    top: 332px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Sono', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    font-style: medium;
+    color: #404040;
+}
+
+.date-input {
+    position: absolute;
+    top: 363px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 189px;
+    height: 46px;
+    border-radius: 15px;
+    background-color: #A9BB77;
+    border: none;
+    text-align: center;
+    font-family: 'Sono', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: #404040;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.date-input:focus {
+  outline: none;
+  background-color: #A9BB77;
+  box-shadow: none;
+}
+
+.submit-button {
+    position: absolute;
+    top: 430px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 100px;
+    height: 44px;
+    background-color: #A9BB77;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Sono', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #404040;
+    font-style: medium;
+}
+
+.submit-button:hover {
+    background-color: #98a96a;
+}
+.submit-button:active {
+    transform: translateX(-50%) scale(0.95);
 }

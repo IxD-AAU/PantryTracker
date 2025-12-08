@@ -1,12 +1,23 @@
 import { Component } from '@angular/core';
-import { AddButtonComponent } from '../add-button/add-button.component';
 
 @Component({
   selector: 'app-change-amount',
-  imports: [AddButtonComponent],
+  standalone: true,
+  imports: [],
   templateUrl: './change-amount.component.html',
-  styleUrl: './change-amount.component.css'
+  styleUrls: ['./change-amount.component.css']
 })
-export class ChangeAmountComponent {
 
+export class ChangeAmountComponent {
+  amount: number = 1;
+
+  increase() {
+    this.amount++;
+  }
+
+  decrease() {
+    if (this.amount > 1) {
+      this.amount--;
+    }
+  }
 }
