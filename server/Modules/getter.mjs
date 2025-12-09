@@ -576,8 +576,9 @@ export const getCabinet = (connection, operation) => {
             console.log("running retrieval of all data from cabinet");
             console.log('Received data:', data);
 
-            // Extract and validate cabinetCode
-            const cabinetCode = typeof data.cabinetCode === 'object' ? data.cabinetCode.value || data.cabinetCode[0] : data.cabinetCode;
+            // Accept either cabinetCode or HCIID as the cabinet identifier (they are now the same)
+            const cabinetCode = (typeof data.cabinetCode === 'object' ? data.cabinetCode.value || data.cabinetCode[0] : data.cabinetCode) || 
+                                (typeof data.HCIID === 'object' ? data.HCIID.value || data.HCIID[0] : data.HCIID);
             console.log('Extracted cabinetCode:', cabinetCode);
 
             if (!cabinetCode) {
@@ -798,6 +799,7 @@ export const getNotes = (connection, operation) => {
             });
         });
     }
+    return router;
 }
 
 export const getAllNotes = (connection) => {
@@ -809,6 +811,23 @@ export const getAllNotes = (connection) => {
             if(err){
                 console.error(err);
                 res.status(500).json({error: 'Dataset: NOTEINDEX(all) | data retrieval failed'});
+                return;
+            }
+            res.json(results);
+        })
+    })
+    return router;
+}
+
+export const getAllCabinets = (connection) => {
+    router.get('/api/data/get/cabinet/all', (req, res) => {
+        const data = req.query;
+        const index = `household${data.UHID}`;
+
+        connection.query(`SELECT * FROM ${index} ORDER BY HCIID ASC`, (err, results) => {
+            if(err){
+                console.error(err);
+                res.status(500).json({error: 'Dataset: HOUSEHOLD_CABINET_INDEX(all) | data retrieval failed'});
                 return;
             }
             res.json(results);

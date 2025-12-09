@@ -69,17 +69,31 @@ export const addCabinet = (connection)=>{
 }
 
 export const addHouseholdCabinetIndex = (connection)=>{
-    router.post('/api/data/add/houescabinetindex', (req, res)=>{
+    router.post('/api/data/add/householdcabinetindex', (req, res)=>{
         const data = req.body;
         const index = `household${data.UHID}`;
 
-        connection.query(`INSERT INTO ${index} (displayname, cabinetCode, cabinetType) VALUES (?,?,?)`, [data.displayName, data.cabinetCode], (err, results)=>{
+        // First insert with cabinetCode as empty (will be updated after getting HCIID)
+        connection.query(`INSERT INTO ${index} (displayname, cabinetCode, cabinetType) VALUES (?,?,?)`, [data.displayName, '', data.cabinetType], (err, results)=>{
             if (err){
                 console.error(err);
                 res.status(500).json({error: 'Database insertion (HouseholdCabinetIndex) failed'});
                 return;
             }
-            res.json({ success: true, id: results.insertId});
+            
+            const hciid = results.insertId;
+            
+            // Now update the cabinetCode to be the same as HCIID
+            connection.query(`UPDATE ${index} SET cabinetCode = ? WHERE HCIID = ?`, [hciid.toString(), hciid], (updateErr, updateResults)=>{
+                if (updateErr){
+                    console.error('Error updating cabinetCode:', updateErr);
+                    res.status(500).json({error: 'Database update (cabinetCode) failed'});
+                    return;
+                }
+                
+                console.log(`✓ Cabinet created with HCIID: ${hciid}, cabinetCode set to: ${hciid}`);
+                res.json({ success: true, id: hciid, cabinetCode: hciid });
+            })
         })
     })
     return router;

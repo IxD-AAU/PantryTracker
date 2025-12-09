@@ -1,9 +1,8 @@
 import mysql from 'mysql2';
 import cors from 'cors';
 import express from 'express';
-import cors from 'cors';
 
-import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetIndex, getRecipe, getNotes, getAllNotes } from './Modules/getter.mjs';
+import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetIndex, getRecipe, getNotes, getAllNotes, getAllCabinets } from './Modules/getter.mjs';
 
 import { addUser, addFood, addCabinet, addHousehold, addHouseholdCabinetIndex, addNote } from './Modules/insert.mjs';
 
@@ -275,6 +274,7 @@ app.use(getNotes(connection, "Amount"));
 app.use(getNotes(connection, "Text"));
 
 app.use(getAllNotes(connection));
+app.use(getAllCabinets(connection));
 
 app.use(updateNoteIndex(connection, "Amount"));
 

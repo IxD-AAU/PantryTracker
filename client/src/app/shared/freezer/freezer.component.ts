@@ -9,7 +9,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 })
 export class FreezerComponent {
   @Input() label: string = 'Fryser';
-  @Input() cabinetName: string = 'Freezer';
+  @Input() cabinetName: string = 'Fryser';
   @Input() cabinetIndex: number = 1;  
   @Output() clicked = new EventEmitter<void>();
   @Output() cabinetClicked = new EventEmitter<number>();  
