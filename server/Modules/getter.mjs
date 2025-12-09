@@ -573,6 +573,7 @@ export const getCabinet = (connection, operation) => {
     } else if (operation == "everything") {
         router.get('/api/data/get/cabinet/everything', (req, res) => {
             const data = req.query;
+            console.log("running retrieval of all data from cabinet");
             console.log('Received data:', data);
 
             // Extract and validate cabinetCode
