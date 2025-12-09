@@ -575,8 +575,9 @@ export const getCabinet = (connection, operation) => {
             const data = req.query;
             console.log('Received data:', data);
 
-            // Extract and validate cabinetCode
-            const cabinetCode = typeof data.cabinetCode === 'object' ? data.cabinetCode.value || data.cabinetCode[0] : data.cabinetCode;
+            // Accept either cabinetCode or HCIID as the cabinet identifier (they are now the same)
+            const cabinetCode = (typeof data.cabinetCode === 'object' ? data.cabinetCode.value || data.cabinetCode[0] : data.cabinetCode) || 
+                                (typeof data.HCIID === 'object' ? data.HCIID.value || data.HCIID[0] : data.HCIID);
             console.log('Extracted cabinetCode:', cabinetCode);
 
             if (!cabinetCode) {
