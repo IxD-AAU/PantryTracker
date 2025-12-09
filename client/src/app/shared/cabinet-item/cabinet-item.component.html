@@ -1,1 +1,13 @@
-<p>{{item.itemAmount}}x {{displayName}} udløber om: {{this.daysUntilExpiration}}</p>
+<h4>{{item.itemAmount}}x {{displayName[0].displayName}}</h4>
+
+<div class="spacer"></div>
+
+<h5>udløber om: {{this.daysUntilExpiration}} dage</h5>
+
+<div [ngSwitch]="iconSwitchExpression" class="icon">
+  <div *ngSwitchCase="1" class="box grey"></div><!--already expired(Grey)-->
+  <div *ngSwitchCase="2" class="box red"></div><!--almost expired(Red)-->
+  <div *ngSwitchCase="3" class="box yellow"></div><!--just about to expire(Yellow)-->
+</div>
+
+<hr class="SegmenterLine">

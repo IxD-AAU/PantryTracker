@@ -1,0 +1,48 @@
+h4{
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0px 16px 12px 16px;
+  color: #404040;
+}
+
+h5 {
+  font-family: 'Sono', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  margin: 0px 16px 12px 16px;
+  color: #404040;
+}
+
+.spacer{
+  margin-top: -13px;
+}
+
+.icon{
+  margin-left: 90%;
+  margin-top: -80px;/*Might need to remove based on img*/
+}
+
+hr{
+  width: 94%;
+  height: 5px;
+  color: #A9BB77;
+  background-color: #A9BB77;
+  border-radius: 15px;
+  border-style: solid;
+}
+
+.box{
+  width: 20px;
+  height: 70px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 5px;
+}
+
+.grey{background-color: #999999;}
+
+.red{background-color: #dd3333;}
+
+.yellow{background-color: #ffcc33;}
+
+

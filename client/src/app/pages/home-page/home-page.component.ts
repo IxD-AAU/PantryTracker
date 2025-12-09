@@ -23,7 +23,7 @@ export class HomePageComponent implements OnInit{
   expiringItems: any[] = [];
   expiringItemsSorted: any[] = [];
   expiringitemsLimited: any[] = [];
-  cabientCodes: any[] = [];
+  cabinetCodes: any[] = [];
   HouseholdID: any;
   query: {
     UUID: number;
@@ -48,14 +48,17 @@ export class HomePageComponent implements OnInit{
 
   onCabinetClick() {
     console.log('Cabinet button clicked!');
+    this.router.navigate(['/cabinets'])
   }
 
   onListClick() {
     console.log('List button clicked!');
+    this.router.navigate(['/grocery-list'])
   }
 
   onRecipeClick() {
     console.log('Recipe box clicked!');
+    this.router.navigate(['/recipe'])
   }
 
 
@@ -64,7 +67,7 @@ export class HomePageComponent implements OnInit{
     this.dataLoaded = false;
     this.expirationList();
     console.log('Load Completed')
-    this.dataLoaded = true;
+
   }
 
   async expirationList() {
@@ -91,18 +94,24 @@ export class HomePageComponent implements OnInit{
 
     // Fetch cabinet codes with a maximum limit to prevent infinite loops
     let j = 1;
-    const maxCabinets = 50; // Set a reasonable limit
+    const maxCabinets = 25; // Set a reasonable limit
     while (j <= maxCabinets) {
+      console.log("running cabinetCode fetch, index:", j);
       const cabinetCode = await this.getCabinetCode(j);
-      if (!cabinetCode) {
+      if (!cabinetCode[0]) {
         break; // Stop if no more cabinet codes are found
       }
-      this.cabientCodes.push(cabinetCode);
+
+      this.cabinetCodes.push(cabinetCode[0]);
       j++;
     }
 
     // Process each cabinet code
-    for (const cabinetCode of this.cabientCodes) {
+    for (const cabinetCode of this.cabinetCodes) {
+      console.log("running: fetching data");
+      console.log("cabient codes:",this.cabinetCodes);
+
+
       const cabinetData = await this.getCabinetData(cabinetCode);
       if (cabinetData) {
         this.processCabinetData(cabinetData, this.expiringitemsLimited);
@@ -119,9 +128,13 @@ export class HomePageComponent implements OnInit{
     console.log("Sorted Cabinet Items:");
     console.log(this.expiringItemsSorted);
 
+    let listIndex = 0;
+
     for (const item of this.expiringItemsSorted) {
-      await this.fetchDisplayName(item);
+      await this.fetchDisplayName(item,listIndex);
+      listIndex++;
     }
+    this.dataLoaded = true;
   }
 
   processCabinetData(data: any, list: any[]){
@@ -138,9 +151,11 @@ export class HomePageComponent implements OnInit{
       list.push(data);
     }
   }
- fetchDisplayName(item: any): Promise<void> {
+ fetchDisplayName(item: any, index: number): Promise<void> {
   return new Promise((resolve) => {
-    this.query.UFID = item.itemID;
+    console.log("items:",item);
+    this.query.UFID = item[index].itemID;
+    console.log("UFID:",this.query.UFID);
     this.databasehandler.getEntryDatabase("Food", "DisplayName", this.query).subscribe(displayName => {
       if (displayName) {
         this.displayNameMap.set(item.itemID, displayName);
@@ -182,7 +197,8 @@ getCabinetCode(index: number): Promise<any> {
 
 getCabinetData(cabinetCode: any): Promise<any> {
   return new Promise((resolve) => {
-    this.query.cabinetCode= cabinetCode;
+    this.query.cabinetCode = cabinetCode.cabinetCode;
+    console.log("Code for cabinet:", this.query.cabinetCode);
     this.databasehandler.getEntryDatabase("Cabinet", "Everything", this.query).subscribe(cabinetData => {
       resolve(cabinetData); // Resolve the Promise with the result
     });

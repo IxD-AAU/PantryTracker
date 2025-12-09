@@ -146,7 +146,7 @@ export const delNotes = (connection, operation) => {
             const data = req.body;
             const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
 
-            connection.query(`DELTE FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
+            connection.query(`DELETE FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
                 if(err){
                     console.error(err);
                     res.status(500).json({ error: 'Database Deletion (NOTEINDEX ENTRY) failed'});
