@@ -1,15 +1,22 @@
 <app-page-title [title]="'Tilføj varer'"></app-page-title>
+
+<button class="back-button" (click)="onBackClicked()">←</button>
+
+
 <app-scanner-button class="scanner-button" (clicked)="onScannerClicked()" ></app-scanner-button>
 <span class="AIP-title"> eller </span>
 <app-manual-add-button class="manual-add-button" (clicked)="onManualAddClicked()" ></app-manual-add-button>
 
 <div class="added-items-list">
     <div *ngFor="let item of addedItems" class="item-card">
+        <div class="item-top-row">
         <div class="item-info">
             <div class="item-name">{{ item.name }}</div>
             <div class="item-date"> Bedst før: {{ item.expirationDate }}</div>
         </div>
         <app-change-amount [amount]="item.amount"></app-change-amount>
+    </div>
+        <app-small-green-line></app-small-green-line>
     </div>
 </div>
 
@@ -25,6 +32,7 @@
 <app-add-item-popup-m 
     *ngIf="showAddItemPopupM"
     [itemName]="itemName"
+    [cabinets]="cabinets"
     (itemNameChange)="itemName = $event"
     (closed)="onPopupClosed()" 
     (itemSubmitted)="onItemSubmitted($event)"></app-add-item-popup-m>

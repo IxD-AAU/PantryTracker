@@ -1,7 +1,12 @@
 .small-green-line {
-    max-width: 367px;
+    width: 100%;
     height: 10px;
     background-color: #A9BB77;
     border-radius: 15px;
+    display: block;
+}
 
+.small-green-line.compact {
+    max-width: 270px;
+    margin: 0 auto;
 }

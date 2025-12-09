@@ -27,15 +27,14 @@
   background-color: #F6F0CB;
   border: none;
   border-radius: 8px;
-  padding: 8px;
 }
 
 .item-card {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 8px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .item-info {
@@ -45,14 +44,17 @@
     flex: 1;
 }
 
+.item-top-row {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
 .item-name {
     font-family: 'Sono', sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: #404040;
-    left: 18px;
-    top: 456px;
-    display: flex;
     position: static;
 }
 
@@ -61,19 +63,44 @@
     font-size: 14px;
     font-weight: 400;
     color: #404040;
-    left: 18px;
-    top: 180px;
     position: static;
 } 
 
 app-change-amount {
-  position: absolute;
-  left: 232px;
   display: flex;
   justify-content: center;
 }
 
-.item-separator {
-  left: 13px;
+app-small-green-line {
+  width: 100%;
+  height: 10px;
+  margin-top: 10px;
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
+.back-button {
+  position: absolute;
+  top: 110px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  background-color:#A9BB77;
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  color: #404040;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button:hover {
+  background-color: #98a96a;
+}
+.back-button:active {
+  transform: scale(0.95);
 }
 

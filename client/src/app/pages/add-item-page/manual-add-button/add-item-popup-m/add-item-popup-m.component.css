@@ -67,14 +67,14 @@
 app-small-green-line {
     position: absolute;
     top: 204px;
+    left: 50%;
+    transform: translateX(-50%);
     display: block;
-    align-self: center;
     width: 270px;
 }
 
 app-small-green-line:nth-of-type(2) {
     top: 314px;
-    width: 270px;
 }
 
 .AIPopup-title1 {
@@ -164,4 +164,12 @@ app-change-amount {
 }
 .submit-button:active {
     transform: translateX(-50%) scale(0.95);
+}
+
+app-choose-cabinet {
+    position: absolute;
+    top: 125px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
 }

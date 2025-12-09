@@ -1,0 +1,15 @@
+<div class="dropdown-container">
+    <button class="dropdown-button" (click)="toggleDropdown()">
+        {{ selectedcabinet }}
+        <span class="arrow">▼</span>
+    </button>
+
+    <div class="dropdown-menu" *ngIf="isOpen">
+        <div
+            *ngFor="let cabinet of cabinets"
+            class="dropdown-item"
+            (click)="selectCabinet(cabinet)">
+            {{ cabinet }}
+        </div>
+    </div>
+</div>
