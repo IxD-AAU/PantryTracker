@@ -144,7 +144,7 @@ export const delNotes = (connection, operation) => {
     if (operation == "Entry"){
         router.delete('/api/data/delete/notes/entry', (req, res)=>{
             const data = req.body;
-            const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
+            const index = `noteIndex${data.UHID}`;
 
             connection.query(`DELETE FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results)=>{
                 if(err){
@@ -159,7 +159,7 @@ export const delNotes = (connection, operation) => {
     else if (operation == "Whole"){
         router.delete('/api/data/delete/notes/whole', (req, res)=>{
             const data = req.body;
-            const index = `noteIndex${data.UHID}-${data.NoteIndex}`;
+            const index = `noteIndex${data.UHID}`;
 
             connection.query(`DROP TABLE ${index}`, (err, results)=>{
                 if(err){
@@ -171,5 +171,21 @@ export const delNotes = (connection, operation) => {
             })
         })
     }
+    
+    // Generic delete endpoint that the client uses
+    router.delete('/api/data/delete/note', (req, res) => {
+        const data = req.body;
+        const index = `noteIndex${data.UHID}`;
+        
+        connection.query(`DELETE FROM ${index} WHERE UNID = ?`, [data.UNID], (err, results) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Database Deletion (NOTE) failed' });
+                return;
+            }
+            res.json(results);
+        });
+    });
+    
     return router;
 }

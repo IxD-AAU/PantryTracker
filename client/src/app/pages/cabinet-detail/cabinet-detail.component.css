@@ -2,6 +2,33 @@
   position: relative;
   display: block;
   height: 100%;
+  width: 100%;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  padding-right: 15px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.title-row app-page-title {
+  flex: 0 1 auto;
+}
+
+.title-actions {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  flex-shrink: 0;
+  padding-top: 30px;
 }
 
 .button-container {

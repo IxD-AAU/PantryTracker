@@ -19,9 +19,9 @@ export class AddCabinetPopupComponent {
   cabinetName = '';
   currentCabinetIndex = 0;
   cabinets = [
-    { name: 'Fridge', type: 'fridge' },
-    { name: 'Freezer', type: 'freezer' },
-    { name: 'Cabinet', type: 'cabinet' }
+    { name: 'Køleskab', type: 'fridge' },
+    { name: 'Fryser', type: 'freezer' },
+    { name: 'Skab', type: 'cabinet' }
   ];
 
   onClose() {
