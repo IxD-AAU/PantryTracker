@@ -1,62 +1,66 @@
-<div class="nav-bar">
-    <button class="grocery-list-but" 
-    routerLink="/grocery-list" 
-    routerLinkActive="active-route" 
+<div *ngIf="isActive;else notActive">
+  <div class="nav-bar">
+    <button class="grocery-list-but"
+    routerLink="/grocery-list"
+    routerLinkActive="active-route"
     #groceryRla="routerLinkActive">
 
-        <img class="button-icons" 
-        [src]="groceryRla.isActive ? 'assets/images/icon-images/image-grocery-list-click.png' 
+        <img class="button-icons"
+        [src]="groceryRla.isActive ? 'assets/images/icon-images/image-grocery-list-click.png'
                             : 'assets/images/icon-images/image-grocery-list.png'"
         alt="Grocery List">
     </button>
 
-    <button class="cabinets-but" 
-    routerLink="/cabinets" 
+    <button class="cabinets-but"
+    routerLink="/cabinets"
     routerLinkActive="active-route"
     #cabinetsRla="routerLinkActive"
     [routerLinkActiveOptions]="{ exact: true }">
 
-        <img class="button-icons" 
-            [src]="cabinetsRla.isActive ? 'assets/images/icon-images/image-cabinets-click.png' 
+        <img class="button-icons"
+            [src]="cabinetsRla.isActive ? 'assets/images/icon-images/image-cabinets-click.png'
                                 : 'assets/images/icon-images/image-cabinets.png'"
         alt="Cabinets">
     </button>
 
-    <button class="home-but" 
-        routerLink="/home" 
+    <button class="home-but"
+        routerLink="/home"
         routerLinkActive="active-route"
-        #homeRla="routerLinkActive" 
+        #homeRla="routerLinkActive"
         [routerLinkActiveOptions]="{ exact: true }">
 
         <img class="button-icons"
-            [src]="homeRla.isActive ? 'assets/images/icon-images/image-home-click.png' 
+            [src]="homeRla.isActive ? 'assets/images/icon-images/image-home-click.png'
                                 : 'assets/images/icon-images/image-home.png'"
             alt="Home">
     </button>
 
-    <button class="household-but" 
-        routerLink="/household" 
+    <button class="household-but"
+        routerLink="/household"
         routerLinkActive="active-route"
-        #householdRla="routerLinkActive" 
+        #householdRla="routerLinkActive"
         [routerLinkActiveOptions]="{ exact: true }">
 
         <img class="button-icons"
-            [src]="householdRla.isActive ? 'assets/images/icon-images/image-household-click.png' 
+            [src]="householdRla.isActive ? 'assets/images/icon-images/image-household-click.png'
                                 : 'assets/images/icon-images/image-household.png'"
             alt="Household">
     </button>
 
-    <button class="recipe-but" 
-        routerLink="/recipe" 
+    <button class="recipe-but"
+        routerLink="/recipe"
         routerLinkActive="active-route"
-        #recipeRla="routerLinkActive" 
+        #recipeRla="routerLinkActive"
         [routerLinkActiveOptions]="{ exact: true }">
 
         <img class="button-icons"
-            [src]="recipeRla.isActive ? 'assets/images/icon-images/image-recipe-click.png' 
+            [src]="recipeRla.isActive ? 'assets/images/icon-images/image-recipe-click.png'
                                 : 'assets/images/icon-images/image-recipe.png'"
             alt="Recipe">
 
     </button>
 </div>
 
+</div>
+
+<ng-template #notActive></ng-template>

@@ -10,13 +10,14 @@ import { RecipePageComponent } from './pages/recipe-page/recipe-page.component';
 import { AddItemPageComponent } from './pages/add-item-page/add-item-page.component';
 import { CabinetDetailComponent } from './pages/cabinet-detail/cabinet-detail.component';
 import { ListDetailComponent } from './pages/list-detail/list-detail.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const appRoutes: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     component: PhoneSquareComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '', component: LoginComponent },
       { path: 'home', component: HomePageComponent },
       { path: 'grocery-list', component: GroceryListPageComponent },
       { path: 'cabinets', component: CabinetsPageComponent },

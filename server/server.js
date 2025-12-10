@@ -111,6 +111,8 @@ app.use(getID(connection,"user"));
 
 app.use(getID(connection,"food"));
 
+app.use(getID(connection, "foodName"));
+
 app.use(getID(connection, "household1"));
 
 app.use(getID(connection, "household2"));
