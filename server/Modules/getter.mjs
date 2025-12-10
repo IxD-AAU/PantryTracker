@@ -30,6 +30,19 @@ export const getID = (connection, operation) => {
             })
         })
     }
+    else if (operation == "foodName"){
+        router.get('/api/data/get/foodName/id', (req, res)=>{
+            const data = req.query;
+            connection.query('SELECT UFID FROM foodtable WHERE displayName = ?', [data.displayName], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Dataset: FOODNAME(UFID) | data retrieval failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+    }
     else if (operation == "household1"){
         router.get('/api/data/get/household/id/1', (req, res)=>{
             console.log('received query data:',req.query);
