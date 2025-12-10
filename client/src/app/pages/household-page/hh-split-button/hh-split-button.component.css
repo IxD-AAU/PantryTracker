@@ -1,0 +1,33 @@
+button {
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #404040;
+}
+
+.hh-btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    gap: 3px;
+}
+
+.add-cabinet-button {
+  width:  183px;
+  height: 30px;
+  border-bottom-left-radius: 10px;
+  background-color: #A9BB77;
+  border: none;
+
+}
+.add-member-button {
+  width: 183px;
+  height: 30px;
+  border-bottom-right-radius: 10px;
+  background-color: #A9BB77;
+  border: none;
+}
+
+.add-cabinet-button:hover, .add-member-button:hover{
+    background-color:#a9bb7779;
+}
