@@ -1,7 +1,7 @@
 .filter-recipe-button {
  width: 34px;
  height: 34px;
- top: 110px;
+ top: 130px;
  left: 275px;
  background-color: #A9BB77;
  border: none;
@@ -12,4 +12,12 @@
  justify-content: center;
  transition: all 0.2s ease;
  position: absolute;
+}
+
+.filter-recipe-button img {
+ width: 60px;
+ height: 60px;
+ object-fit: contain;
+ margin-left: 6px;
+ margin-top: 4px;
 }

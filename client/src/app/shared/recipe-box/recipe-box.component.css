@@ -41,7 +41,16 @@
   margin: 0;
   padding: 0;
   position: absolute;
+  top: 0;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: #A9BB77;
+}
+
+.recipe-content {
+  margin-top: 30px;
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  color: #404040;
+  font-size: 1.2rem;
 }
