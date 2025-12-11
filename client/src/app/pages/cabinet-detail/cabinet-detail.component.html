@@ -3,7 +3,24 @@
   <div class="title-actions">
     <app-add-button (clicked)="onAddClick()"></app-add-button>
     <app-trash-icon (clicked)="onDeleteCabinet()"></app-trash-icon>
+  </div>
+</div>
 
+<div class="item-container">
+<div class="items-list">
+      <div *ngFor="let item of cabinetItems" class="item-card">
+        <div class="item-info">
+          <div class="amount-box">{{ item.amount }}</div>
+          <div class="bottom-row">
+            <div class="item-name">{{ item.name }}</div>
+          <div class="item-expiration">Bedst før: {{ item.expirationDate }}</div>
+        </div>  
+        <app-trash-icon class="item-delete-icon" (clicked)="onDeleteItem(item)"></app-trash-icon>
+        </div>
+        <app-small-green-line></app-small-green-line>
+      </div>
+    </div>
 </div>
-</div>
+
+
 

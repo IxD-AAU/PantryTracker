@@ -752,6 +752,26 @@ addItemToCabinet(cabinetCode: number, foodId: number, amount: number, expiration
   });
 }
 
+/**
+ * Get Items from a specific cabinet
+ * @param cabinetCode - the cabinet code/ID
+ * @returns observable containing array of items with, name, amount, expirationDate
+ */
+getCabinetItems(cabinetCode: number): Observable<any[]> {
+	const params = new HttpParams().set("cabinetCode", cabinetCode.toString());
+	return this.http.get<any[]>(`${this.apiUrl}/get/cabinet/items`, { params });
 }
 
+/**
+ * Delete an item from a specific cabinet
+ * @param cabinetCode - The cabinet code/ID
+ * @param itemId - The item ID to delete
+ * @returns Observable containing the delete response
+ */
+deleteItemFromCabinet(cabinetCode: number, itemId: number): Observable<any> {
+  const params = new HttpParams()
+    .set('cabinetCode', cabinetCode.toString())
+    .set('itemId', itemId.toString());
+  return this.http.delete(`${this.apiUrl}/delete/cabinet/item`, { params });
+}}
 

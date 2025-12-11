@@ -189,3 +189,28 @@ export const delNotes = (connection, operation) => {
     
     return router;
 }
+export const deleteItemFromCabinet = (connection) => {
+    router.delete('/api/data/delete/cabinet/item', (req, res) => {
+        const { cabinetCode, itemId } = req.query;
+
+        if (!cabinetCode || !itemId) {
+            res.status(400).json({ error: 'Cabinet code and item ID are required' });
+            return;
+        }
+
+        const cabinetTableName = `cabinet${cabinetCode}`;
+        const query = `DELETE FROM ${cabinetTableName} WHERE UCID = ?`;
+
+        connection.query(query, [itemId], (err, results) => {
+            if (err) {
+                console.error('Error deleting item:', err);
+                res.status(500).json({ error: 'Failed to delete item' });
+                return;
+            }
+            console.log(`✅ Deleted item ${itemId} from ${cabinetTableName}`);
+            res.json({ success: true, message: 'Item deleted' });
+        });
+    });
+    
+    return router;
+};

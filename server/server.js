@@ -2,15 +2,16 @@ import mysql from 'mysql2';
 import cors from 'cors';
 import express from 'express';
 
-import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetIndex, getRecipe, getNotes, getAllNotes, getAllCabinets } from './Modules/getter.mjs';
+import { getID, getUser, getFood, getHousehold, getCabinet, getHouesholdCabinetIndex, getRecipe, getNotes, getAllNotes, getAllCabinets, getCabinetItems } from './Modules/getter.mjs';
 
 import { addUser, addFood, addCabinet, addHousehold, addHouseholdCabinetIndex, addNote } from './Modules/insert.mjs';
 
 import { updateUser, updateFood, updateHouseHold, updateRecipe, updateCabinet, updateHouseHoldCabinetIndex, updateNoteIndex } from './Modules/update.mjs';
 
-import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex, delNotes } from './Modules/delete.mjs';
+import { delUser, delFood, delHouseHold, delRecipe, delCabinet, delHouseHoldIndex, delNotes, deleteItemFromCabinet } from './Modules/delete.mjs';
 
 import { createCabinet, createHouseIndex, createNoteIndex, migrateNoteIndex } from './Modules/create.mjs';
+
 
 const app = express();
 const PORT = 3000;
@@ -168,6 +169,8 @@ app.use(getCabinet(connection, "itemexpirationdate"));
 
 app.use(getCabinet(connection, "everything"))
 
+app.use(getCabinetItems(connection));
+
     //Getter code for Household Cabinet Index
 app.use(getHouesholdCabinetIndex(connection, "DisplayName"));
 
@@ -256,6 +259,8 @@ app.use(delHouseHoldIndex(connection, "Whole"));
 app.use(delNotes(connection, "Entry"));
 
 app.use(delNotes(connection, "Whole"));
+
+app.use(deleteItemFromCabinet(connection));
 
 //CREATION CODE:
 

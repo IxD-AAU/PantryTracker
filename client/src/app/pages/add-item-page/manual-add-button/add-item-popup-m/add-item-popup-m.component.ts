@@ -56,6 +56,19 @@ export class AddItemPopupMComponent {
   onSubmit() {
     const amountComponent = this.changeAmountComponent?.amount || 1;
     if (this.itemName.trim() && this.expirationDate.trim() && this.selctedCabinet.trim()) {
+ // Validate date format
+    const dateRegex = /^\d{2}\.\d{2}\.\d{2}$/;
+    if (!dateRegex.test(this.expirationDate)) {
+      console.error('Invalid date format. Expected DD.MM.YY');
+      return;
+    }
+
+    // Convert DD.MM.YY to YYYY-MM-DD
+    const dateParts = this.expirationDate.split('.');
+    const day = dateParts[0];
+    const month = dateParts[1];
+    const year = dateParts[2];
+
       this.itemSubmitted.emit({
         name: this.itemName,
         amount: amountComponent,

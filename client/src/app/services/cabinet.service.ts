@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { DatabaseHandlerService } from '../database-handler.service';
+import { DatabaseHandlerService } from '../database-handler.service';''
+import { map, catchError } from 'rxjs/operators';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -243,10 +245,41 @@ addItemToCabinet(cabinetName: string, item: { name: string; amount: number; expi
         observer.error(err);
       }
     });
-
-
-
   });
+}
 
+/**
+ * Get Items from a specific cabinet
+ */
+getCabinetItems(cabinetCode: number): Observable<{ itemId: number; name: string; amount: number; expirationDate: string }[]> {
+  return this.dbHandler.getCabinetItems(cabinetCode).pipe(
+    map(items => items.map(item => ({
+      itemId: item.itemId,  // Add this line
+      name: item.name,
+      amount: item.amount,
+      expirationDate: item.expirationDate,
+    }))),
+  
+    catchError(() => of([])),
+  );
+}
+
+/**
+ * Delete item from a specific cabinet
+ */
+
+deleteItemFromCabinet(cabinetCode: number, itemId: number): Observable<any> {
+  return new Observable(observer => {
+    this.dbHandler.deleteItemFromCabinet(cabinetCode, itemId).subscribe({
+      next: (response) => {
+        console.log(`✅ Item "${itemId}" deleted from cabinet "${cabinetCode}" successfully:`, response);
+        observer.next(response);
+        observer.complete();
+      },
+      error: (err) => {
+        console.error(`Failed to delete item "${itemId}" from cabinet "${cabinetCode}":`, err);
+        observer.error(err);
+      }
+    });
+  });
 }}
-

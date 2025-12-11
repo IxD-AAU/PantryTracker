@@ -848,3 +848,38 @@ export const getAllCabinets = (connection) => {
     })
     return router;
 }
+
+export const getCabinetItems = (connection) => {
+    router.get('/api/data/get/cabinet/items', (req, res) => {
+        const { cabinetCode } = req.query;
+
+        if (!cabinetCode) {
+            res.status(400).json({ error: 'Cabinet code is required' });
+            return;
+        }
+
+        const cabinetTableName = `cabinet${cabinetCode}`;
+        const query = `
+            SELECT 
+                c.UCID as itemId,
+                COALESCE(f.displayName, 'Unknown Item') as name,
+                c.itemAmount as amount,
+                c.itemExpirationDate as expirationDate
+            FROM ${cabinetTableName} c
+            LEFT JOIN foodtable f ON c.itemID = f.UFID
+        `;
+
+        console.log('🔍 Executing query:', query);
+        connection.query(query, (err, results) => {
+            if (err) {
+                console.error('Error getting cabinet items:', err);
+                res.status(500).json({ error: 'Failed to get items', details: err.message });
+                return;
+            }
+            console.log(`✅ Returning ${results.length} items for ${cabinetTableName}`);
+             console.log('📋 Results:', results);
+            res.json(results);
+        });
+    });
+    return router;
+}
