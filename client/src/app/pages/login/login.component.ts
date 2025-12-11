@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-login',
   imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent implements OnInit{
   UserKnown: boolean = false;
   isLogin: boolean = true;
@@ -32,7 +31,6 @@ export class LoginComponent implements OnInit{
     UserEmail: "",
     UserEmail2: ""
   }
-
 
   constructor(private router: Router){}
 
