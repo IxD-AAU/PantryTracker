@@ -16,8 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [
     RouterOutlet,
-    PhoneSquareComponent,
-    NavBarComponent,
+    /*PhoneSquareComponent,
+    NavBarComponent,*/
     HomeButComponent,
     CabinetsButComponent,
     GroceryListButComponent,

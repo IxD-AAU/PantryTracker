@@ -6,7 +6,7 @@ import { SubmitButtonComponent } from '../../../shared/submit-button/submit-butt
 @Component({
   selector: 'app-add-item-to-list-popup',
   standalone: true,
-  imports: [CommonModule, FormsModule, SubmitButtonComponent],
+  imports: [CommonModule, FormsModule /* SubmitButtonComponent*/],
   templateUrl: './add-item-to-list-popup.component.html',
   styleUrl: './add-item-to-list-popup.component.css'
 })

@@ -31,3 +31,7 @@ button {
 .add-cabinet-button:hover, .add-member-button:hover{
     background-color:#a9bb7779;
 }
+
+.add-cabinet-button:active, .add-member-button:active{
+  transform: scale(.95);
+}

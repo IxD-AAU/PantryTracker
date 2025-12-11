@@ -25,16 +25,8 @@
   transition: all 0.2s ease;
 }
 
-.HouseholdBox-button:hover {
-  background-color: #F7E3A8;
-}
-
 .HouseholdBox-wrapper{
   margin-bottom: 2rem;
-}
-
-.HouseholdBox-wrapper:active{
-  transform: scale(0.95);
 }
 
 .title-box {

@@ -1,0 +1,23 @@
+button {
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #404040;
+}
+
+.edit-info-button {
+  width: 369px;
+  height: 30px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #A9BB77;
+  border: none;
+}
+
+.edit-info-button:hover{
+    background-color:#a9bb7779;
+}
+
+.edit-info-button:active{
+  transform: scale(.95);
+}

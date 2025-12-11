@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nav-bar',
-  imports: [GroceryListButComponent, CabinetsButComponent, HomeButComponent, HouseholdButComponent, RecipeButComponent, RouterOutlet, RouterLink, RouterModule, CommonModule],
+  imports: [/*GroceryListButComponent, CabinetsButComponent, HomeButComponent, HouseholdButComponent, RecipeButComponent, RouterOutlet*/ RouterLink, RouterModule, CommonModule],
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
