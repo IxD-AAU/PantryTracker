@@ -27,6 +27,10 @@
   background-color: #F6F0CB;
   border: none;
   border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  bottom: 175px;
 }
 
 .item-card {
@@ -95,6 +99,7 @@ app-small-green-line {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .back-button:hover {

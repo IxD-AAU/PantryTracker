@@ -8,7 +8,10 @@
     height: 40px;
     background-color: #A9BB77;
     border: none;
-    border-radius: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
     font-family: 'Sono', sans-serif;
     font-size: 16px;
     font-weight: 300;
@@ -39,9 +42,12 @@
     width: 189px;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #A9BB77;
+    background-color: #FFFFFF;
     border: 1px solid #404040;
-    border-radius: 8px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }

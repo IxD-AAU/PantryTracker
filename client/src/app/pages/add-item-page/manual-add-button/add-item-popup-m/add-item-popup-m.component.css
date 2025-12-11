@@ -71,6 +71,7 @@ app-small-green-line {
     transform: translateX(-50%);
     display: block;
     width: 270px;
+    z-index: 1;
 }
 
 app-small-green-line:nth-of-type(2) {
@@ -168,8 +169,10 @@ app-change-amount {
 
 app-choose-cabinet {
     position: absolute;
-    top: 125px;
+    top: 110px;
     left: 50%;
     transform: translateX(-50%);
     display: block;
+    bottom: 628px;
+    z-index: 10;
 }

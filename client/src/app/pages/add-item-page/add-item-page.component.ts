@@ -34,6 +34,7 @@ export class AddItemPageComponent implements OnInit {
     addedItems: { name: string; amount: number; expirationDate: string; cabinet: string }[] = [];
     selectedItemIndex: number | null = null;
     cabinets: string[] = [];
+    expirationDate: string = '';
   
     constructor(
       private router: Router, 
@@ -65,15 +66,33 @@ export class AddItemPageComponent implements OnInit {
 
   onAcceptClicked() {
     console.log('Accept button clicked!');
+    
     this.addedItems.forEach(item => {
+      // Convert DD.MM.YY to YYYY-MM-DD format for each item
+      const dateParts = item.expirationDate.split('.');
+      if (dateParts.length === 3) {
+        const day = dateParts[0].padStart(2, '0');
+        const month = dateParts[1].padStart(2, '0');
+        let year = dateParts[2];
+        
+        // Convert 2-digit year to 4-digit (assume 20xx for 00-99)
+        if (year.length === 2) {
+          year = '20' + year;
+        }
+        
+        item.expirationDate = `${year}-${month}-${day}`;
+      }
+      
       console.log(`Adding ${item.name} to ${item.cabinet}`);
       console.log('Item details:', item);
+      
       this.cabinetService.addItemToCabinet(item.cabinet, item).subscribe({
         next: (response) => {
           console.log(`✅ Item "${item.name}" added to cabinet "${item.cabinet}" successfully:`, response);
         }
       });
     });
+    
     this.router.navigate(['/cabinets']);
   }
 

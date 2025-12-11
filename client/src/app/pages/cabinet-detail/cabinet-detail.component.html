@@ -13,7 +13,7 @@
           <div class="amount-box">{{ item.amount }}</div>
           <div class="bottom-row">
             <div class="item-name">{{ item.name }}</div>
-          <div class="item-expiration">Bedst før: {{ item.expirationDate }}</div>
+          <div class="item-expiration">Bedst før: {{ item.expirationDate | date:"dd.MM.yy" }}</div>
         </div>  
         <app-trash-icon class="item-delete-icon" (clicked)="onDeleteItem(item)"></app-trash-icon>
         </div>

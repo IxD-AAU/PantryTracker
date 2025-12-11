@@ -3,6 +3,10 @@
   display: block;
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
 }
 
 .title-row {
@@ -17,6 +21,7 @@
   left: 0;
   right: 0;
   z-index: 10;
+  background-color: #F6F0CB;
 }
 
 .title-row app-page-title {
@@ -51,13 +56,18 @@
 .item-container {
   position: relative;
   padding-top: 20px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .items-list {
-  position: absolute;
-  top: 182px;
-  left: 13px;
-  padding: 0px;
+  margin-top: 182px;
+  margin-left: 13px;
+  margin-right: auto;
+  padding: 0;
+  max-width: 600px;
+  width: 90%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -70,11 +80,12 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  padding-bottom: 20px;
+  margin: 0; /* Remove any margin */
   border: none;
   transition: all 0.2s ease;
   gap: 6px;
   flex-direction: column;
-  left: 13px;
 }
 
 .item-info {
@@ -82,12 +93,13 @@
   display: flex;
   flex-direction: row;
   gap: 6px;
+  align-items: flex-end;
 }
 
 .bottom-row {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
   margin-top: 8px;
 }
 
@@ -96,7 +108,6 @@
   font-family: 'Sono', sans-serif;
   color: #404040;
   font-weight: 400;
-  margin-top: -10px;
 }
 
 .amount-box {
@@ -116,6 +127,17 @@ app-small-green-line {
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 367px
-  
+  width: 367px;
+}
+
+.item-expiration {
+  font-size: 16px;
+  font-family: 'Sono', sans-serif;
+  color: #404040;
+  font-weight: 400;
+}
+
+.item-delete-icon {
+  position: absolute;
+  right: 4px;
 }
