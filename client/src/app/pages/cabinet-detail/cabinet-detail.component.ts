@@ -97,9 +97,6 @@ export class CabinetDetailComponent implements OnInit {
       alert('Cannot delete: Cabinet ID is missing');
       return;
     }
-    
-    if (confirm(`Delete ${item.name}?`)) {
-      console.log('✅ User confirmed deletion');
       console.log('📤 Calling service with cabinetId:', this.cabinetId, 'itemId:', item.itemId);
       
       this.cabinetService.deleteItemFromCabinet(this.cabinetId, item.itemId).subscribe({
@@ -113,5 +110,4 @@ export class CabinetDetailComponent implements OnInit {
         }
       });
     }
-  }
 }

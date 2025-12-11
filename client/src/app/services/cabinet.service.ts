@@ -215,14 +215,15 @@ addItemToCabinet(cabinetName: string, item: { name: string; amount: number; expi
     console.log("Item details (service):", item);
     this.body.displayName = item.name;
 
-    this.grabUFID();
-
-    console.log("item amount:",item.amount);
+  // WAIT for grabUFID to complete before proceeding
+    this.grabUFID().then((ufid) => {
+      console.log("✅ UFID fetched and set:", ufid);
+      console.log("item amount:", item.amount);
 
     this.body.UCID = this.currentHouseholdId;
     this.body.amount = item.amount.valueOf();
     this.body.expirationDate = item.expirationDate;
-    this.body.cabinetCode = cabinet.id;
+    this.body.cabinetCode = cabinet.id!;
 
     console.log("Request body for adding item to cabinet:", this.body);
 
@@ -245,6 +246,7 @@ addItemToCabinet(cabinetName: string, item: { name: string; amount: number; expi
         observer.error(err);
       }
     });
+  });
   });
 }
 
