@@ -6,10 +6,11 @@ import { RecommendButtonComponent } from './recommend-button/recommend-button.co
 import { RouterModule } from '@angular/router';
 import { AllRecipeButtonComponent } from './all-recipe-button/all-recipe-button.component';
 import { FilterRecipeButtonComponent } from './filter-recipe-button/filter-recipe-button.component';
+import { RecipeBoxComponent } from '../../shared/recipe-box/recipe-box.component';
 
 @Component({
   selector: 'app-recipe-page',
-  imports: [PageTitleComponent, RecommendButtonComponent,FilterRecipeButtonComponent, AddButtonComponent, AllRecipeButtonComponent, RouterModule],
+  imports: [PageTitleComponent, RecommendButtonComponent,FilterRecipeButtonComponent, AddButtonComponent, AllRecipeButtonComponent, RouterModule, RecipeBoxComponent],
   standalone: true,
   templateUrl: './recipe-page.component.html',
   styleUrl: './recipe-page.component.css'

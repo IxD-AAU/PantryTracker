@@ -1,10 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { TitleBoxComponent } from './title-box/title-box.component';
 
 @Component({
   selector: 'app-recipe-box',
   standalone: true,
-  imports: [TitleBoxComponent],
+  imports: [],
   templateUrl: './recipe-box.component.html',
   styleUrl: './recipe-box.component.css'
 })
