@@ -107,9 +107,11 @@ app.get('/api/data', (req, res) => {
 
 //GETTING CODE:
     // GET ID BASED ON UNIQUE FIELD ENTRY:
-app.use(getID(connection,"user"));
+app.use(getID(connection, "user"));
 
-app.use(getID(connection,"food"));
+app.use(getID(connection, "userName"));
+
+app.use(getID(connection, "food"));
 
 app.use(getID(connection, "foodName"));
 

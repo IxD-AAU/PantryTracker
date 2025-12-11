@@ -7,6 +7,7 @@ import { RecipeButComponent } from './recipe-but/recipe-but.component';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { resolve } from 'path';
 
 
 
@@ -23,18 +24,23 @@ export class NavBarComponent implements OnInit{
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.Page = this.router.url;
-    if (this.Page == "/"){
-      this.isActive = false;
-    } else { this.isActive = true};
+    console.log("INIT on LOGIN PAGE");
+    this.isActive = false;
+
+    setTimeout(()=>{
+      this.Page = this.router.url
+      if (this.Page == "/"){
+        this.isActive = false;
+      }
+      else {
+        this.isActive = true;
+      }
+    },250)
+
   }
 
-  ngOnLoad(): void{
-    this.Page = this.router.url;
-    if (this.Page == "/"){
-      this.isActive = false;
-    } else { this.isActive = true};
-  }
+
+
 
 
   goHome(): void {

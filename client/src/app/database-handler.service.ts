@@ -81,6 +81,9 @@ getEntryDatabase(operation: String, subOperation: String, query: any): Observabl
 			case "User":
 				this.path1 = '/get/user';
 				break;
+      case "UserName":
+        this.path1 = '/get/userName';
+        break;
 			case "Food":
 				this.path1 = '/get/food';
 				break;

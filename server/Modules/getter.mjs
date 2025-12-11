@@ -17,6 +17,19 @@ export const getID = (connection, operation) => {
             })
         })
     }
+    else if (operation == "userName"){
+        router.get('/api/data/get/userName/id', (req,res)=>{
+            const data = req.query;
+            connection.query('SELECT UUID FROM usertable WHERE Username = ?', [data.Username], (err, results)=>{
+                if (err){
+                    console.error(err);
+                    res.status(500).json({ error: 'Dataaet: USERNAME(UUID) | data retrieval failed'});
+                    return;
+                }
+                res.json(results);
+            })
+        })
+    }
     else if (operation == "food"){
         router.get('/api/data/get/food/id', (req, res)=>{
             const data = req.query;
