@@ -34,6 +34,7 @@
     object-fit: contain;
     display: block;
     pointer-events: none;
+    scale: 75%;
 }
 
 .cabinets-but {

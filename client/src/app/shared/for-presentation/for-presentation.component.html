@@ -1,0 +1,22 @@
+<div class="bigpane" *ngIf="showSelect" [ngStyle]="{'top.px': top, 'left.px': left}">
+
+<div class="pane-handle" (mousedown)="startDrag($event)"><img src= "../../../assets/images/icon-images/victory.png" /></div>
+
+<select class="pane" 
+[(ngModel)]="selectedPage" 
+(change)="navigateToPage()">
+    <option value="placeholder" disabled hidden>Navigation</option>
+    <option value="/">Login</option>
+    <option value="home">Home</option>
+    <option value="cabinets">Cabinets</option>
+    <option value="grocery-list">List</option>
+    <option value="recipe">Recipe</option>
+    <option value="household">Profile</option>
+        <optgroup></optgroup>
+    <optgroup label="SHHHHH!"></optgroup>
+    <optgroup label="Don't tell anyone I was here!"></optgroup>
+    <optgroup label="ඞ 什么?"></optgroup>
+        <optgroup></optgroup>
+</select>
+
+</div>

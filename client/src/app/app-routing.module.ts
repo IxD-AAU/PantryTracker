@@ -25,7 +25,7 @@ export const appRoutes: Routes = [
       { path: 'recipe', component: RecipePageComponent },
       { path: 'add-item', component: AddItemPageComponent },
       { path: 'cabinet/:id', component: CabinetDetailComponent },
-      { path: 'list/:id', component: ListDetailComponent }
+      { path: 'list/:id', component: ListDetailComponent },
     ]
   }
 ];

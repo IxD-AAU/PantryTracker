@@ -1,0 +1,48 @@
+body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.login{
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #404040;
+  margin: auto;
+}
+
+.signup{
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #404040;
+  margin: auto;
+}
+img {
+  display: block;
+  margin: 50px 0px;
+}
+
+input {
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  text-align: center;
+  color: #404040;
+  margin: 8px 2px;
+  width: 220px;
+  height: 2rem;
+  border: none;
+  border-radius: 10px;
+}
+
+button {
+  position: relative;
+  margin: 8px 2px;
+  width: 226px;
+  height: 2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #A9BB77;
+}
