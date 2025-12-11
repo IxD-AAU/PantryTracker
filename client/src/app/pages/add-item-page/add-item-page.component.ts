@@ -22,7 +22,7 @@ import { SmallGreenLineComponent } from '../../shared/small-green-line/small-gre
     AcceptButtonComponent, 
     AddItemPopupMComponent, 
     ChangeAmountComponent,
-    SmallGreenLineComponent,
+    /*SmallGreenLineComponent,*/
     CommonModule, RouterModule, FormsModule],
   templateUrl: './add-item-page.component.html',
   styleUrl: './add-item-page.component.css'

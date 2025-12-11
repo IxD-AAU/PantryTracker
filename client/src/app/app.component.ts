@@ -3,6 +3,7 @@ import { NavBarComponent } from './phone-square/nav-bar/nav-bar.component';
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PresentationComponent } from './shared/for-presentation/for-presentation.component';
 import { HomeButComponent } from './phone-square/nav-bar/home-but/home-but.component';
 import { CabinetsButComponent } from './phone-square/nav-bar/cabinets-but/cabinets-but.component';
 import { GroceryListButComponent } from './phone-square/nav-bar/grocery-list-but/grocery-list-but.component';
@@ -16,13 +17,14 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [
     RouterOutlet,
-    PhoneSquareComponent,
-    NavBarComponent,
+    /*PhoneSquareComponent,
+    NavBarComponent,*/
     HomeButComponent,
     CabinetsButComponent,
     GroceryListButComponent,
     RecipeButComponent,
     HouseholdButComponent,
+    PresentationComponent,
     HttpClientModule
   ],
   template: `
@@ -33,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
       <app-recipe-but routerLink="/recipe-page"></app-recipe-but>
       <app-household-but routerLink="/household-page"></app-household-but>
     </nav>
+    <app-presentation></app-presentation>
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.css']

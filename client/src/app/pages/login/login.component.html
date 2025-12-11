@@ -1,13 +1,15 @@
-
+<body>
+<img src="../../../assets/images/icon-images/logo1.svg">
 
 <div *ngIf="isLogin;else signup" class="login">
   <form (ngSubmit)="submitFormLogin()" #myForm="ngForm">
-    <input id="username" type="text" required [(ngModel)]="user.UserName" [ngModelOptions]="{standalone: true}" placeholder="Brugernavn">
-    <input id="accesscode" type="password" required [(ngModel)]="user.AccessCode" [ngModelOptions]="{standalone: true}" placeholder="Adgangskode">
+    <input id="username"    type="text" required      [(ngModel)]="user.UserName"   [ngModelOptions]="{standalone: true}" placeholder="Brugernavn">
+    <input id="accesscode"  type="password" required  [(ngModel)]="user.AccessCode" [ngModelOptions]="{standalone: true}" placeholder="Adgangskode">
     <br>
     <button id="LoginBtnSubmit" type="submit">Log Ind</button>
   </form>
-
+  
+  <br>
   <label for="signupBtn">Ikke en bruger?</label>
   <br>
   <button id="signupBtn" (click)="newUser()">Opret Bruger</button>
@@ -16,26 +18,24 @@
 <ng-template #signup>
   <div class="signup">
     <form (ngSubmit)="submitFormNewUser()" #myForm="ngForm">
-      <input id="sign-username" type="text" required [(ngModel)]="user.UserName" [ngModelOptions]="{standalone: true}" placeholder="Brugernavn">
-      <input id="sign-firstname" type="text" required [(ngModel)]="user.FirstName" [ngModelOptions]="{standalone: true}" placeholder="Fornavn">
-      <input id="sign-lastname" type="text" required [(ngModel)]="user.LastName" [ngModelOptions]="{standalone: true}" placeholder="Efternavn">
-      <input id="sign-email" type="text" required [(ngModel)]="user.UserEmail" [ngModelOptions]="{standalone: true}" placeholder="Email">
-      <input id="sign-email2" type="text" required [(ngModel)]="user.UserEmail2" [ngModelOptions]="{standalone: true}" placeholder="Gentage Email">
-      <input id="sign-accesscode" type="password" required [(ngModel)]="user.AccessCode" [ngModelOptions]="{standalone: true}" placeholder="Adgangskode">
-      <input id="sign-accesscode2" type="password" required [(ngModel)]="user.AccessCode2" [ngModelOptions]="{standalone: true}" placeholder="Gentage Adgangskode">
+      <input id="sign-username"    type="text" required      [(ngModel)]="user.UserName"    [ngModelOptions]="{standalone: true}" placeholder="Brugernavn">
+      <input id="sign-firstname"   type="text" required      [(ngModel)]="user.FirstName"   [ngModelOptions]="{standalone: true}" placeholder="Fornavn">
+      <input id="sign-lastname"    type="text" required      [(ngModel)]="user.LastName"    [ngModelOptions]="{standalone: true}" placeholder="Efternavn">
+      <input id="sign-email"       type="text" required      [(ngModel)]="user.UserEmail"   [ngModelOptions]="{standalone: true}" placeholder="Email">
+      <input id="sign-email2"      type="text" required      [(ngModel)]="user.UserEmail2"  [ngModelOptions]="{standalone: true}" placeholder="Gentage Email">
+      <input id="sign-accesscode"  type="password" required  [(ngModel)]="user.AccessCode"  [ngModelOptions]="{standalone: true}" placeholder="Adgangskode">
+      <input id="sign-accesscode2" type="password" required  [(ngModel)]="user.AccessCode2" [ngModelOptions]="{standalone: true}" placeholder="Gentage Adgangskode">
       <br>
       <button id="signupBtnSubmit" type="submit">Opret Bruger</button>
 
     </form>
     <br>
-  <label for="loginBtn">Allerede Bruger?,</label>
+  <label for="loginBtn">Allerede Bruger?</label>
   <br>
   <button id="loginBtn" (click)="login()">Log Ind</button>
 
 
   </div>
 
-
-
-
 </ng-template>
+</body>                                  

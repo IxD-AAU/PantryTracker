@@ -1,0 +1,9 @@
+<div class="popup-overlay" (click)="onClose()">
+  <div class="popup-modal" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="onClose()">✕</button>
+    
+    <input type="text" class="info-input" placeholder="infotekst" [(ngModel)]="infoData">
+    
+    <app-submit-button (clicked)="onSubmit()"></app-submit-button>
+  </div>
+</div>

@@ -1,1 +1,13 @@
 <app-page-title [title]="'Profil'"></app-page-title>
+<h3>Info</h3>
+<app-profile-box></app-profile-box>
+
+<h3>Hustand</h3>
+<app-household-box></app-household-box>
+
+
+<div class="add-hh-btn" (clicked)="onHHadd()">
+    <img class="add-hh-btn-ico" src="../../../assets/images/icon-images/image-household-add.png">
+</div>
+    
+<app-add-household-popup *ngIf="HHpopupVisible" (closed)="HHpopupX()"></app-add-household-popup>
