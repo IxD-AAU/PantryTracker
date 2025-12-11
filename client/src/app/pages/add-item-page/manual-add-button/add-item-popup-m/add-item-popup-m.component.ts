@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { SmallGreenLineComponent } from '../../../../shared/small-green-line/small-green-line.component';
 import { ChangeAmountComponent } from '../../../../shared/change-amount/change-amount.component';
 import { ChooseCabinetComponent } from '../../../../shared/choose-cabinet/choose-cabinet.component';
+import { CabinetService } from '../../../../services/cabinet.service';
 
 @Component({
   selector: 'app-add-item-popup-m',
@@ -25,6 +26,8 @@ export class AddItemPopupMComponent {
   expirationDate: string = '';
   amount: number = 1;
   selctedCabinet: string = '';
+
+  constructor(private cabinetService: CabinetService) { }
 
   onClose() {
     this.closed.emit();

@@ -10,9 +10,29 @@ export class CabinetService {
   private cabinetsSubject = new BehaviorSubject<Array<{ id?: number, name: string, type: number }>>([]);
   private currentHouseholdId: number = 1; // UHID for TestHousehold
 
+  public body: {
+    UCID: number,
+    cabinetCode: number,
+    UFID: number,
+    displayName: string,
+    amount: number,
+    expirationDate: string
+  } = {
+    UCID: 0,
+    UFID: 0,
+    cabinetCode: 0,
+    amount: 0,
+    expirationDate: '',
+    displayName: ''
+  };
+
+
   constructor(private dbHandler: DatabaseHandlerService, private http: HttpClient) {
     this.loadCabinetsFromDatabase().subscribe();
+
   }
+
+
 
   /**
    * Load all cabinets from database and update the subject
@@ -162,4 +182,71 @@ export class CabinetService {
       });
     });
   }
+/**
+ * Add an item to a specific cabinet
+ */
+
+grabUFID(): Promise<any> {
+  return new Promise((resolve) => {
+    this.dbHandler.getEntryDatabase("ID","FoodName",this.body).subscribe(UFID=>{
+      console.log("UFID fetched:",UFID);
+      this.body.UFID = UFID[0].UFID;
+      console.log("Item ID set in body:",this.body.UFID);
+      resolve(UFID[0].UFID);
+    });
+  });
 }
+
+addItemToCabinet(cabinetName: string, item: { name: string; amount: number; expirationDate: string }): Observable<any> {
+  return new Observable(observer => {
+    // Find the cabinet by name
+    const cabinet = this.cabinetsSubject.value.find(c => c.name === cabinetName);
+    
+    // if Cabinet does not exist, return error
+    if (!cabinet || cabinet.id == null) {
+      observer.error(new Error(`Cabinet "${cabinetName}" not found`));
+      return;
+    }
+
+    // add item to database through dbHandler
+    console.log(`Adding item "${item.name}" to cabinet "${cabinetName}" (ID: ${cabinet.id})`);
+    console.log("Item details (service):", item);
+    this.body.displayName = item.name;
+
+    this.grabUFID();
+
+    console.log("item amount:",item.amount);
+
+    this.body.UCID = this.currentHouseholdId;
+    this.body.amount = item.amount.valueOf();
+    this.body.expirationDate = item.expirationDate;
+    this.body.cabinetCode = cabinet.id;
+
+    console.log("Request body for adding item to cabinet:", this.body);
+
+    this.dbHandler.insertIntoDatabase("Cabinet",this.body).subscribe({
+      next: (response) => {
+        console.log(`✅ Item "${item.name}" added to cabinet "${cabinetName}" successfully:`, response);
+        // Optionally refresh cabinets if the DB handler changes data visible to the client
+        this.loadCabinetsFromDatabase().subscribe({
+          next: () => {
+            observer.next(response);
+            observer.complete();
+          },
+          error: (err) => {
+            observer.error(err);
+          }
+        });
+      },
+      error: (err) => {
+        console.error(`Failed to add item "${item.name}" to cabinet "${cabinetName}":`, err);
+        observer.error(err);
+      }
+    });
+
+
+
+  });
+
+}}
+

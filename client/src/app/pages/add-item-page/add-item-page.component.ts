@@ -67,6 +67,12 @@ export class AddItemPageComponent implements OnInit {
     console.log('Accept button clicked!');
     this.addedItems.forEach(item => {
       console.log(`Adding ${item.name} to ${item.cabinet}`);
+      console.log('Item details:', item);
+      this.cabinetService.addItemToCabinet(item.cabinet, item).subscribe({
+        next: (response) => {
+          console.log(`✅ Item "${item.name}" added to cabinet "${item.cabinet}" successfully:`, response);
+        }
+      });
     });
     this.router.navigate(['/cabinets']);
   }

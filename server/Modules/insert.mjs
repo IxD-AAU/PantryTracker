@@ -48,13 +48,9 @@ export const addHousehold = (connection)=>{
 export const addCabinet = (connection)=>{
     router.post('/api/data/add/cabinet', (req, res)=>{
         const data = req.body;
+        console.log("Adding item to cabinet:", data);
         const cabinetTableName = `cabinet${data.cabinetCode}`;
-        
-        if (!(data.cabinetCode).isInteger()){
-            console.error("Provided cabinet code is not an integer.");
-            res.status(500).json({error: 'Provided cabinet code is not an integer.'})
-            return;
-        }
+    
 
         connection.query(`INSERT INTO ${cabinetTableName} (itemID, itemAmount, itemExpirationDate) VALUES (?,?,?)`, [data.UFID, data.amount, data.expirationDate], (err, results)=>{
             if(err){

@@ -17,6 +17,8 @@ export class CabinetDetailComponent implements OnInit {
   cabinetName: string = '';
   cabinetId: number = 0;
   cabinetIndex: number = 0;
+  itemName = '';
+  addedItems: { name: string; amount: number; expirationDate: string; cabinet: string }[] = [];
 
   constructor(
     private route: ActivatedRoute,
