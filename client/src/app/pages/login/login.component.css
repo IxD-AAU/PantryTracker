@@ -2,6 +2,10 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
+  font-family: 'Sono', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #404040;
 }
 
 .login{
@@ -45,4 +49,100 @@ button {
   border: none;
   border-radius: 10px;
   background-color: #A9BB77;
+}
+
+
+.Household:hover{
+  opacity: 0.8;
+}
+
+
+.household-container {
+  display: flex;
+  justify-content: center; /* Center the items horizontally */
+  gap: 20px; /* Add spacing between the buttons */
+}
+
+.household-item {
+  display: flex;
+  flex-direction: column; /* Stack the button and label vertically */
+  align-items: center; /* Center the button and label horizontally */
+}
+
+.household-item button {
+  width: 171px; /* Set button width */
+  height: 171px; /* Set button height */
+  border: none; /* Remove default border */
+  cursor: pointer;
+}
+
+.household-item label {
+  margin-top: 10px; /* Add spacing between the button and label */
+  text-align: center; /* Center the label text */
+}
+
+.new{
+  background-image: url('../../../assets/images/login-icons/newhouse.svg');
+  background-size: 60%; /* Ensure the background image covers the button */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.join{
+  background-image: url('../../../assets/images/login-icons/joinhouse.svg');
+  background-size: 60%; /* Ensure the background image covers the button */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+button{
+  cursor: pointer;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+  margin-bottom: 15px; /* Add spacing between form groups */
+}
+
+.form-group label {
+  margin-bottom: 5px; /* Add spacing between the label and the input */
+  font-weight: bold; /* Optional: Make the label text bold */
+}
+
+.form-group input {
+  font-family: 'Sono', sans-serif;
+  font-size: 15px;
+  padding: 8px;
+  border: 1px solid #ccc; /* Optional: Add a border to the input */
+  border-radius: 5px; /* Optional: Add rounded corners to the input */
+  margin-left: 17%;
+}
+
+.form-group button{
+  margin-left: 18%;
+}
+
+.form-group2 {
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+  margin-bottom: 15px; /* Add spacing between form groups */
+}
+
+.form-group2 label {
+  margin-bottom: 5px; /* Add spacing between the label and the input */
+  font-weight: bold; /* Optional: Make the label text bold */
+}
+
+.form-group2 input {
+  font-family: 'Sono', sans-serif;
+  font-size: 15px;
+  padding: 8px;
+  border: 1px solid #ccc; /* Optional: Add a border to the input */
+  border-radius: 5px; /* Optional: Add rounded corners to the input */
+}
+
+.form-group2 button{
+  font-family: 'Sono', sans-serif;
+  font-size: 15px;
 }

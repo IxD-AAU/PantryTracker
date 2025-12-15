@@ -73,7 +73,8 @@ export class HomePageComponent implements OnInit{
 
   async expirationList() {
     this.tempID = localStorage.getItem("UUID");
-    this.query.UUID = 1; // Temporary solution, missing login and caching system.
+    console.log("UUID:",this.tempID);
+    this.query.UUID = Number(this.tempID);
     let i = 1;
     // Find household ID
     while (i < 7) {

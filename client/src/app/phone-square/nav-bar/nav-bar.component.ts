@@ -28,14 +28,14 @@ export class NavBarComponent implements OnInit{
     this.isActive = false;
 
     setTimeout(()=>{
-      this.Page = this.router.url
+      this.Page = this.router.url;
       if (this.Page == "/"){
         this.isActive = false;
       }
       else {
         this.isActive = true;
       }
-    },250)
+    },200)
 
   }
 

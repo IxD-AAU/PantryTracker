@@ -1,0 +1,22 @@
+<svg width="106" height="99" viewBox="0 0 106 99" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect y="18.25" width="80.5" height="80.5" fill="url(#pattern0_870_229)"/>
+<g filter="url(#filter0_d_870_229)">
+<path d="M75.3125 2C77.6052 2 79.4639 3.85869 79.4639 6.15137V23.8486H97.5986C99.8913 23.8486 101.75 25.7073 101.75 28C101.75 30.2926 99.8913 32.1514 97.5986 32.1514H79.4639V49.8486C79.4639 52.1413 77.6052 54 75.3125 54C73.02 53.9998 71.1621 52.1412 71.1621 49.8486V32.1514H53.9014C51.6087 32.1514 49.7501 30.2926 49.75 28C49.75 25.7073 51.6087 23.8486 53.9014 23.8486H71.1621V6.15137C71.1621 3.85884 73.02 2.00024 75.3125 2Z" fill="#768844"/>
+</g>
+<defs>
+<pattern id="pattern0_870_229" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_870_229" transform="scale(0.02)"/>
+</pattern>
+<filter id="filter0_d_870_229" x="45.75" y="0" width="60" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_870_229"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_870_229" result="shape"/>
+</filter>
+<image id="image0_870_229" width="50" height="50" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeElEQVR4nO3WvWvVUBjA4bciFUFtEXQoDt3qIrh0EzoIgpubbu3k7KZ/gqujq5MgiCAdRagVoShOLuLiIqIIFqSD1j5SSPHSD+65aW5M8H0gZAg5h99w3iQiDYdZPK+u2egjXMU3f33HtegLTOA2fttrC3dxJLoMp/DYcMs4HV2Ei/ig3EfM71pjX21GLGLD6LbfWRxY5xZ+th6CY7jn8B7geLXmJXxqLQTn8Epz3uyMaJzBs7GHYAGfNe8rrlR7HK0m3NY4R+um8dnEne29qj2vNx1xEo+05ymmm444j3fa9x4Xmoq4gR/+nQ0sHSZg57B1xX1MjhpxdnD8dcgqZkoj9nyQOuYLLg+LuLnfL0IH/ao+AxO7A07gof55gqnBkLXqwbr+WK/ua4MhL/EWc/pjDq+xctA56YUomFq9EBnSMZEhHRMZ8j+FxIgyRIaUyZAaIkMKZEgNkSEFMqSGyJACGVJDZEiBDKkhChZ/0YOQlVH3Sinq+QNcp5Lm5yAD0QAAAABJRU5ErkJggg=="/>
+</defs>
+</svg>
