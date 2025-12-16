@@ -26,6 +26,7 @@ The current database files uses the sys database, another database can be used i
 | Password: | `DBpassword` |
 
 4. Press Apply.
+5. Apply Administrative Role: `DBA`
 
 Once both of these steps are completed the application can be ran via the terminal, its is recommended to use VSCode's integrated terminal for this.
 
