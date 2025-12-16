@@ -194,6 +194,8 @@ export class LoginComponent implements OnInit{
   }
 
   async joinHouseHold(){
+    await this.grabID();
+    this.query.UUID = this.tempUserID;
     let i = 2;
     let maxQuery = 6
     while(i < maxQuery){
@@ -208,6 +210,7 @@ export class LoginComponent implements OnInit{
       alert("Husstand er fuld");
     }
     else {
+      localStorage.setItem("UUID",(this.query.UUID).toString())
       this.router.navigate(['/home']);
     }
   }
@@ -287,19 +290,29 @@ export class LoginComponent implements OnInit{
           console.log("Membership spot on index ",index," has the following data:",Member[0])
           switch (index) {
             case 2:
-              if (Member[0].HouseHoldMember2 == null){ this.spotOpen = true };
+              if (Member[0].HouseHoldMember2 === null){ this.spotOpen = true };
+              console.log("is spot 2 open? ",this.spotOpen);
+              this.query.HouseHoldMember2 = this.query.UUID;
               break;
             case 3:
-              if (Member[0].HouseHoldMember3 == null){ this.spotOpen = true };
+              if (Member[0].HouseHoldMember3 === null){ this.spotOpen = true };
+              console.log("is spot 3 open? ",this.spotOpen);
+              this.query.HouseHoldMember3 = this.query.UUID;
               break;
             case 4:
-              if (Member[0].HouseHoldMember4 == null){ this.spotOpen = true };
+              if (Member[0].HouseHoldMember4 === null){ this.spotOpen = true };
+              console.log("is spot 4 open? ",this.spotOpen);
+              this.query.HouseHoldMember4 = this.query.UUID;
               break;
             case 5:
-              if (Member[0].HouseHoldMember5 == null){ this.spotOpen = true };
+              if (Member[0].HouseHoldMember5 === null){ this.spotOpen = true };
+              console.log("is spot 5 open? ",this.spotOpen);
+              this.query.HouseHoldMember5 = this.query.UUID;
               break;
             case 6:
-              if (Member[0].HouseHoldMember6 == null){ this.spotOpen = true };
+              if (Member[0].HouseHoldMember6 === null){ this.spotOpen = true };
+              console.log("is spot 6 open? ",this.spotOpen);
+              this.query.HouseHoldMember6 = this.query.UUID;
               break;
             default:
               break;
@@ -314,7 +327,7 @@ export class LoginComponent implements OnInit{
     return new Promise((resolve)=>{
       this.databaseHandler.updateEntryDatabase("HouseHold",`HouseHoldMember${index}`,this.query).subscribe(HouseHold=>{
         if (HouseHold){
-          console.log("User added");
+          console.log("User added",HouseHold);
         }
         resolve();
       })
