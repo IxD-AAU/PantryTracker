@@ -81,6 +81,9 @@ getEntryDatabase(operation: String, subOperation: String, query: any): Observabl
 			case "User":
 				this.path1 = '/get/user';
 				break;
+      case "UserName":
+        this.path1 = '/get/userName';
+        break;
 			case "Food":
 				this.path1 = '/get/food';
 				break;
@@ -248,9 +251,6 @@ getEntryDatabase(operation: String, subOperation: String, query: any): Observabl
 
 
   const params = new HttpParams({ fromObject: query});
-
-  console.log(`constructed URL: ${this.apiUrl}${this.path1}${this.path2}${this.path3}${params}`);
-  console.log('params: ',params);
 
 	return this.http.get(`${this.apiUrl}${this.path1}${this.path2}${this.path3}`, { params });
 }

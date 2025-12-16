@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class HomePageComponent implements OnInit{
 
+  tempID: string | null = "";
   dataLoaded: boolean = false;
   expiringItems: any[] = [];
   expiringItemsSorted: any[] = [];
@@ -71,7 +72,9 @@ export class HomePageComponent implements OnInit{
   }
 
   async expirationList() {
-    this.query.UUID = 1; // Temporary solution, missing login and caching system.
+    this.tempID = localStorage.getItem("UUID");
+    console.log("UUID:",this.tempID);
+    this.query.UUID = Number(this.tempID);
     let i = 1;
     // Find household ID
     while (i < 7) {

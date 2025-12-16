@@ -33,7 +33,7 @@ export const addFood = (connection)=>{
 export const addHousehold = (connection)=>{
     router.post('/api/data/add/household', (req, res)=>{
         const data = req.body;
-        connection.query('SELECT INTO householdtable (displayName, inviteCode, HouseHoldMember1, HouseHoldMember2, HouseHoldMember3, HouseHoldMember4, HouseHoldMember5, HouseHoldMember6) VALUES (?,?,?,?,?,?,?,?)', [data.displayName, data.inviteCode, data.HouseHoldMember1, data.HouseHoldMember2, data.HouseHoldMember3, data.HouseHoldMember4, data.HouseHoldMember5, data.HouseHoldMember6],(err, results)=>{
+        connection.query('INSERT INTO householdtable (displayName, inviteCode, HouseHoldMember1, HouseHoldMember2, HouseHoldMember3, HouseHoldMember4, HouseHoldMember5, HouseHoldMember6) VALUES (?,?,?,?,?,?,?,?)', [data.displayName, data.inviteCode, data.HouseHoldMember1, data.HouseHoldMember2, data.HouseHoldMember3, data.HouseHoldMember4, data.HouseHoldMember5, data.HouseHoldMember6],(err, results)=>{
             if(err){
                 console.error(err);
                 res.status(500).json({error: 'Database insertion (HouseHold) failed'});

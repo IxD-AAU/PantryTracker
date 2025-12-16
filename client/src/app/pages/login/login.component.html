@@ -8,7 +8,7 @@
     <br>
     <button id="LoginBtnSubmit" type="submit">Log Ind</button>
   </form>
-  
+
   <br>
   <label for="signupBtn">Ikke en bruger?</label>
   <br>
@@ -16,6 +16,7 @@
 </div>
 
 <ng-template #signup>
+  <div *ngIf="!HouseholdSelector;else HouseHoldChoice">
   <div class="signup">
     <form (ngSubmit)="submitFormNewUser()" #myForm="ngForm">
       <input id="sign-username"    type="text" required      [(ngModel)]="user.UserName"    [ngModelOptions]="{standalone: true}" placeholder="Brugernavn">
@@ -36,6 +37,75 @@
 
 
   </div>
+  </div>
 
 </ng-template>
-</body>                                  
+
+<ng-template #HouseHoldChoice>
+  <div [ngSwitch]="HouseholdPage">
+    <div *ngSwitchCase="0" class="household-container">
+      <div class="household-item">
+        <button id="newhousehold" class="Household new" (click)="createNewHousehold()"></button>
+        <label for="newhousehold">Opret en nye Hustand</label>
+      </div>
+      <div class="household-item">
+        <button id="joinhousehold" class="Household join" (click)="joinHousehold()"></button>
+        <label for="joinhousehold">Bliv medled af en Hustand</label>
+      </div>
+    </div>
+    <div *ngSwitchCase="1"> <!--NEW HOUSEHOLD-->
+      <form (ngSubmit)="newhouseholdSubmit()" #myForm="ngForm">
+        <input id="householdName" type="text" required [(ngModel)]="household.displayName" [ngModelOptions]="{standalone: true}" placeholder="Hustandens navn">
+        <button id="newhouseholdBtnSubmit" type="submit">Opret nyt hustand</button>
+      </form>
+
+      <button id="goBackBtn" (click)="goBack(0)">Tilbage</button>
+    </div>
+    <div *ngSwitchCase="11">
+      <form>
+        <div class="form-group">
+          <label for="householdName">Navn:</label>
+          <input id="householdName" type="text" readonly [(ngModel)]="this.household.displayName" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label for="householdInviteCode">Invitationskode:</label>
+          <input id="householdInviteCode" type="text" readonly [(ngModel)]="this.household.invideCode" [ngModelOptions]="{standalone: true}">
+        </div>
+      </form>
+        <div class="form-group">
+          <button id="goBackBtn" (click)="reDirect()">Log Ind</button>
+          <button id="goBackBtn" (click)="goBack(1)">Tilbage</button>
+        </div>
+
+
+
+    </div>
+
+    <div *ngSwitchCase="2"><!--JOIN HOUSEHOLD-->
+      <div class="form-group2">
+        <form (ngSubmit)="submitJoinRequest()" #myForm="ngForm">
+          <label for="requestInviteCode">Invitationskode</label>
+          <input
+            id="requestInviteCode" required type="text" [(ngModel)]="tempInviteCode" placeholder="00000000" [ngModelOptions]="{standalone: true}" maxlength="8" pattern="^\d{8}$"
+          />
+          <button id="requestInviteCodeSubmit" type="submit">Check Koden</button>
+        </form>
+      </div>
+    </div>
+
+
+
+    <div *ngSwitchCase="22">
+      <form (ngSubmit)="joinHouseHold()" #myForm="ngForm">
+        <label for="HouseHoldNameProper">Hustand:</label>
+        <input id="HouseHoldNameProper" type="text" [(ngModel)]="this.query.displayName" readonly [ngModelOptions]="{standalone: true}">
+        <button id="joinHouseholdProper" type="submit">Bliv Medlem</button>
+      </form>
+      <button (click)="goBack(2)">Tilbage</button>
+    </div>
+  </div>
+</ng-template>
+
+
+
+</body>
